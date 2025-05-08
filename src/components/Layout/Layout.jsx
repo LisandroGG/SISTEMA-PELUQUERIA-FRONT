@@ -1,0 +1,32 @@
+import React from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { logoutUser } from "../../redux/actions.js";
+import Footer from "../Footer/Footer.jsx";
+import Home from "../Home/Home.jsx";
+import Nav from "../Nav/Nav.jsx";
+
+const Layout = () => {
+    const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const user = useSelector((state) => state.user);
+
+	const handleLogout = async () => {
+		await dispatch(logoutUser());
+		navigate("/");
+	};
+    return (
+        <div>
+            <Nav user={user} handleLogout={handleLogout}/>
+            <h2>
+				user: {user ? user.name : "deslogueado"} role:{" "}
+				{user ? user.role : "deslogueado"}
+			</h2>
+            <Home />
+            <Footer />
+        </div>
+    );
+};
+
+export default Layout;

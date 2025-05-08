@@ -1,0 +1,10 @@
+//USER
+export const REGISTER = "REGISTER";
+export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+
+//LOADINGS
+export const SET_LOADING_SESSION = "SET_LOADING_SESSION";
+
