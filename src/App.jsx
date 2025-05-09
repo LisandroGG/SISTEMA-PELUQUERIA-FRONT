@@ -16,9 +16,9 @@ import TokenRoute from "./components/Routes/TokenRoute.jsx";
 
 import AdminHome from "./components/Admin/AdminHome.jsx";
 import DisableDate from "./components/Admin/DisableDate.jsx";
-import Workers from "./components/Admin/Workers.jsx";
 import Reservations from "./components/Admin/Reservations.jsx";
 import Services from "./components/Admin/Services.jsx";
+import Workers from "./components/Admin/Workers.jsx";
 
 import { getUserSession } from "./redux/actions.js";
 
@@ -41,7 +41,7 @@ function App() {
 	}
 
 	return (
-				<div className="min-h-screen">
+		<div className="min-h-screen">
 			<Toaster position="top-center" />
 			<Routes>
 				<Route path="/" element={<Layout />} />

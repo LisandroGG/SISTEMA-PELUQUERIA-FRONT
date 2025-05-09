@@ -8,7 +8,7 @@ import Home from "../Home/Home.jsx";
 import Nav from "../Nav/Nav.jsx";
 
 const Layout = () => {
-    const dispatch = useDispatch();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	const user = useSelector((state) => state.user);
 
@@ -16,17 +16,17 @@ const Layout = () => {
 		await dispatch(logoutUser());
 		navigate("/");
 	};
-    return (
-        <div>
-            <Nav user={user} handleLogout={handleLogout}/>
-            <h2>
+	return (
+		<div>
+			<Nav user={user} handleLogout={handleLogout} />
+			<h2>
 				user: {user ? user.name : "deslogueado"} role:{" "}
 				{user ? user.role : "deslogueado"}
 			</h2>
-            <Home />
-            <Footer />
-        </div>
-    );
+			<Home />
+			<Footer />
+		</div>
+	);
 };
 
 export default Layout;

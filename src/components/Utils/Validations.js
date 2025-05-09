@@ -21,8 +21,8 @@ export const validatePhone = (phoneNumber) => {
 	return "";
 };
 
-export const validateEmail = (email) => {
-	if (!emailRegex.test(email)) {
+export const validateGmail = (Gmail) => {
+	if (!emailRegex.test(Gmail)) {
 		return "Solo se permiten correos de Gmail válidos.";
 	}
 	return "";

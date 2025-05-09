@@ -1,11 +1,74 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { forgotPassword } from "../../redux/actions";
+import ErrorMessage from "../Common/ErrorMessage.jsx";
+import Form from "../Common/Form.jsx";
+import Input from "../Common/Input.jsx";
+import { validateGmail } from "../Utils/Validations.js";
 
 const ForgotPassword = () => {
-    return (
-        <div>
-            <h1>ForgotPassword</h1>
-        </div>
-    );
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [error, setError] = useState("");
+	const [formData, setFormData] = useState({
+		gmail: "",
+	});
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!formData.gmail) {
+			return setError("Complete los campos");
+		}
+
+		const gmailError = validateGmail(formData.gmail);
+		if (gmailError) return setError(gmailError);
+
+		const loadingToastId = toast.loading("Enviando correo...");
+
+		try {
+			const response = await dispatch(forgotPassword(formData));
+			if (response.success) {
+				toast.dismiss(loadingToastId);
+				toast.success(response.message);
+				navigate("/login");
+			} else {
+				toast.dismiss(loadingToastId);
+				setError(response.message);
+			}
+		} catch (error) {
+			toast.dismiss(loadingToastId);
+			toast.error("Hubo un problema inesperado. Intente nuevamente");
+		}
+	};
+	return (
+		<div>
+			<Form
+				onSubmit={handleSubmit}
+				submitText={"Enviar correo de recuperacion"}
+				title="Recuperar contraseña"
+			>
+				<Input
+					label="Gmail"
+					name="gmail"
+					type="email"
+					value={formData.gmail}
+					onChange={handleChange}
+				/>
+				<ErrorMessage message={error} />
+				<div>
+					<h1 className="font-semibold">
+						<a href="/login">Ir a iniciar sesion</a>
+					</h1>
+				</div>
+			</Form>
+		</div>
+	);
 };
 
 export default ForgotPassword;

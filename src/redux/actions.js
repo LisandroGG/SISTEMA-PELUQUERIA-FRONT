@@ -1,6 +1,13 @@
 import axios from "axios";
 
-import { REGISTER, LOGIN, LOGOUT, FORGOT_PASSWORD, CHANGE_PASSWORD, SET_LOADING_SESSION } from "./actions-types";
+import {
+	CHANGE_PASSWORD,
+	FORGOT_PASSWORD,
+	LOGIN,
+	LOGOUT,
+	REGISTER,
+	SET_LOADING_SESSION,
+} from "./actions-types";
 
 const LOCAL = import.meta.env.VITE_LOCAL;
 const DEPLOY = import.meta.env.VITE_DEPLOY;

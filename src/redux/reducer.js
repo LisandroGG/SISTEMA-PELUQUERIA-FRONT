@@ -1,4 +1,11 @@
-import { REGISTER, LOGIN, LOGOUT, FORGOT_PASSWORD, CHANGE_PASSWORD, SET_LOADING_SESSION } from "./actions-types";
+import {
+	CHANGE_PASSWORD,
+	FORGOT_PASSWORD,
+	LOGIN,
+	LOGOUT,
+	REGISTER,
+	SET_LOADING_SESSION,
+} from "./actions-types";
 
 export const initialState = {
 	user: null,
@@ -7,7 +14,7 @@ export const initialState = {
 
 // biome-ignore lint: REDUCER
 function rootReducer(state = initialState, action) {
-	switch(action.type) {
+	switch (action.type) {
 		case REGISTER:
 			return {
 				...state,

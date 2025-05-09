@@ -1,11 +1,71 @@
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { changePassword } from "../../redux/actions.js";
+import ErrorMessage from "../Common/ErrorMessage.jsx";
+import Form from "../Common/Form.jsx";
+import Input from "../Common/Input.jsx";
+import { validatePassword } from "../Utils/Validations.js";
 
 const ChangePassword = () => {
-    return (
-        <div>
-            <h1>ChangePassword</h1>
-        </div>
-    );
+	const [searchParams] = useSearchParams();
+	const token = searchParams.get("token");
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const [error, setError] = useState("");
+	const [formData, setFormData] = useState({
+		newPassword: "",
+	});
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!formData.newPassword) {
+			return setError("Complete los campos");
+		}
+
+		const passwordError = validatePassword(formData.newPassword);
+		if (passwordError) return setError(passwordError);
+
+		const loadingToastId = toast.loading("Cambiando contraseña...");
+
+		try {
+			const response = await dispatch(changePassword(token, formData));
+			if (response.success) {
+				toast.dismiss(loadingToastId);
+				toast.success(response.message);
+				navigate("/login");
+			} else {
+				toast.dismiss(loadingToastId);
+				setError(response.message);
+			}
+		} catch (error) {
+			toast.dismiss(loadingToastId);
+			toast.error("Hubo un problema inesperado. Intente nuevamente");
+		}
+	};
+	return (
+		<div>
+			<Form
+				onSubmit={handleSubmit}
+				submitText={"Actualizar contraseña"}
+				title={"Cambiar Contraseña"}
+			>
+				<Input
+					label="Nueva contraseña"
+					name="newPassword"
+					type="password"
+					value={formData.newPassword}
+					onChange={handleChange}
+				/>
+				<ErrorMessage message={error} />
+			</Form>
+		</div>
+	);
 };
 
 export default ChangePassword;
