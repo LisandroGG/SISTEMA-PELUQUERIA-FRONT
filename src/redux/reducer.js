@@ -75,6 +75,7 @@ export const initialState = {
 // biome-ignore lint: REDUCER
 function rootReducer(state = initialState, action) {
 	switch (action.type) {
+		//USERS
 		case REGISTER:
 			return {
 				...state,
@@ -94,6 +95,18 @@ function rootReducer(state = initialState, action) {
 				isLoadingServices: false,
 				reservations: [],
 				isLoadingReservations: false,
+				workers: [],
+				isLoadingWorkers: false,
+				disableDays: [],
+				isLoadingDisableDays: false,
+				bloquedDays: [],
+				isLoadingBloquedDays: false,
+				workingHours: [],
+				isLoadingWorkingHours: false,
+				customWorkingHours: [],
+				isLoadingCustomWorkingHours: false,
+				workingHoursByDate: [],
+				isLoadingWorkingHoursByDate: false,
 			};
 		case FORGOT_PASSWORD:
 			return {
@@ -108,6 +121,7 @@ function rootReducer(state = initialState, action) {
 				...state,
 				isLoadingSession: action.payload,
 			};
+		//SERVICES
 		case GET_SERVICES:
 			return {
 				...state,
@@ -137,6 +151,196 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				isLoadingServices: action.payload,
+			};
+		//RESERVATIONS
+		case GET_ALL_RESERVATIONS:
+			return {
+				...state,
+				reservations: action.payload,
+				isLoadingReservations: false,
+			};
+		case GET_RESERVATIONS_BY_GMAIL:
+			return {
+				...state,
+				reservations: action.payload,
+				isLoadingReservations: false,
+			};
+		case GET_RESERVATIONS_BY_WORKER:
+			return {
+				...state,
+				reservations: action.payload,
+				isLoadingReservations: false,
+			};
+		case CREATE_RESERVATION:
+			return {
+				...state,
+				reservations: [...state.reservations, action.payload],
+			};
+		case CHANGE_RESERVATION_STATUS:
+			return {
+				...state,
+				reservations: state.reservations.map((res) =>
+					res.id === action.payload.id ? action.payload : res,
+				),
+			};
+		case CANCEL_RESERVATION:
+			return {
+				...state,
+				reservations: state.reservations.map((res) =>
+					res.id === action.payload.id ? action.payload : res,
+				),
+			};
+		case SET_LOADING_RESERVATIONS:
+			return {
+				...state,
+				isLoadingReservations: action.payload,
+			};
+		//WORKERS
+		case GET_ALL_WORKERS:
+			return {
+				...state,
+				workers: action.payload,
+				isLoadingWorkers: false,
+			};
+		case GET_WORKER_BY_SERVICE:
+			return {
+				...state,
+				workers: action.payload,
+				isLoadingWorkers: false,
+			};
+		case CREATE_WORKER:
+			return {
+				...state,
+				workers: [...state.workers, action.payload],
+			};
+		case EDIT_WORKER:
+			return {
+				...state,
+				workers: state.workers.map((worker) =>
+					worker.id === action.payload.id ? action.payload : worker,
+				),
+			};
+		case DELETE_WORKER:
+			return {
+				...state,
+				workers: state.workers.filter(
+					(worker) => worker.id !== action.payload.id,
+				),
+			};
+		case SET_LOADING_WORKERS:
+			return {
+				...state,
+				isLoadingWorkers: action.payload,
+			};
+		//DISABLE DAYS
+		case GET_DISABLE_DAYS:
+			return {
+				...state,
+				disableDays: action.payload,
+				isLoadingDisableDays: false,
+			};
+		case CREATE_DISABLE_DAY:
+			return {
+				...state,
+				disableDays: [...state.disableDays, action.payload],
+			};
+		case CANCEL_DISABLE_DAY:
+			return {
+				...state,
+				disableDays: state.disableDays.filter(
+					(day) => day.id !== action.payload.id,
+				),
+			};
+		case SET_LOADING_DISABLE_DAYS:
+			return {
+				...state,
+				isLoadingDisableDays: action.payload,
+			};
+		//WORKING HOURS BY DATE
+		case GET_WORKING_HOURS_BY_DATE:
+			return {
+				...state,
+				workingHoursByDate: action.payload,
+				isLoadingWorkingHoursByDate: false,
+			};
+		case SET_LOADING_WORKING_HOURS_BY_DATE:
+			return {
+				...state,
+				isLoadingWorkingHoursByDate: action.payload,
+			};
+		//BLOQUED DAYS
+		case GET_BLOQUED_DAYS:
+			return {
+				...state,
+				bloquedDays: action.payload,
+				isLoadingBloquedDays: false,
+			};
+		case SET_LOADING_BLOQUED_DAYS:
+			return {
+				...state,
+				isLoadingBloquedDays: action.payload,
+			};
+		//WORKING HOURS
+		case GET_WORKING_HOURS_BY_WORKER:
+			return {
+				...state,
+				workingHours: action.payload,
+				isLoadingWorkingHours: false,
+			};
+		case CREATE_WORKING_HOURS:
+			return {
+				...state,
+				workingHours: [...state.workingHours, action.payload],
+			};
+		case EDIT_WORKING_HOURS:
+			return {
+				...state,
+				workingHours: state.workingHours.map((hour) =>
+					hour.id === action.payload.id ? action.payload : hour,
+				),
+			};
+		case DELETE_WORKING_HOURS:
+			return {
+				...state,
+				workingHours: state.workingHours.filter(
+					(hour) => hour.id !== action.payload.id,
+				),
+			};
+		case SET_LOADING_WORKING_HOURS:
+			return {
+				...state,
+				isLoadingWorkingHours: action.payload,
+			};
+		//CUSTOM WORKING HOURS
+		case GET_CUSTOM_WORKING_HOURS_BY_WORKER:
+			return {
+				...state,
+				customWorkingHours: action.payload,
+				isLoadingCustomWorkingHours: false,
+			};
+		case CREATE_CUSTOM_WORKING_HOURS:
+			return {
+				...state,
+				customWorkingHours: [...state.customWorkingHours, action.payload],
+			};
+		case EDIT_CUSTOM_WORKING_HOURS:
+			return {
+				...state,
+				customWorkingHours: state.customWorkingHours.map((hour) =>
+					hour.id === action.payload.id ? action.payload : hour,
+				),
+			};
+		case DELETE_CUSTOM_WORKING_HOURS:
+			return {
+				...state,
+				customWorkingHours: state.customWorkingHours.filter(
+					(hour) => hour.id !== action.payload.id,
+				),
+			};
+		case SET_LOADING_CUSTOM_WORKING_HOURS:
+			return {
+				...state,
+				isLoadingCustomWorkingHours: action.payload,
 			};
 		default:
 			return state;

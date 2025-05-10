@@ -1,6 +1,11 @@
 import axios from "axios";
 
-import { getErrorMessage, jsonHeaders } from "./actions-utils.js";
+import {
+	getErrorMessage,
+	jsonHeaders,
+	startLoading,
+	stopLoading,
+} from "./actions-utils.js";
 
 import {
 	CANCEL_DISABLE_DAY,
@@ -82,7 +87,6 @@ export const loginUser = (formData) => {
 				formData,
 				jsonHeaders,
 			);
-			console.log(data);
 			dispatch({
 				type: LOGIN,
 				payload: data.user,
@@ -135,7 +139,7 @@ export const refreshToken = async () => {
 export const getUserSession = () => {
 	return async (dispatch) => {
 		console.log("Se ejecuto getUserSession");
-		dispatch({ type: SET_LOADING_SESSION, payload: true });
+		startLoading(dispatch, SET_LOADING_SESSION);
 		try {
 			const { data } = await axios.get(`${LOCAL}/users/me`, {
 				withCredentials: true,
@@ -161,13 +165,13 @@ export const getUserSession = () => {
 							payload: userData.user,
 						});
 					} catch (error) {
-						dispatch({ type: SET_LOADING_SESSION, payload: false });
+						stopLoading(dispatch, SET_LOADING_SESSION);
 					}
 				} else {
-					dispatch({ type: SET_LOADING_SESSION, payload: false });
+					stopLoading(dispatch, SET_LOADING_SESSION);
 				}
 			} else {
-				dispatch({ type: SET_LOADING_SESSION, payload: false });
+				stopLoading(dispatch, SET_LOADING_SESSION);
 			}
 		}
 	};
@@ -221,7 +225,7 @@ export const changePassword = (token, formData) => {
 export const getServices = () => {
 	return async (dispatch) => {
 		console.log("se ejecuto getServices");
-		dispatch({ type: SET_LOADING_SERVICES, payload: true });
+		startLoading(dispatch, SET_LOADING_SERVICES);
 		try {
 			const { data } = await axios.get(`${LOCAL}/services`, {
 				withCredentials: true,
@@ -232,9 +236,8 @@ export const getServices = () => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			const errorMessage = error.response?.data.message || error.message;
-			dispatch({ type: SET_LOADING_SERVICES, payload: false });
-			return { success: false, message: errorMessage };
+			stopLoading(dispatch, SET_LOADING_SERVICES);
+			return { success: false, message: getErrorMessage(error) };
 		}
 	};
 };
@@ -307,7 +310,7 @@ export const editService = (formData, serviceId) => {
 export const getAllReservations = () => {
 	return async (dispatch) => {
 		console.log("ejecutamos getAllReservations");
-		dispatch({ type: SET_LOADING_RESERVATIONS, payload: true });
+		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const { data } = await axios.get(`${LOCAL}/reservations`, {
 				withCredentials: true,
@@ -318,7 +321,7 @@ export const getAllReservations = () => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_RESERVATIONS, payload: false });
+			stopLoading(dispatch, SET_LOADING_RESERVATIONS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -327,7 +330,7 @@ export const getAllReservations = () => {
 export const getReservationsByGmail = (gmail) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getReservationsByGmail");
-		dispatch({ type: SET_LOADING_RESERVATIONS, payload: true });
+		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/reservations/by-gmail?gmail=${gmail}`,
@@ -341,7 +344,7 @@ export const getReservationsByGmail = (gmail) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_RESERVATIONS, payload: false });
+			stopLoading(dispatch, SET_LOADING_RESERVATIONS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -350,7 +353,7 @@ export const getReservationsByGmail = (gmail) => {
 export const getReservationsByWorker = (workerId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getReservationsByWorker");
-		dispatch({ type: SET_LOADING_RESERVATIONS, payload: true });
+		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/reservations/by-worker?workerId=${workerId}`,
@@ -364,7 +367,7 @@ export const getReservationsByWorker = (workerId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_RESERVATIONS, payload: false });
+			stopLoading(dispatch, SET_LOADING_RESERVATIONS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -439,7 +442,7 @@ export const cancelReservation = (token) => {
 export const getAllWorkers = () => {
 	return async (dispatch) => {
 		console.log("ejecutamos getAllWorkers");
-		dispatch({ type: SET_LOADING_WORKERS, payload: true });
+		startLoading(dispatch, SET_LOADING_WORKERS);
 		try {
 			const { data } = await axios.get(`${LOCAL}/workers`, {
 				withCredentials: true,
@@ -450,7 +453,7 @@ export const getAllWorkers = () => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_WORKERS, payload: false });
+			stopLoading(dispatch, SET_LOADING_WORKERS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -459,7 +462,7 @@ export const getAllWorkers = () => {
 export const getWorkersByService = (serviceId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getWorkersByServices");
-		dispatch({ type: SET_LOADING_WORKERS, payload: true });
+		startLoading(dispatch, SET_LOADING_WORKERS);
 		try {
 			const { data } = await axios.get(`${LOCAL}/workers/${serviceId}`, {
 				withCredentials: true,
@@ -470,7 +473,7 @@ export const getWorkersByService = (serviceId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_WORKERS, payload: false });
+			stopLoading(dispatch, SET_LOADING_WORKERS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -543,7 +546,7 @@ export const deleteWorker = (workerId) => {
 export const getDisableDays = (id) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getDisableDays");
-		dispatch({ type: SET_LOADING_DISABLE_DAYS, payload: true });
+		startLoading(dispatch, SET_LOADING_DISABLE_DAYS);
 		try {
 			const { data } = await axios.get(`${LOCAL}/disableDay?workerId=${id}`, {
 				withCredentials: true,
@@ -554,7 +557,7 @@ export const getDisableDays = (id) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_DISABLE_DAYS, payload: false });
+			stopLoading(dispatch, SET_LOADING_DISABLE_DAYS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -605,7 +608,7 @@ export const cancelDisableDay = (id) => {
 export const getWorkingHoursByWorker = (workerId, date, serviceId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getWorkingHoursByWorker");
-		dispatch({ type: SET_LOADING_WORKING_HOURS_BY_DATE, payload: true });
+		startLoading(dispatch, SET_LOADING_WORKING_HOURS_BY_DATE);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/hours/by-date?workerId=${workerId}&date=${date}&serviceId=${serviceId}`,
@@ -619,7 +622,7 @@ export const getWorkingHoursByWorker = (workerId, date, serviceId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_WORKING_HOURS_BY_DATE, payload: false });
+			stopLoading(dispatch, SET_LOADING_WORKING_HOURS_BY_DATE);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -628,7 +631,7 @@ export const getWorkingHoursByWorker = (workerId, date, serviceId) => {
 export const getBloquedDays = (workerId, serviceId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getBloquedDays");
-		dispatch({ type: SET_LOADING_BLOQUED_DAYS, payload: true });
+		startLoading(dispatch, SET_LOADING_BLOQUED_DAYS);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/hours/bloquedDays?workerId=${workerId}&serviceId=${serviceId}`,
@@ -642,7 +645,7 @@ export const getBloquedDays = (workerId, serviceId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_BLOQUED_DAYS, payload: false });
+			stopLoading(dispatch, SET_LOADING_BLOQUED_DAYS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -655,7 +658,7 @@ export const getBloquedDays = (workerId, serviceId) => {
 export const getWorkingHours = (workerId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getWorkingHours");
-		dispatch({ type: SET_LOADING_WORKING_HOURS, payload: true });
+		startLoading(dispatch, SET_LOADING_WORKING_HOURS);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/hours/working?workerId=${workerId}`,
@@ -669,7 +672,7 @@ export const getWorkingHours = (workerId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_WORKING_HOURS, payload: false });
+			stopLoading(dispatch, SET_LOADING_WORKING_HOURS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
@@ -743,7 +746,7 @@ export const deleteWorkingHour = (id) => {
 export const getCustomWorkingHours = (workerId) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getCustomWorkingHours");
-		dispatch({ type: SET_LOADING_CUSTOM_WORKING_HOURS, payload: true });
+		startLoading(dispatch, SET_LOADING_CUSTOM_WORKING_HOURS);
 		try {
 			const { data } = await axios.get(
 				`${LOCAL}/hours/custom?workerId=${workerId}`,
@@ -757,7 +760,7 @@ export const getCustomWorkingHours = (workerId) => {
 			});
 			return { success: true, message: data.message };
 		} catch (error) {
-			dispatch({ type: SET_LOADING_CUSTOM_WORKING_HOURS, payload: false });
+			stopLoading(dispatch, SET_LOADING_CUSTOM_WORKING_HOURS);
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
