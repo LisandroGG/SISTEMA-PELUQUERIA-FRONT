@@ -1,6 +1,6 @@
 import {
-	CANCEL_RESERVATION,
 	CANCEL_DISABLE_DAY,
+	CANCEL_RESERVATION,
 	CHANGE_PASSWORD,
 	CHANGE_RESERVATION_STATUS,
 	CREATE_CUSTOM_WORKING_HOURS,
@@ -108,36 +108,36 @@ function rootReducer(state = initialState, action) {
 				...state,
 				isLoadingSession: action.payload,
 			};
-		case GET_SERVICES: 
+		case GET_SERVICES:
 			return {
 				...state,
 				services: action.payload,
 				isLoadingServices: false,
-			}
-		case CREATE_SERVICE: 
+			};
+		case CREATE_SERVICE:
 			return {
 				...state,
 				services: [...state.services, action.payload],
-			}
+			};
 		case DELETE_SERVICE:
 			return {
 				...state,
 				services: state.services.filter(
-					(service) => service.id !== action.payload.id
+					(service) => service.id !== action.payload.id,
 				),
-			}
+			};
 		case EDIT_SERVICE:
 			return {
 				...state,
 				services: state.services.map((service) =>
-					service.id === action.payload.id ? action.payload : service
+					service.id === action.payload.id ? action.payload : service,
 				),
 			};
 		case SET_LOADING_SERVICES:
 			return {
 				...state,
-				isLoadingServices: action.payload
-			}
+				isLoadingServices: action.payload,
+			};
 		default:
 			return state;
 	}
