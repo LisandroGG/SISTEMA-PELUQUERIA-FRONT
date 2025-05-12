@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../redux/actions.js";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
+import FormText from "../Common/FormText.jsx";
 import Input from "../Common/Input.jsx";
+import FormHeader from "../Common/formHeader.jsx";
 import {
 	validateGmail,
 	validatePassword,
@@ -68,12 +70,9 @@ const Register = () => {
 		}
 	};
 	return (
-		<div>
-			<Form
-				onSubmit={handleSubmit}
-				submitText={"Registrarse"}
-				title={"Crear cuenta"}
-			>
+		<div className="min-h-screen grid place-content-center bg-form-gradient">
+			<Form onSubmit={handleSubmit} submitText={"Registrarse"} title={""}>
+				<FormHeader title="Bienvenido a AF Peluquería" subtitle="Registrarse" />
 				<Input
 					label="Nombre"
 					name="name"
@@ -104,9 +103,11 @@ const Register = () => {
 				/>
 				<ErrorMessage message={error} />
 				<div>
-					<h1 className="font-semibold">
-						¿Ya tienes una cuenta?<a href="/login"> Inicia sesion</a>
-					</h1>
+					<FormText
+						text="¿Ya tienes una cuenta?"
+						linkText="Inicia sesión"
+						to="/login"
+					/>
 				</div>
 			</Form>
 		</div>

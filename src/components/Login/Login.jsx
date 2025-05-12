@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../redux/actions.js";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
+import FormText from "../Common/FormText.jsx";
 import Input from "../Common/Input.jsx";
+import FormHeader from "../Common/formHeader.jsx";
 import { validateGmail, validatePassword } from "../Utils/Validations.js";
 
 const Login = () => {
@@ -52,18 +54,19 @@ const Login = () => {
 	};
 
 	return (
-		<div>
-			<Form
-				onSubmit={handleSubmit}
-				submitText={"Iniciar Sesión"}
-				title={"Iniciar Sesión"}
-			>
+		<div className="min-h-screen grid place-content-center bg-form-gradient">
+			<Form onSubmit={handleSubmit} submitText={"Iniciar Sesión"} title={""}>
+				<FormHeader
+					title="Bienvenido a AF Peluquería"
+					subtitle="Iniciar sesión"
+				/>
 				<Input
 					label="Gmail"
 					name="gmail"
 					type="email"
 					value={formData.gmail}
 					onChange={handleChange}
+					placeholder={"nombre@gmail.com"}
 				/>
 				<Input
 					label="Contraseña"
@@ -71,15 +74,20 @@ const Login = () => {
 					type="password"
 					value={formData.password}
 					onChange={handleChange}
+					placeholder={"contraseña"}
 				/>
 				<ErrorMessage message={error} />
-				<div className="">
-					<h1 className="font-semibold">
-						¿No tienes una cuenta? <a href="/register">Registrate</a>
-					</h1>
-					<h1 className="font-semibold">
-						<a href="/forgotPassword">Olvide mi contraseña</a>
-					</h1>
+				<div className="flex flex-col text-center justify-between gap-2">
+					<FormText
+						text=""
+						linkText="Olvide mi contraseña"
+						to="/forgotPassword"
+					/>
+					<FormText
+						text="¿No tienes una cuenta?"
+						linkText="Regístrate"
+						to="/register"
+					/>
 				</div>
 			</Form>
 		</div>

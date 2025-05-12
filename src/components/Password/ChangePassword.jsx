@@ -6,6 +6,7 @@ import { changePassword } from "../../redux/actions.js";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
 import Input from "../Common/Input.jsx";
+import FormHeader from "../Common/formHeader.jsx";
 import { validatePassword } from "../Utils/Validations.js";
 
 const ChangePassword = () => {
@@ -49,12 +50,16 @@ const ChangePassword = () => {
 		}
 	};
 	return (
-		<div>
+		<div className="min-h-screen grid place-content-center bg-form-gradient">
 			<Form
 				onSubmit={handleSubmit}
 				submitText={"Actualizar contraseña"}
-				title={"Cambiar Contraseña"}
+				title={""}
 			>
+				<FormHeader
+					title="Bienvenido a AF Peluquería"
+					subtitle="Cambiar contraseña"
+				/>
 				<Input
 					label="Nueva contraseña"
 					name="newPassword"

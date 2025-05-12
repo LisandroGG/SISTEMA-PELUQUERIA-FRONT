@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { forgotPassword } from "../../redux/actions";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
+import FormText from "../Common/FormText.jsx";
 import Input from "../Common/Input.jsx";
+import FormHeader from "../Common/formHeader.jsx";
 import { validateGmail } from "../Utils/Validations.js";
 
 const ForgotPassword = () => {
@@ -47,12 +49,12 @@ const ForgotPassword = () => {
 		}
 	};
 	return (
-		<div>
-			<Form
-				onSubmit={handleSubmit}
-				submitText={"Enviar correo de recuperacion"}
-				title="Recuperar contraseña"
-			>
+		<div className="min-h-screen grid place-content-center bg-form-gradient">
+			<Form onSubmit={handleSubmit} submitText={"Recuperar contrseña"} title="">
+				<FormHeader
+					title="Bienvenido a AF Peluquería"
+					subtitle="Recuperar contraseña"
+				/>
 				<Input
 					label="Gmail"
 					name="gmail"
@@ -62,9 +64,7 @@ const ForgotPassword = () => {
 				/>
 				<ErrorMessage message={error} />
 				<div>
-					<h1 className="font-semibold">
-						<a href="/login">Ir a iniciar sesion</a>
-					</h1>
+					<FormText linkText="Inicia sesión" to="/login" />
 				</div>
 			</Form>
 		</div>
