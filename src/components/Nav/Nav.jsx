@@ -25,7 +25,7 @@ const Nav = ({ user, handleLogout }) => {
 							<button
 								type="button"
 								onClick={handleLogout}
-								className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500"
+								className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500 cursor-pointer"
 							>
 								Cerrar sesion
 							</button>
@@ -33,7 +33,7 @@ const Nav = ({ user, handleLogout }) => {
 					) : (
 						<li>
 							<Link to="/login">
-								<span className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500">
+								<span className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500 cursor-pointer">
 									Iniciar Sesion
 								</span>
 							</Link>
