@@ -20,6 +20,8 @@ import Reservations from "./components/Admin/Reservations.jsx";
 import Services from "./components/Admin/Services.jsx";
 import Workers from "./components/Admin/Workers.jsx";
 
+import Reservation from "./components/Reservation/Reservation.jsx";
+
 import { getUserSession } from "./redux/actions.js";
 
 function App() {
@@ -91,6 +93,7 @@ function App() {
 						</TokenRoute>
 					}
 				/>
+				<Route path="/reservations" element={<Reservation />} />
 			</Routes>
 		</div>
 	);

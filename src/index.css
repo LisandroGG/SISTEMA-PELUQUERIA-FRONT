@@ -8,6 +8,10 @@
 
 	.bg-form-gradient {
 		background: linear-gradient(to bottom, #f9fafb, #e5e7eb, #9ca3af);
+		/*
+		OPCION SECUNDARIA
+		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
+		*/
 	}
 }
 
