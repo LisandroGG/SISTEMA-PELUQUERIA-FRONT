@@ -66,6 +66,7 @@ const ChangePassword = () => {
 					type="password"
 					value={formData.newPassword}
 					onChange={handleChange}
+					placeholder="Nueva contraseña"
 				/>
 				<ErrorMessage message={error} />
 			</Form>

@@ -79,6 +79,7 @@ const Register = () => {
 					type="text"
 					value={formData.name}
 					onChange={handleChange}
+					placeholder="Nombre"
 				/>
 				<Input
 					label="Gmail"
@@ -86,6 +87,7 @@ const Register = () => {
 					type="email"
 					value={formData.gmail}
 					onChange={handleChange}
+					placeholder="Correo electrónico"
 				/>
 				<Input
 					label="Telefono"
@@ -93,6 +95,7 @@ const Register = () => {
 					type="tel"
 					value={formData.phoneNumber}
 					onChange={handleChange}
+					placeholder="Teléfono"
 				/>
 				<Input
 					label="Contraseña"
@@ -100,6 +103,7 @@ const Register = () => {
 					type="password"
 					value={formData.password}
 					onChange={handleChange}
+					placeholder="Contraseña"
 				/>
 				<ErrorMessage message={error} />
 				<div>

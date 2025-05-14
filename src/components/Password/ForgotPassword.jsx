@@ -61,6 +61,7 @@ const ForgotPassword = () => {
 					type="email"
 					value={formData.gmail}
 					onChange={handleChange}
+					placeholder="Correo electrónico"
 				/>
 				<ErrorMessage message={error} />
 				<div>
