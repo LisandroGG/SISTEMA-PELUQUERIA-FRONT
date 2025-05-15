@@ -78,7 +78,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 			{isLoadingBloquedDays ? (
 				<Loading loadingText={"Cargando calendario..."} />
 			) : (
-				<div className="flex justify-center">
+				<div className="flex justify-center mt-2">
 					<DayPicker
 						mode="single"
 						disabled={disabledDays}
@@ -114,7 +114,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 					) : workingHoursByDate?.timeSlots?.length === 0 ? (
 						<p>No hay horarios disponibles para esta fecha.</p>
 					) : (
-						<div className="grid grid-cols-4 md:grid-cols-5 gap-2">
+						<div className="grid grid-cols-4 md:grid-cols-5 gap-2 ">
 							{workingHoursByDate?.timeSlots.map((h) => (
 								<button
 									key={h.startTime}
@@ -129,7 +129,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 					)}
 				</div>
 			)}
-			<div className="flex flex-col gap-2 justify-between items-center">
+			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
 					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52"

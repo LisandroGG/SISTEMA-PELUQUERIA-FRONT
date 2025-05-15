@@ -70,18 +70,21 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 				.join(" | ")}
 		>
 			<Input
+				label="Nombre"
 				name="clientName"
 				placeholder="Nombre"
 				value={formData.clientName}
 				onChange={handleChange}
 			/>
 			<Input
+				label="Gmail"
 				name="clientGmail"
 				placeholder="Correo electrónico"
 				value={formData.clientGmail}
 				onChange={handleChange}
 			/>
 			<Input
+				label="Teléfono"
 				name="clientPhoneNumber"
 				placeholder="Teléfono"
 				value={formData.clientPhoneNumber}
@@ -90,7 +93,7 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 
 			<ErrorMessage message={error} />
 
-			<div className="flex flex-col gap-2 justify-between items-center">
+			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
 					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-52"

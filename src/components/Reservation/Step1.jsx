@@ -40,7 +40,7 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 			{isLoadingServices ? (
 				<Loading loadingText={"Cargando servicios..."} />
 			) : (
-				<ul className="gap-2 flex flex-col">
+				<ul className="gap-2 flex flex-col mt-2">
 					{services.map((service) => (
 						<li
 							key={service.id}
@@ -58,7 +58,7 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 					))}
 				</ul>
 			)}
-			<div className="flex flex-col gap-2 justify-between items-center">
+			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					type="button"
 					onClick={handleNavigate}

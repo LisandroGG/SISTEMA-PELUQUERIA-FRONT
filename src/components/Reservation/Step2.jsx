@@ -42,7 +42,7 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 			) : workers.length === 0 ? (
 				<p>No hay peluqueros disponibles para este servicio.</p>
 			) : (
-				<ul className="gap-2 flex flex-col">
+				<ul className="gap-2 flex flex-col mt-2">
 					{workers.map((worker) => (
 						<li
 							key={worker.id}
@@ -59,7 +59,7 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 					))}
 				</ul>
 			)}
-			<div className="flex flex-col gap-2 justify-between items-center">
+			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
 					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52"
