@@ -1,9 +1,9 @@
+import { ArrowBigLeft } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getWorkersByService } from "../../redux/actions";
-import StepCompont from "../Common/StepComponent.jsx";
-import { ArrowBigLeft } from 'lucide-react';
 import Loading from "../Common/Loading.jsx";
+import StepCompont from "../Common/StepComponent.jsx";
 
 const Step2 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();
@@ -29,11 +29,14 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 		setStep(1);
 	};
 	return (
-		<StepCompont step={"Elegí un peluquero:"} stepSelected={
-    formData.serviceId
-      ? services.find(s => s.id === formData.serviceId)?.name
-      : ""
-  }>
+		<StepCompont
+			step={"Elegí un peluquero:"}
+			stepSelected={
+				formData.serviceId
+					? services.find((s) => s.id === formData.serviceId)?.name
+					: ""
+			}
+		>
 			{isLoadingWorkers ? (
 				<Loading loadingText={"Cargando Peluqueros..."} />
 			) : workers.length === 0 ? (
@@ -57,10 +60,14 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 				</ul>
 			)}
 			<div className="flex flex-col gap-2 justify-between items-center">
-			<button onClick={handleBack} className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52" type="button">
-				<ArrowBigLeft />
-				<span>Volver al paso anterior</span>
-			</button>
+				<button
+					onClick={handleBack}
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52"
+					type="button"
+				>
+					<ArrowBigLeft />
+					<span>Volver al paso anterior</span>
+				</button>
 			</div>
 		</StepCompont>
 	);

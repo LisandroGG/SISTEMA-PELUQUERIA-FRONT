@@ -1,11 +1,15 @@
+import { format, parseISO } from "date-fns";
+import { ArrowBigLeft, CalendarCheck } from "lucide-react";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import StepCompont from "../Common/StepComponent.jsx";
-import Input from "../Common/Input.jsx";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
-import { ArrowBigLeft, CalendarCheck } from "lucide-react";
-import { validateGmail, validateName, validatePhone } from "../Utils/Validations.js";
-import { format, parseISO } from "date-fns";
+import Input from "../Common/Input.jsx";
+import StepCompont from "../Common/StepComponent.jsx";
+import {
+	validateGmail,
+	validateName,
+	validatePhone,
+} from "../Utils/Validations.js";
 
 const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 	const user = useSelector((state) => state.user);
@@ -32,32 +36,39 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 	};
 
 	const handleSubmit = () => {
-		if(!formData.clientGmail || !formData.clientName || !formData.clientPhoneNumber)
-			return setError("Complete los campos")
+		if (
+			!formData.clientGmail ||
+			!formData.clientName ||
+			!formData.clientPhoneNumber
+		)
+			return setError("Complete los campos");
 
 		const nameError = validateName(formData.clientName);
-		if(nameError) return setError(nameError)
+		if (nameError) return setError(nameError);
 
 		const gmailError = validateGmail(formData.clientGmail);
-		if(gmailError) return setError(gmailError)
+		if (gmailError) return setError(gmailError);
 
 		const phoneError = validatePhone(formData.clientPhoneNumber);
-		if(phoneError) return setError(phoneError)
+		if (phoneError) return setError(phoneError);
 
 		onSubmit();
 	};
 
 	return (
-		<StepCompont step={"Tus datos:"} stepSelected={
-    [
-      formData.serviceId && services.find(s => s.id === formData.serviceId)?.name,
-      formData.workerId && workers.find(w => w.id === formData.workerId)?.name,
-      formData.date && format(parseISO(formData.date), "dd/MM/yyyy"),
-      formData.startTime
-    ]
-      .filter(Boolean)
-      .join(" | ")
-  }>
+		<StepCompont
+			step={"Tus datos:"}
+			stepSelected={[
+				formData.serviceId &&
+					services.find((s) => s.id === formData.serviceId)?.name,
+				formData.workerId &&
+					workers.find((w) => w.id === formData.workerId)?.name,
+				formData.date && format(parseISO(formData.date), "dd/MM/yyyy"),
+				formData.startTime,
+			]
+				.filter(Boolean)
+				.join(" | ")}
+		>
 			<Input
 				name="clientName"
 				placeholder="Nombre"
@@ -77,19 +88,23 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 				onChange={handleChange}
 			/>
 
-			<ErrorMessage message={error}/>
+			<ErrorMessage message={error} />
 
 			<div className="flex flex-col gap-2 justify-between items-center">
-				<button onClick={handleBack} className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-52" type="button">
-								<ArrowBigLeft />
-								<span>Volver al paso anterior</span>
-							</button>
+				<button
+					onClick={handleBack}
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-52"
+					type="button"
+				>
+					<ArrowBigLeft />
+					<span>Volver al paso anterior</span>
+				</button>
 				<button
 					type="submit"
 					onClick={handleSubmit}
 					className="p-2 cursor-pointer text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all flex gap-1 w-full md:w-52"
 				>
-					<CalendarCheck className="w-5"/>
+					<CalendarCheck className="w-5" />
 					<span>Confirmar reserva</span>
 				</button>
 			</div>

@@ -6,10 +6,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getBloquedDays, getWorkingHoursByWorker } from "../../redux/actions";
 import "react-day-picker/dist/style.css";
 import { parse } from "date-fns";
-import { startOfMonth, endOfMonth, addMonths } from 'date-fns';
-import StepCompont from "../Common/StepComponent.jsx";
-import { ArrowBigLeft } from 'lucide-react';
+import { addMonths, endOfMonth, startOfMonth } from "date-fns";
+import { ArrowBigLeft } from "lucide-react";
 import Loading from "../Common/Loading.jsx";
+import StepCompont from "../Common/StepComponent.jsx";
 
 const Step3 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();
@@ -64,43 +64,51 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 	const disabledDays = [...blockedDates, { before: today }, { dayOfWeek: [0] }];
 
 	return (
-		<StepCompont step={"Elegí una fecha y horario:"} stepSelected={
-    [formData.serviceId && services.find(s => s.id === formData.serviceId)?.name,
-     formData.workerId && workers.find(w => w.id === formData.workerId)?.name]
-      .filter(Boolean)
-      .join(" | ")
-  }>
+		<StepCompont
+			step={"Elegí una fecha y horario:"}
+			stepSelected={[
+				formData.serviceId &&
+					services.find((s) => s.id === formData.serviceId)?.name,
+				formData.workerId &&
+					workers.find((w) => w.id === formData.workerId)?.name,
+			]
+				.filter(Boolean)
+				.join(" | ")}
+		>
 			{isLoadingBloquedDays ? (
 				<Loading loadingText={"Cargando calendario..."} />
 			) : (
 				<div className="flex justify-center">
-				<DayPicker
-					mode="single"
-					disabled={disabledDays}
-					locale={es}
-					weekStartsOn={0}
-					selected={selectedDate}
-					onSelect={handleSelectDate}
-                    startMonth={startOfMonth(new Date())}
-                    endMonth={endOfMonth(addMonths(new Date(), 1))}
-					classNames={{
-						disabled: "!text-shark-100",
-						today: "!text-black !font-bold",
-						day: "font-semibold text-shark-600",
-						chevron: "fill-white",
-						selected: "!font-extrabold text-xl !text-shark-500",
-						weekday: "text-shark-500 text-md pt-2 pb-1 !font-extrabold",
-						month_caption: "flex items-center h-10 font-bold text-lg text-white bg-shark-500 px-3 rounded-t-xl",
-						month_grid: "border-2 border-shark-500",
-						month: "shadow-xl"
-					}}
-				/>
+					<DayPicker
+						mode="single"
+						disabled={disabledDays}
+						locale={es}
+						weekStartsOn={0}
+						selected={selectedDate}
+						onSelect={handleSelectDate}
+						startMonth={startOfMonth(new Date())}
+						endMonth={endOfMonth(addMonths(new Date(), 1))}
+						classNames={{
+							disabled: "!text-shark-100",
+							today: "!text-black !font-bold",
+							day: "font-semibold text-shark-600",
+							chevron: "fill-white",
+							selected: "!font-extrabold text-xl !text-shark-500",
+							weekday: "text-shark-500 text-md pt-2 pb-1 !font-extrabold",
+							month_caption:
+								"flex items-center h-10 font-bold text-lg text-white bg-shark-500 px-3 rounded-t-xl",
+							month_grid: "border-2 border-shark-500",
+							month: "shadow-xl",
+						}}
+					/>
 				</div>
 			)}
 
 			{selectedDate && (
 				<div className="mt-4">
-					<h3 className="text-shark-500 font-bold mb-2 text-lg">Horarios disponibles:</h3>
+					<h3 className="text-shark-500 font-bold mb-2 text-lg">
+						Horarios disponibles:
+					</h3>
 					{isLoadingWorkingHoursByDate ? (
 						<Loading loadingText={"Cargando horarios..."} />
 					) : workingHoursByDate?.timeSlots?.length === 0 ? (
@@ -122,10 +130,14 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 				</div>
 			)}
 			<div className="flex flex-col gap-2 justify-between items-center">
-			<button onClick={handleBack} className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52" type="button">
-				<ArrowBigLeft />
-				<span>Volver al paso anterior</span>
-			</button>
+				<button
+					onClick={handleBack}
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52"
+					type="button"
+				>
+					<ArrowBigLeft />
+					<span>Volver al paso anterior</span>
+				</button>
 			</div>
 		</StepCompont>
 	);

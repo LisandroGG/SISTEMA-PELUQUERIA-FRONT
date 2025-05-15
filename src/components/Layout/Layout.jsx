@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -13,8 +14,21 @@ const Layout = () => {
 	const user = useSelector((state) => state.user);
 
 	const handleLogout = async () => {
-		await dispatch(logoutUser());
-		navigate("/");
+		const loadingToastId = toast.loading("Cerrando Sesion...");
+		try {
+			const response = await dispatch(logoutUser());
+			if (response.success) {
+				toast.dismiss(loadingToastId);
+				toast.success(response.message);
+				navigate("/");
+			} else {
+				toast.dismiss(loadingToastId);
+				toast.error(response.message);
+			}
+		} catch (error) {
+			toast.dismiss(loadingToastId);
+			toast.error("Hubo un problema inesperado. Intente nuevamente");
+		}
 	};
 	return (
 		<div>

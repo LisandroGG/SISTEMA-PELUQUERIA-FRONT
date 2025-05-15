@@ -25,8 +25,8 @@ const Reservation = () => {
 	const dispatch = useDispatch();
 
 	const handleReservationSubmit = async () => {
-		if(!formData.workerId || !formData.serviceId) {
-			console.log("error")
+		if (!formData.workerId || !formData.serviceId) {
+			console.log("error");
 		}
 
 		const loadingToastId = toast.loading("Reservando Turno...");
@@ -85,9 +85,14 @@ const Reservation = () => {
 				return null;
 		}
 	};
-	return <section aria-labelledby="reservation" className="min-h-screen grid place-content-center bg-form-gradient">
-		{renderStep()}
-		</section>;
+	return (
+		<section
+			aria-labelledby="reservation"
+			className="min-h-screen grid place-content-center bg-form-gradient"
+		>
+			{renderStep()}
+		</section>
+	);
 };
 
 export default Reservation;

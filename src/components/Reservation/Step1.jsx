@@ -1,10 +1,10 @@
+import { ArrowBigLeft } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getServices } from "../../redux/actions";
-import { ArrowBigLeft } from 'lucide-react';
-import StepCompont from "../Common/StepComponent.jsx";
 import Loading from "../Common/Loading.jsx";
+import StepCompont from "../Common/StepComponent.jsx";
 
 const Step1 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();
@@ -38,7 +38,7 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 	return (
 		<StepCompont step={"Elegí un servicio:"} stepSelected="">
 			{isLoadingServices ? (
-				<Loading loadingText={"Cargando servicios..."}/>
+				<Loading loadingText={"Cargando servicios..."} />
 			) : (
 				<ul className="gap-2 flex flex-col">
 					{services.map((service) => (
@@ -59,14 +59,14 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 				</ul>
 			)}
 			<div className="flex flex-col gap-2 justify-between items-center">
-			<button
-				type="button"
-				onClick={handleNavigate}
-				className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-40"
-			>
-				<ArrowBigLeft />
-				<span>Volver al inicio</span>
-			</button>
+				<button
+					type="button"
+					onClick={handleNavigate}
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-40"
+				>
+					<ArrowBigLeft />
+					<span>Volver al inicio</span>
+				</button>
 			</div>
 		</StepCompont>
 	);
