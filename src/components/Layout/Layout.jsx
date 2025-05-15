@@ -31,7 +31,7 @@ const Layout = () => {
 		}
 	};
 	return (
-		<div>
+		<div className="bg-bgbody">
 			<Nav user={user} handleLogout={handleLogout} />
 			<h2>
 				user: {user ? user.name : "deslogueado"} role:{" "}

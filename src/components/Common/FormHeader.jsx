@@ -4,7 +4,7 @@ const FormHeader = ({ title, subtitle }) => {
 			<img
 				src="/assets/logo.webp"
 				alt="Logo de AF Peluquería"
-				className="w-22 h-22 rounded-[50px]"
+				className="w-22 h-22 rounded-full"
 			/>
 			<div className="w-full text-center grid gap-1">
 				<h1 className="font-bold text-xl text-shark-700">{title}</h1>

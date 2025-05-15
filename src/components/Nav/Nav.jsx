@@ -1,18 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu, X, LogInIcon, LogOutIcon } from "lucide-react";
 
 const Nav = ({ user, handleLogout }) => {
+	const [menuOpen, setMenuOpen ] = useState(false)
+
+	const handleToggle = () => setMenuOpen(!menuOpen);
+	const handleClose = () => setMenuOpen(false);
+
 	return (
 		<header>
-			<nav>
-				<ul className="flex gap-4 justify-between">
+			<nav className="bg-shark-500 text-white font-bold p-2 shadow-xl">
+				<ul className="flex gap-4 justify-between items-center">
 					<li>
-						<Link to="/">Inicio</Link>
+						<Link to="/"><img src="assets/logo.webp" className="rounded-full w-12 h-12"/></Link>
 					</li>
 					{user?.role === "admin" ? (
 						<li>
 							<Link to="/admin">
-								<span className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500">
+								<span className="">
 									Panel de administrador
 								</span>
 							</Link>
@@ -25,7 +31,7 @@ const Nav = ({ user, handleLogout }) => {
 							<button
 								type="button"
 								onClick={handleLogout}
-								className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500 cursor-pointer"
+								className=""
 							>
 								Cerrar sesion
 							</button>
@@ -33,7 +39,7 @@ const Nav = ({ user, handleLogout }) => {
 					) : (
 						<li>
 							<Link to="/login">
-								<span className="text-white p-1 rounded-lg font-semibold transition-all bg-gray-500 cursor-pointer">
+								<span className="">
 									Iniciar Sesion
 								</span>
 							</Link>

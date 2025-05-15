@@ -31,6 +31,8 @@
 	--color-shark-900: oklch(0% 0 none);
 	--color-shark-950: oklch(0% 0 none);
 
+	--color-bgbody: #ededed;
+
 	/* SIZES */
 	--container-sm: 21rem;
 	--container-md: 28rem;
