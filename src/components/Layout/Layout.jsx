@@ -33,11 +33,7 @@ const Layout = () => {
 	return (
 		<div className="bg-bgbody">
 			<Nav user={user} handleLogout={handleLogout} />
-			<h2>
-				user: {user ? user.name : "deslogueado"} role:{" "}
-				{user ? user.role : "deslogueado"}
-			</h2>
-			<Home />
+			<Home user={user} />
 			<Footer />
 		</div>
 	);

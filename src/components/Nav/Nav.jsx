@@ -1,53 +1,145 @@
+import {
+	Calendar,
+	LogInIcon,
+	LogOutIcon,
+	Menu,
+	Scissors,
+	ShieldCheck,
+	X,
+} from "lucide-react";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, LogInIcon, LogOutIcon } from "lucide-react";
 
 const Nav = ({ user, handleLogout }) => {
-	const [menuOpen, setMenuOpen ] = useState(false)
+	const [menuOpen, setMenuOpen] = useState(false);
 
-	const handleToggle = () => setMenuOpen(!menuOpen);
-	const handleClose = () => setMenuOpen(false);
+	const toggleMenu = () => setMenuOpen(!menuOpen);
+	const closeMenu = () => setMenuOpen(false);
+
+	const logoutAndClose = () => {
+		handleLogout();
+		closeMenu();
+	};
+
+	const navItems = [
+		{
+			to: "/reservations",
+			label: "Nuevo turno",
+			icon: <Scissors className="w-5 h-5" />,
+		},
+		{
+			to: "/reservation",
+			label: "Ver/Cancelar turno",
+			icon: <Calendar className="w-5 h-5" />,
+		},
+		user?.role === "admin" && {
+			to: "/admin",
+			label: "Panel del admin",
+			icon: <ShieldCheck className="w-5 h-5" />,
+		},
+	].filter(Boolean);
 
 	return (
-		<header>
-			<nav className="bg-shark-500 text-white font-bold p-2 shadow-xl">
-				<ul className="flex gap-4 justify-between items-center">
-					<li>
-						<Link to="/"><img src="assets/logo.webp" className="rounded-full w-12 h-12"/></Link>
-					</li>
-					{user?.role === "admin" ? (
+		<>
+			<header className="bg-shark-500 text-white shadow-md w-full z-50 fixed top-0 left-0 right-0">
+				<div className="max-w-7xl mx-auto flex items-center justify-between p-4 md:px-8 lg:px-4">
+					{/* Logo */}
+					<Link to="/" className="flex items-center gap-2 z-50">
+						<img
+							src="assets/logo.webp"
+							alt="logo"
+							className="rounded-full w-10 h-10"
+						/>
+						<span className="text-lg font-bold hidden sm:inline">
+							AF Peluquería
+						</span>
+					</Link>
+
+					<button
+						onClick={toggleMenu}
+						className="lg:hidden text-white z-50"
+						type="button"
+					>
+						{menuOpen ? <X /> : <Menu />}
+					</button>
+
+					<nav className="hidden lg:flex items-center">
+						<ul className="flex gap-6 items-center">
+							{navItems.map(({ to, label, icon }) => (
+								<li key={to}>
+									<Link
+										to={to}
+										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										{icon}
+										{label}
+									</Link>
+								</li>
+							))}
+							<li>
+								{user ? (
+									<button
+										type="button"
+										onClick={logoutAndClose}
+										className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										<LogOutIcon className="w-5 h-5" />
+										Cerrar sesión
+									</button>
+								) : (
+									<Link
+										to="/login"
+										className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										<LogInIcon className="w-5 h-5" />
+										Iniciar sesión
+									</Link>
+								)}
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</header>
+
+			{menuOpen && (
+				<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
+					<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
+						{navItems.map(({ to, label, icon }) => (
+							<li key={to}>
+								<Link
+									to={to}
+									onClick={closeMenu}
+									className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+								>
+									{icon}
+									{label}
+								</Link>
+							</li>
+						))}
 						<li>
-							<Link to="/admin">
-								<span className="">
-									Panel de administrador
-								</span>
-							</Link>
+							{user ? (
+								<button
+									type="button"
+									onClick={logoutAndClose}
+									className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+								>
+									<LogOutIcon className="w-5 h-5" />
+									Cerrar sesión
+								</button>
+							) : (
+								<Link
+									to="/login"
+									className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+								>
+									<LogInIcon className="w-5 h-5" />
+									Iniciar sesión
+								</Link>
+							)}
 						</li>
-					) : (
-						""
-					)}
-					{user ? (
-						<li>
-							<button
-								type="button"
-								onClick={handleLogout}
-								className=""
-							>
-								Cerrar sesion
-							</button>
-						</li>
-					) : (
-						<li>
-							<Link to="/login">
-								<span className="">
-									Iniciar Sesion
-								</span>
-							</Link>
-						</li>
-					)}
-				</ul>
-			</nav>
-		</header>
+					</ul>
+				</nav>
+			)}
+		</>
 	);
 };
 
