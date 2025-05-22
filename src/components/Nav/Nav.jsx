@@ -43,7 +43,6 @@ const Nav = ({ user, handleLogout }) => {
 		<>
 			<header className="bg-shark-500 text-white shadow-md w-full z-50 fixed top-0 left-0 right-0">
 				<div className="max-w-7xl mx-auto flex items-center justify-between p-4 md:px-8 lg:px-4">
-					{/* Logo */}
 					<Link to="/" className="flex items-center gap-2 z-50">
 						<img
 							src="assets/logo.webp"
@@ -121,7 +120,7 @@ const Nav = ({ user, handleLogout }) => {
 								<button
 									type="button"
 									onClick={logoutAndClose}
-									className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 								>
 									<LogOutIcon className="w-5 h-5" />
 									Cerrar sesión
@@ -129,7 +128,7 @@ const Nav = ({ user, handleLogout }) => {
 							) : (
 								<Link
 									to="/login"
-									className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 								>
 									<LogInIcon className="w-5 h-5" />
 									Iniciar sesión
