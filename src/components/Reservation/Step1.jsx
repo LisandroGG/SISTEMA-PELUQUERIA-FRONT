@@ -62,7 +62,7 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 				<button
 					type="button"
 					onClick={handleNavigate}
-					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-40"
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-54"
 				>
 					<ArrowBigLeft />
 					<span>Volver al inicio</span>
