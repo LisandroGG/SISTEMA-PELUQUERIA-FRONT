@@ -110,17 +110,14 @@ const Nav = ({ user, handleLogout }) => {
 
 			{menuOpen && (
 				<div
-					className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm pt-20 px-6"
+					className="fixed inset-0 z-40  pt-20 px-6"
 					onClick={closeMenu}
 					onKeyDown={(e) => {
 						if (e.key === "Enter" || e.key === " ") closeMenu();
 					}}
 				>
-						<nav
-			className="bg-shark-500 p-4 rounded-xl shadow-lg text-white flex flex-col gap-4"
-			onClick={(e) => e.stopPropagation()}
-		>
-						<ul>
+					<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40" onClick={(e) => e.stopPropagation()}>
+						<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
 							{navItems.map(({ to, label, icon }) => (
 								<li key={to}>
 									<Link
