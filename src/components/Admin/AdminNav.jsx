@@ -8,7 +8,7 @@ import {
 	Scissors,
 	X,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const AdminNav = ({ handleLogout }) => {
@@ -48,6 +48,14 @@ const AdminNav = ({ handleLogout }) => {
 			icon: <CalendarClock className="w-5 h-5" />,
 		},
 	];
+
+	useEffect(() => {
+		if (menuOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [menuOpen]);
 	return (
 		<>
 			<header className="bg-shark-500 text-white shadow-md w-full z-50 fixed top-0 left-0 right-0">
@@ -100,32 +108,40 @@ const AdminNav = ({ handleLogout }) => {
 			</header>
 
 			{menuOpen && (
-				<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
-					<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
-						{navItems.map(({ to, label, icon }) => (
-							<li key={to}>
-								<Link
-									to={to}
-									onClick={closeMenu}
-									className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+				<div
+					className="fixed inset-0 z-40 pt-20 px-6"
+					onClick={closeMenu}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") closeMenu();
+					}}
+				>
+					<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
+						<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
+							{navItems.map(({ to, label, icon }) => (
+								<li key={to}>
+									<Link
+										to={to}
+										onClick={closeMenu}
+										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										{icon}
+										{label}
+									</Link>
+								</li>
+							))}
+							<li>
+								<button
+									type="button"
+									onClick={logoutAndClose}
+									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 								>
-									{icon}
-									{label}
-								</Link>
+									<LogOutIcon className="w-5 h-5" />
+									Cerrar sesión
+								</button>
 							</li>
-						))}
-						<li>
-							<button
-								type="button"
-								onClick={logoutAndClose}
-								className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-							>
-								<LogOutIcon className="w-5 h-5" />
-								Cerrar sesión
-							</button>
-						</li>
-					</ul>
-				</nav>
+						</ul>
+					</nav>
+				</div>
 			)}
 		</>
 	);
