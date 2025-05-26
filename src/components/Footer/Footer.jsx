@@ -29,7 +29,7 @@ const Footer = () => {
 						</a>
 					</div>
 				</section>
-				<section className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:grid-cols-4">
+				<section className="grid grid-cols-1 gap-6 md:grid-cols-3">
 					<section>
 						<p className="font-bold text-lg mb-4">Enlaces</p>
 						<Link
@@ -39,7 +39,7 @@ const Footer = () => {
 							Nuevo turno
 						</Link>
 					</section>
-					<section>
+					<section className="text-center">
 						<p className="font-bold text-lg mb-4">Contacto</p>
 						<a
 							href="mailto:federicoalvarez728@gmail.com"
@@ -50,7 +50,7 @@ const Footer = () => {
 							federicoalvarez728@gmail.com
 						</a>
 					</section>
-					<section className="md:col-span-1 lg:col-span-1">
+					<section className="md:col-span-1 lg:col-span-1 lg:text-right">
 						<p className="font-bold text-lg mb-4">Desarrollado por</p>
 						<a
 							href="https://lisandrodev.vercel.app/"
@@ -60,10 +60,6 @@ const Footer = () => {
 						>
 							Lisandro Pereyra
 						</a>
-					</section>
-					<section className="md:col-span-3 lg:col-span-1">
-						<p className="font-bold text-lg mb-4">Ubicación:</p>
-						<MapIframe />
 					</section>
 				</section>
 			</div>
