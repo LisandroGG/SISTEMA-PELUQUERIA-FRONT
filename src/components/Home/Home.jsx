@@ -69,7 +69,7 @@ const Home = () => {
 			</section>
 			<section className="mt-20 md:pt-15 flex flex-col lg:flex-row items-center justify-center gap-8">
 					<div className="max-w-[35rem]">
-						<p className="text-5xl font-bold tracking-tight text-shark-600 mb-10 text-center">
+						<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10 text-center">
 						📍Donde encontrarnos
 						</p>
 						<div className="text-2xl font-medium text-shark-300 space-y-1 text-center">
