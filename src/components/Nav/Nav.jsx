@@ -40,12 +40,12 @@ const Nav = ({ user, handleLogout }) => {
 	].filter(Boolean);
 
 	useEffect(() => {
-	if (menuOpen) {
-		document.body.style.overflow = "hidden";
-	} else {
-		document.body.style.overflow = "";
-	}
-}, [menuOpen]);
+		if (menuOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "";
+		}
+	}, [menuOpen]);
 
 	return (
 		<>
@@ -109,42 +109,50 @@ const Nav = ({ user, handleLogout }) => {
 			</header>
 
 			{menuOpen && (
-				<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
-					<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
-						{navItems.map(({ to, label, icon }) => (
-							<li key={to}>
-								<Link
-									to={to}
-									onClick={closeMenu}
-									className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-								>
-									{icon}
-									{label}
-								</Link>
+				<div
+					className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm pt-20 px-6"
+					onClick={closeMenu}
+					onKeyDown={(e) => {
+						if (e.key === "Enter" || e.key === " ") closeMenu();
+					}}
+				>
+					<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
+						<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
+							{navItems.map(({ to, label, icon }) => (
+								<li key={to}>
+									<Link
+										to={to}
+										onClick={closeMenu}
+										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										{icon}
+										{label}
+									</Link>
+								</li>
+							))}
+							<li>
+								{user ? (
+									<button
+										type="button"
+										onClick={logoutAndClose}
+										className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										<LogOutIcon className="w-5 h-5" />
+										Cerrar sesión
+									</button>
+								) : (
+									<Link
+										to="/login"
+										className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									>
+										<LogInIcon className="w-5 h-5" />
+										Iniciar sesión
+									</Link>
+								)}
 							</li>
-						))}
-						<li>
-							{user ? (
-								<button
-									type="button"
-									onClick={logoutAndClose}
-									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-								>
-									<LogOutIcon className="w-5 h-5" />
-									Cerrar sesión
-								</button>
-							) : (
-								<Link
-									to="/login"
-									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-								>
-									<LogInIcon className="w-5 h-5" />
-									Iniciar sesión
-								</Link>
-							)}
-						</li>
-					</ul>
-				</nav>
+						</ul>
+					</nav>
+				</div>
 			)}
 		</>
 	);

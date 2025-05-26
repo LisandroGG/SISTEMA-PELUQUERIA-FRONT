@@ -5,8 +5,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { changePassword } from "../../redux/actions.js";
 import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
-import Input from "../Common/Input.jsx";
 import FormHeader from "../Common/FormHeader.jsx";
+import Input from "../Common/Input.jsx";
 import { validatePassword } from "../Utils/Validations.js";
 
 const ChangePassword = () => {
