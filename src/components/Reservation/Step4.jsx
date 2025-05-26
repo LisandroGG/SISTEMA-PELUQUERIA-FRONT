@@ -96,7 +96,7 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
-					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-52"
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-54"
 					type="button"
 				>
 					<ArrowBigLeft />
@@ -105,7 +105,7 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 				<button
 					type="submit"
 					onClick={handleSubmit}
-					className="p-2 cursor-pointer text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all flex gap-1 w-full md:w-52"
+					className="p-2 cursor-pointer text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all flex gap-1 w-full md:w-54"
 				>
 					<CalendarCheck className="w-5" />
 					<span>Confirmar reserva</span>

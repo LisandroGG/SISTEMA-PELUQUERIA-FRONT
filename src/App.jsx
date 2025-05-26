@@ -43,7 +43,7 @@ function App() {
 	}
 
 	return (
-		<div className="min-h-screen">
+		<div className="min-h-screen font-montserrat">
 			<Toaster position="top-center" />
 			<Routes>
 				<Route path="/" element={<Layout />} />

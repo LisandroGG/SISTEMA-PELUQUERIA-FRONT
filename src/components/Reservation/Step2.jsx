@@ -50,7 +50,7 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 							onClick={() => handleSelect(worker.id)}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
-									handleSelect(service.id);
+									handleSelect(worker.id);
 								}
 							}}
 						>
@@ -62,7 +62,7 @@ const Step2 = ({ setStep, formData, setFormData }) => {
 			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
-					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-52"
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-54"
 					type="button"
 				>
 					<ArrowBigLeft />

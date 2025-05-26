@@ -33,7 +33,7 @@ const Layout = () => {
 	return (
 		<div className="bg-bgbody">
 			<Nav user={user} handleLogout={handleLogout} />
-			<Home user={user} />
+			<Home />
 			<Footer />
 		</div>
 	);

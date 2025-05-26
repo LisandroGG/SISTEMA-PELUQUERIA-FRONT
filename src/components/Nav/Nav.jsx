@@ -41,7 +41,7 @@ const Nav = ({ user, handleLogout }) => {
 
 	return (
 		<>
-			<header className="bg-shark-500 text-white shadow-md w-full z-50 fixed top-0 left-0 right-0">
+			<header className="bg-shark-500 text-white shadow-xl w-full z-50 fixed top-0 left-0 right-0">
 				<div className="max-w-7xl mx-auto flex items-center justify-between p-4 md:px-8 lg:px-4">
 					<Link to="/" className="flex items-center gap-2 z-50">
 						<img
