@@ -7,7 +7,7 @@ import {
 	ShieldCheck,
 	X,
 } from "lucide-react";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Nav = ({ user, handleLogout }) => {
@@ -38,6 +38,14 @@ const Nav = ({ user, handleLogout }) => {
 			icon: <ShieldCheck className="w-5 h-5" />,
 		},
 	].filter(Boolean);
+
+	useEffect(() => {
+	if (menuOpen) {
+		document.body.style.overflow = "hidden";
+	} else {
+		document.body.style.overflow = "";
+	}
+}, [menuOpen]);
 
 	return (
 		<>
