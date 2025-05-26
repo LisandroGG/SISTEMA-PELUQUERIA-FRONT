@@ -7,7 +7,7 @@ import ErrorMessage from "../Common/ErrorMessage.jsx";
 import Form from "../Common/Form.jsx";
 import FormText from "../Common/FormText.jsx";
 import Input from "../Common/Input.jsx";
-import FormHeader from "../Common/formHeader.jsx";
+import FormHeader from "../Common/FormHeader.jsx";
 import { validateGmail } from "../Utils/Validations.js";
 
 const ForgotPassword = () => {
