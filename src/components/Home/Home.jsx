@@ -32,9 +32,9 @@ const Home = () => {
 	return (
 		<main className="max-w-7xl mx-auto mt-18 p-4 md:px-8 lg:px-4 px-5 mb-10">
 			<section className="py-6 md:py-15 flex flex-col md:flex-row items-center justify-center text-center gap-8">
-				<div className="max-w-[35rem]">
+				<div className="max-w-[35rem] font-chivo">
 					<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10">
-						💈Bienvenidos a AF Peluquería!
+						💈Bienvenidos a AF Peluquería
 					</p>
 					<div className="text-2xl font-medium text-shark-300 space-y-1">
 						<p>Para nosotros "Cada Momento Importa".</p>
@@ -70,7 +70,7 @@ const Home = () => {
 				</div>
 			</section>
 			<section className="mt-20 md:pt-15 flex flex-col lg:flex-row items-center justify-center gap-8">
-				<div className="max-w-[35rem]">
+				<div className="max-w-[35rem] font-chivo">
 					<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10 text-center">
 						📍Donde encontrarnos
 					</p>

@@ -8,6 +8,7 @@ const Input = ({
 	value,
 	label,
 	onChange,
+	autocomplete,
 	className = "",
 	...props
 }) => {
@@ -18,6 +19,13 @@ const Input = ({
 	};
 
 	const inputType = type === "password" && showPassword ? "text" : type;
+
+	const autoCompleteValue =
+		autocomplete || (type === "password"
+			? "current-password"
+			: type === "email"
+			? "email"
+			: "off");
 
 	return (
 		<div className="relative">
@@ -36,7 +44,8 @@ const Input = ({
 				placeholder={placeholder}
 				value={value}
 				onChange={onChange}
-				className={`text-lg focus:outline-none focus:border-gray-300 font-semibold border-gray-200 border-2 rounded-lg p-2 pr-11 w-full text-shark-500 ${className} ${className}`}
+				autoComplete={autoCompleteValue}
+				className={`text-lg focus:outline-none focus:border-gray-300 font-semibold border-gray-200 border-2 rounded-lg p-2 ${type === "password" ? "pr-11" : ""} w-full text-shark-500 ${className}`}
 				{...props}
 			/>
 			{type === "password" && (

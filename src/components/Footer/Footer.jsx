@@ -7,7 +7,7 @@ const Footer = () => {
 		<footer className="p-4 bg-shark-500 text-white shadow-xl text-center lg:text-left">
 			<div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-4">
 				<section className="font-bold flex flex-col md:flex-row items-center justify-between pb-4 mb-4 border-b-2 border-shark-400 gap-1">
-					<p className="text-xl">AF Peluquería</p>
+					<p className="text-xl font-chivo">AF Peluquería</p>
 					<div className="flex gap-2">
 						<a href="https://api.whatsapp.com/send?phone=+543472438424&text=%F0%9F%91%8BHola%20Fede,%20vengo%20de%20tu%20pagina%20web!!">
 							<img

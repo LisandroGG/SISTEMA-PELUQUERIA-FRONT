@@ -57,7 +57,7 @@ const Nav = ({ user, handleLogout }) => {
 							alt="logo"
 							className="rounded-full w-10 h-10"
 						/>
-						<span className="text-lg font-bold hidden sm:inline">
+						<span className="text-lg font-bold hidden sm:inline font-chivo">
 							AF Peluquería
 						</span>
 					</Link>

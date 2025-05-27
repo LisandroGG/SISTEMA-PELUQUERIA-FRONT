@@ -67,6 +67,7 @@ const Login = () => {
 					value={formData.gmail}
 					onChange={handleChange}
 					placeholder="Correo electrónico"
+					autocomplete="email"
 				/>
 				<Input
 					label="Contraseña"
@@ -75,6 +76,7 @@ const Login = () => {
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Contraseña"
+					autocomplete="current-password"
 				/>
 				<ErrorMessage message={error} />
 				<div className="flex flex-col text-center justify-between gap-2">

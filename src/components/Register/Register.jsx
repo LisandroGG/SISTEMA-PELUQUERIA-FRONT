@@ -88,6 +88,7 @@ const Register = () => {
 					value={formData.gmail}
 					onChange={handleChange}
 					placeholder="Correo electrónico"
+					autocomplete="email"
 				/>
 				<Input
 					label="Telefono"
@@ -104,6 +105,7 @@ const Register = () => {
 					value={formData.password}
 					onChange={handleChange}
 					placeholder="Contraseña"
+					autocomplete="currrent-password"
 				/>
 				<ErrorMessage message={error} />
 				<div>

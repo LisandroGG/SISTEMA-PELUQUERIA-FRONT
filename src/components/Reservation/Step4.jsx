@@ -96,7 +96,7 @@ const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 			<div className="flex flex-col gap-2 justify-between items-center mt-4">
 				<button
 					onClick={handleBack}
-					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-54"
+					className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex w-full md:w-60"
 					type="button"
 				>
 					<ArrowBigLeft />
