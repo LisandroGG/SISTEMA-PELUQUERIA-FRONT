@@ -24,7 +24,10 @@ const Nav = ({ user, handleLogout }) => {
 		setModalOpen(false);
 	};
 
-	const toggleMenu = () => setMenuOpen(!menuOpen);
+	const toggleMenu = () => {
+		setMenuOpen(!menuOpen)
+		setModalOpen(false)
+	};
 	const closeMenu = () => setMenuOpen(false);
 
 	const logoutAndClose = () => {
@@ -53,12 +56,12 @@ const Nav = ({ user, handleLogout }) => {
 	].filter(Boolean);
 
 	useEffect(() => {
-		if (menuOpen) {
+		if (menuOpen || modalOpen) {
 			document.body.style.overflow = "hidden";
 		} else {
 			document.body.style.overflow = "";
 		}
-	}, [menuOpen]);
+	}, [menuOpen, modalOpen]);
 
 	return (
 		<>
