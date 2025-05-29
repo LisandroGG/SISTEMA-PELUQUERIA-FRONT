@@ -70,7 +70,7 @@ const Home = () => {
 					<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10">
 						💈Bienvenidos a AF Peluquería
 					</p>
-					<div className="text-2xl font-medium text-shark-300 space-y-1">
+					<div className="text-xl md:text-2xl font-medium text-shark-300 space-y-1">
 						<p>Para nosotros "Cada Momento Importa".</p>
 						<p>
 							Ofrecemos cortes de pelo modernos y clásicos, así como servicios
@@ -119,7 +119,7 @@ const Home = () => {
 					<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10 text-center">
 						📍Donde encontrarnos
 					</p>
-					<div className="text-2xl font-medium text-shark-300 space-y-1 text-center">
+					<div className="text-xl md:text-2xl font-medium text-shark-300 space-y-1 text-center">
 						<p>
 							AF Peluquería está ubicada en Benvenuto 1431, Leones, Córdoba.
 						</p>

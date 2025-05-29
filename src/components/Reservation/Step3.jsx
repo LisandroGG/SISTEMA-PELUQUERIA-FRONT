@@ -93,8 +93,8 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 							today: "!text-black !font-bold",
 							day: "font-semibold text-shark-600",
 							chevron: "fill-white",
-							selected: "!font-extrabold text-xl !text-shark-500",
-							weekday: "text-shark-500 text-md pt-2 pb-1 !font-extrabold",
+							selected: "!font-bold text-xl !text-shark-500",
+							weekday: "text-shark-500 text-md pt-2 pb-1 !font-bold",
 							month_caption:
 								"flex items-center h-10 font-bold text-lg text-white bg-shark-500 px-3 rounded-t-xl",
 							month_grid: "border-2 border-shark-500 border-blue-500",
