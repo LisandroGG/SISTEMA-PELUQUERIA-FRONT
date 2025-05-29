@@ -16,15 +16,51 @@ const Home = () => {
 	);
 
 	const images = [
-		"assets/foto1.webp",
-		"assets/foto2.webp",
-		"assets/foto3.webp",
-		"assets/foto4.webp",
-		"assets/foto5.webp",
-		"assets/foto6.webp",
-		"assets/foto7.webp",
-		"assets/foto8.webp",
-		"assets/foto9.webp",
+		{
+			src: "assets/foto1.webp",
+			src480: "assets/foto1-480w.webp",
+			src768: "assets/foto1-768.webp",
+		},
+		{
+			src: "assets/foto2.webp",
+			src480: "assets/foto2-480w.webp",
+			src768: "assets/foto2-768.webp",
+		},
+		{
+			src: "assets/foto3.webp",
+			src480: "assets/foto3-480w.webp",
+			src768: "assets/foto3-768.webp",
+		},
+		{
+			src: "assets/foto4.webp",
+			src480: "assets/foto4-480w.webp",
+			src768: "assets/foto4-768.webp",
+		},
+		{
+			src: "assets/foto5.webp",
+			src480: "assets/foto5-480w.webp",
+			src768: "assets/foto5-768.webp",
+		},
+		{
+			src: "assets/foto6.webp",
+			src480: "assets/foto6-480w.webp",
+			src768: "assets/foto6-768.webp",
+		},
+		{
+			src: "assets/foto7.webp",
+			src480: "assets/foto7-480w.webp",
+			src768: "assets/foto7-768.webp",
+		},
+		{
+			src: "assets/foto8.webp",
+			src480: "assets/foto8-480w.webp",
+			src768: "assets/foto8-768.webp",
+		},
+		{
+			src: "assets/foto9.webp",
+			src480: "assets/foto9-480w.webp",
+			src768: "assets/foto9-768.webp",
+		},
 	];
 
 	return (
@@ -54,20 +90,26 @@ const Home = () => {
 					</span>
 				</div>
 
-				{/* Slider con Keen */}
 				<div className="w-full md:w-1/2">
 					<div ref={sliderRef} className="keen-slider rounded-xl shadow-md">
-						{images.map((src, index) => (
-							<div key={src} className="keen-slider__slide">
-								<img
-									src={src}
-									alt={`Slide ${src}`}
-									className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-xl"
-									loading={index === 0 ? "eager" : "lazy"}
-									fetchpriority={index === 0 ? "high" : "auto"}
-								/>
-							</div>
-						))}
+						{images.map((image, index) => {
+							const src = image.src;
+							const src480 = image.src480;
+							const src768 = image.src768;
+							return (
+								<div key={index} className="keen-slider__slide">
+									<img
+										src={src}
+										srcSet={`${src480 || src} 480w, ${src768 || src} 768w, ${src} 1024w`}
+										sizes="(max-width: 768px) 100vw, 50vw"
+										alt={`Slide ${index + 1}`}
+										loading={index === 0 ? "eager" : "lazy"}
+										fetchPriority={index === 0 ? "high" : "auto"}
+										className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-xl shadow-md"
+									/>
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</section>
