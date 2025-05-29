@@ -57,12 +57,14 @@ const Home = () => {
 				</div>
 				<div className="w-full md:w-1/2 ">
 					<Slider {...settings}>
-						{images.map((src) => (
+						{images.map((src, index) => (
 							<div key={src}>
 								<img
 									src={src}
 									alt={`Slide ${src}`}
 									className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-xl shadow-md"
+									loading={index === 0 ? "eager" : "lazy"}
+      								fetchPriority={index === 0 ? "high" : "auto"}
 								/>
 							</div>
 						))}
