@@ -10,6 +10,7 @@ import Login from "./components/Login/Login.jsx";
 import ChangePassword from "./components/Password/ChangePassword.jsx";
 import ForgotPassword from "./components/Password/ForgotPassword.jsx";
 import Register from "./components/Register/Register.jsx";
+import CancelReservation from "./components/Reservation/CancelReservation.jsx";
 import PrivateRoute from "./components/Routes/PrivateRoute.jsx";
 import PublicRoute from "./components/Routes/PublicRoute.jsx";
 import TokenRoute from "./components/Routes/TokenRoute.jsx";
@@ -69,6 +70,14 @@ function App() {
 						<PublicRoute>
 							<ForgotPassword />
 						</PublicRoute>
+					}
+				/>
+				<Route
+					path="/cancel"
+					element={
+						<TokenRoute>
+							<CancelReservation />
+						</TokenRoute>
 					}
 				/>
 				<Route

@@ -9,9 +9,20 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import ReservationsModal from "../Reservation/ReservationsModal.jsx";
 
 const Nav = ({ user, handleLogout }) => {
 	const [menuOpen, setMenuOpen] = useState(false);
+	const [modalOpen, setModalOpen] = useState(false);
+
+	const openModal = () => {
+		setModalOpen(true);
+		closeMenu();
+	};
+
+	const closeModal = () => {
+		setModalOpen(false);
+	};
 
 	const toggleMenu = () => setMenuOpen(!menuOpen);
 	const closeMenu = () => setMenuOpen(false);
@@ -26,16 +37,18 @@ const Nav = ({ user, handleLogout }) => {
 			to: "/reservations",
 			label: "Nuevo turno",
 			icon: <Scissors className="w-5 h-5" />,
+			action: null,
 		},
 		{
-			to: "/reservation",
-			label: "Ver/Cancelar turno",
+			label: "Mis turnos",
 			icon: <Calendar className="w-5 h-5" />,
+			action: openModal,
 		},
 		user?.role === "admin" && {
 			to: "/admin",
 			label: "Panel del admin",
 			icon: <ShieldCheck className="w-5 h-5" />,
+			action: null,
 		},
 	].filter(Boolean);
 
@@ -72,15 +85,26 @@ const Nav = ({ user, handleLogout }) => {
 
 					<nav className="hidden lg:flex items-center">
 						<ul className="flex gap-6 items-center">
-							{navItems.map(({ to, label, icon }) => (
-								<li key={to}>
-									<Link
-										to={to}
-										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-									>
-										{icon}
-										{label}
-									</Link>
+							{navItems.map(({ to, label, icon, action }) => (
+								<li key={label}>
+									{action ? (
+										<button
+											type="button"
+											onClick={action}
+											className="cursor-pointer flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										>
+											{icon}
+											{label}
+										</button>
+									) : (
+										<Link
+											to={to}
+											className="cursor-pointer flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										>
+											{icon}
+											{label}
+										</Link>
+									)}
 								</li>
 							))}
 							<li>
@@ -118,16 +142,26 @@ const Nav = ({ user, handleLogout }) => {
 				>
 					<nav className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm pt-20 px-6 z-40">
 						<ul className="flex flex-col gap-4 bg-shark-500 p-4 rounded-xl shadow-lg text-white">
-							{navItems.map(({ to, label, icon }) => (
-								<li key={to}>
-									<Link
-										to={to}
-										onClick={closeMenu}
-										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
-									>
-										{icon}
-										{label}
-									</Link>
+							{navItems.map(({ to, label, icon, action }) => (
+								<li key={label}>
+									{action ? (
+										<button
+											type="button"
+											onClick={action}
+											className="flex cursor-pointer w-full gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										>
+											{icon}
+											{label}
+										</button>
+									) : (
+										<Link
+											to={to}
+											className="flex cursor-pointer w-full gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										>
+											{icon}
+											{label}
+										</Link>
+									)}
 								</li>
 							))}
 							<li>
@@ -154,6 +188,7 @@ const Nav = ({ user, handleLogout }) => {
 					</nav>
 				</div>
 			)}
+			<ReservationsModal isOpen={modalOpen} onClose={closeModal} user={user} />
 		</>
 	);
 };

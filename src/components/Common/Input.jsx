@@ -21,11 +21,12 @@ const Input = ({
 	const inputType = type === "password" && showPassword ? "text" : type;
 
 	const autoCompleteValue =
-		autocomplete || (type === "password"
+		autocomplete ||
+		(type === "password"
 			? "current-password"
 			: type === "email"
-			? "email"
-			: "off");
+				? "email"
+				: "off");
 
 	return (
 		<div className="relative">
