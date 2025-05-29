@@ -80,7 +80,7 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 				>
 					<X />
 				</button>
-				<h2 className="text-xl font-semibold mb-4 text-center">Mis Turnos</h2>
+				<h2 className="text-2xl font-bold mb-4 text-center">Mis Turnos</h2>
 				<form onSubmit={handleSubmit} className="space-y-4">
 					<Input
 						label="Gmail"
