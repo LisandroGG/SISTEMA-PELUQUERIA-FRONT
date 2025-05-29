@@ -1,21 +1,19 @@
+import { useKeenSlider } from "keen-slider/react";
 import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import "keen-slider/keen-slider.min.css";
 import { Link } from "react-router-dom";
 import MapIframe from "../Map/Map";
+import { AutoplayPlugin } from "../Utils/Autoloop.js";
 
 const Home = () => {
-	const settings = {
-		dots: false,
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		autoplay: true,
-		autoplaySpeed: 3000,
-		arrows: false,
-	};
+	const [sliderRef] = useKeenSlider(
+		{
+			loop: true,
+			slides: { perView: 1 },
+			autoplay: { delay: 3000 },
+		},
+		[AutoplayPlugin],
+	);
 
 	const images = [
 		"assets/foto1.webp",
@@ -55,22 +53,25 @@ const Home = () => {
 						</Link>
 					</span>
 				</div>
-				<div className="w-full md:w-1/2 ">
-					<Slider {...settings}>
+
+				{/* Slider con Keen */}
+				<div className="w-full md:w-1/2">
+					<div ref={sliderRef} className="keen-slider rounded-xl shadow-md">
 						{images.map((src, index) => (
-							<div key={src}>
+							<div key={src} className="keen-slider__slide">
 								<img
 									src={src}
 									alt={`Slide ${src}`}
-									className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-xl shadow-md"
+									className="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover rounded-xl"
 									loading={index === 0 ? "eager" : "lazy"}
-      								fetchPriority={index === 0 ? "high" : "auto"}
+									fetchpriority={index === 0 ? "high" : "auto"}
 								/>
 							</div>
 						))}
-					</Slider>
+					</div>
 				</div>
 			</section>
+
 			<section className="mt-20 md:pt-15 flex flex-col lg:flex-row items-center justify-center gap-8">
 				<div className="max-w-[35rem] font-chivo">
 					<p className="text-4xl md:text-5xl font-bold tracking-tight text-shark-600 mb-10 text-center">
