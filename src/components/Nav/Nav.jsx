@@ -25,8 +25,8 @@ const Nav = ({ user, handleLogout }) => {
 	};
 
 	const toggleMenu = () => {
-		setMenuOpen(!menuOpen)
-		setModalOpen(false)
+		setMenuOpen(!menuOpen);
+		setModalOpen(false);
 	};
 	const closeMenu = () => setMenuOpen(false);
 
