@@ -25,7 +25,6 @@ const Services = () => {
 	const services = useSelector((state) => state.services);
 	const isLoadingServices = useSelector((state) => state.isLoadingServices);
 	const workers = useSelector((state) => state.workers);
-	const isLoadingWorkers = useSelector((state) => state.isLoadingWorkers);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [error, setError] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -101,6 +100,7 @@ const Services = () => {
 			toast.error("Hubo un problema inesperado. Intente nuevamente");
 		}
 	};
+
 	const handleEdit = async (e) => {
 		e.preventDefault();
 
@@ -139,6 +139,26 @@ const Services = () => {
 		}
 	};
 
+	const handleDeleteService = async () => {
+		if (!serviceToDelete) return;
+
+		const toastId = toast.loading("Eliminando servicio...");
+		try {
+			const res = await dispatch(deleteService(serviceToDelete.id));
+			if (res.success) {
+				toast.success(res.message);
+				dispatch(getServices());
+			} else {
+				toast.error(res.message);
+			}
+		} catch {
+			toast.error("Hubo un error inesperado");
+		} finally {
+			toast.dismiss(toastId);
+			setDeleteModalOpen(false);
+		}
+	};
+
 	useEffect(() => {
 		if (executed.current) return;
 		executed.current = true;
@@ -168,7 +188,7 @@ const Services = () => {
 			) : (
 				<section>
 					{services?.map((service, index) => (
-						<article key={service?.serviceId ?? `service-${index}`}>
+						<article key={service?.id ?? `service-${index}`}>
 							<button
 								type="button"
 								onClick={() => {
@@ -199,7 +219,7 @@ const Services = () => {
 							<div className="mt-2">
 								<p>Trabajadores:</p>
 								<ul className="">
-									{service.Workers.map((worker) => (
+									{(service.Workers ?? []).map((worker) => (
 										<li key={worker.id}>{worker.name}</li>
 									))}
 								</ul>
@@ -286,26 +306,7 @@ const Services = () => {
 					<button type="button" onClick={() => setDeleteModalOpen(false)}>
 						Cancelar
 					</button>
-					<button
-						type="button"
-						onClick={async () => {
-							const toastId = toast.loading("Eliminando servicio...");
-							try {
-								const res = await dispatch(deleteService(serviceToDelete.id));
-								if (res.success) {
-									toast.success(res.message);
-									dispatch(getServices());
-								} else {
-									toast.error(res.message);
-								}
-							} catch {
-								toast.error("Hubo un error inesperado");
-							} finally {
-								toast.dismiss(toastId);
-								setDeleteModalOpen(false);
-							}
-						}}
-					>
+					<button type="button" onClick={handleDeleteService}>
 						Eliminar
 					</button>
 				</div>

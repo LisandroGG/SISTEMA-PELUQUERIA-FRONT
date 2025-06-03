@@ -91,7 +91,7 @@ const Register = () => {
 					autocomplete="email"
 				/>
 				<Input
-					label="Telefono"
+					label="Teléfono"
 					name="phoneNumber"
 					type="tel"
 					value={formData.phoneNumber}
