@@ -288,7 +288,7 @@ export const editService = (formData, serviceId) => {
 		console.log("ejecutamos editService");
 		try {
 			const { data } = await axios.put(
-				`${LOCAL}/service/edit/${serviceId}`,
+				`${LOCAL}/services/edit/${serviceId}`,
 				formData,
 				jsonHeaders,
 			);

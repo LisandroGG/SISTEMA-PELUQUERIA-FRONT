@@ -144,7 +144,7 @@ function rootReducer(state = initialState, action) {
 			return {
 				...state,
 				services: state.services.map((service) =>
-					service.id === action.payload.id ? action.payload : service,
+					service.id === action.payload.id ? action.payload.service : service,
 				),
 			};
 		case SET_LOADING_SERVICES:
