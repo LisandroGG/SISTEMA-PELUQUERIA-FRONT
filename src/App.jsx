@@ -16,10 +16,10 @@ import PublicRoute from "./components/Routes/PublicRoute.jsx";
 import TokenRoute from "./components/Routes/TokenRoute.jsx";
 
 import DisableDate from "./components/Admin/DisableDate.jsx";
+import Hours from "./components/Admin/Hours.jsx";
 import Reservations from "./components/Admin/Reservations.jsx";
 import Services from "./components/Admin/Services.jsx";
 import Workers from "./components/Admin/Workers.jsx";
-import Hours from "./components/Admin/Hours.jsx";
 
 import Reservation from "./components/Reservation/Reservation.jsx";
 

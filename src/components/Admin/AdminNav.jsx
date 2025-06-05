@@ -41,7 +41,7 @@ const AdminNav = ({ handleLogout }) => {
 		{
 			to: "/admin/hours",
 			label: "Horarios",
-			icon: <Clock className="w-5 h-5" />
+			icon: <Clock className="w-5 h-5" />,
 		},
 		{
 			to: "/admin/disableDate",

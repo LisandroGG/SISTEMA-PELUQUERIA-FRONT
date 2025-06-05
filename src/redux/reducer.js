@@ -284,7 +284,7 @@ function rootReducer(state = initialState, action) {
 		case GET_WORKING_HOURS_BY_WORKER:
 			return {
 				...state,
-				workingHours: action.payload,
+				workingHours: action.payload.workingHours || [],
 				isLoadingWorkingHours: false,
 			};
 		case CREATE_WORKING_HOURS:

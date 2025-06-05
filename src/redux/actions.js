@@ -673,6 +673,10 @@ export const getWorkingHours = (workerId) => {
 			return { success: true, message: data.message };
 		} catch (error) {
 			stopLoading(dispatch, SET_LOADING_WORKING_HOURS);
+			dispatch({
+				type: GET_WORKING_HOURS_BY_WORKER,
+				payload: [],
+			});
 			return { success: false, message: getErrorMessage(error) };
 		}
 	};
