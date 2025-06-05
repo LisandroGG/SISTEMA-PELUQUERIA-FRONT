@@ -66,6 +66,9 @@ const AdminNav = ({ handleLogout }) => {
 							alt="logo"
 							className="rounded-full w-10 h-10"
 						/>
+						<span className="text-lg font-bold hidden sm:inline font-chivo">
+							Panel de adminitrador
+						</span>
 					</Link>
 
 					<button
