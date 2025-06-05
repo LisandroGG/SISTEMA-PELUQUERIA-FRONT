@@ -4,9 +4,13 @@ import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	createWorker,
+	createWorkingHour,
 	deleteWorker,
+	deleteWorkingHour,
 	editWorker,
+	editWorkingHours,
 	getAllWorkers,
+	getWorkingHours,
 } from "../../redux/actions";
 import ErrorMessage from "../Common/ErrorMessage";
 import Input from "../Common/Input";
@@ -21,8 +25,13 @@ import {
 const Workers = () => {
 	const dispatch = useDispatch();
 	const executed = useRef(false);
+	const [step, setStep] = useState(1);
 	const workers = useSelector((state) => state.workers);
+	const workingHours = useSelector((state) => state.workingHours);
 	const isLoadingWorkers = useSelector((state) => state.isLoadingWorkers);
+	const isLoadingWorkingHours = useSelector(
+		(state) => state.isLoadingWorkingHours,
+	);
 	const [modalOpen, setModalOpen] = useState(false);
 	const [error, setError] = useState("");
 	const [deleteModalOpen, setDeleteModalOpen] = useState(false);
@@ -35,10 +44,33 @@ const Workers = () => {
 		phoneNumber: "",
 	});
 
+	const [hourBlocks, setHourBlocks] = useState([
+		{ dayOfWeek: "", startTime: "", endTime: "" },
+	]);
+
+	const [editHourBlocks, setEditHourBlocks] = useState([]);
+
+	const daysOfWeek = [
+		"lunes",
+		"martes",
+		"miércoles",
+		"jueves",
+		"viernes",
+		"sábado",
+	];
+
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
 		cleanData();
 		setError("");
+	};
+
+	const toggleEditModal = () => {
+		setEditModalOpen(!editModalOpen);
+		setWorkerToEdit(null);
+		setError("");
+		setEditHourBlocks([]);
+		setStep(1);
 	};
 
 	const cleanData = () =>
@@ -72,16 +104,40 @@ const Workers = () => {
 
 		try {
 			const response = await dispatch(createWorker(formData));
+
 			if (response.success) {
+				const newWorker = response.payload;
+				const newWorkerId = newWorker.id;
+
+				const validBlocks = hourBlocks
+					.filter(
+						(b) =>
+							b.dayOfWeek &&
+							b.startTime &&
+							b.endTime &&
+							b.startTime < b.endTime,
+					)
+					.map((b) => ({
+						workerId: newWorkerId,
+						dayOfWeek: b.dayOfWeek,
+						startTime: b.startTime,
+						endTime: b.endTime,
+					}));
+
+				if (validBlocks.length > 0) {
+					await dispatch(createWorkingHour(validBlocks));
+				}
+
 				await dispatch(getAllWorkers());
 				toast.dismiss(loadingToastId);
-				toast.success(response.message);
+				toast.success("Trabajador y horarios creados exitosamente");
 				toggleModal();
 			} else {
 				toast.dismiss(loadingToastId);
 				setError(response.message);
 			}
 		} catch (error) {
+			console.error(error);
 			toast.dismiss(loadingToastId);
 			toast.error("Hubo un problema inesperado. Intente nuevamente");
 		}
@@ -106,11 +162,39 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Guardando cambios...");
 
-		console.log(formData);
-
 		try {
 			const response = await dispatch(editWorker(formData, workerToEdit.id));
+
 			if (response.success) {
+				for (const block of editHourBlocks) {
+					if (
+						block.dayOfWeek &&
+						block.startTime &&
+						block.endTime &&
+						block.startTime < block.endTime
+					) {
+						if (block.id) {
+							await dispatch(
+								editWorkingHours(
+									{ startTime: block.startTime, endTime: block.endTime },
+									block.id,
+								),
+							);
+						} else {
+							await dispatch(
+								createWorkingHour([
+									{
+										workerId: workerToEdit.id,
+										dayOfWeek: block.dayOfWeek,
+										startTime: block.startTime,
+										endTime: block.endTime,
+									},
+								]),
+							);
+						}
+					}
+				}
+
 				await dispatch(getAllWorkers());
 				toast.dismiss(loadingToastId);
 				toast.success(response.message);
@@ -158,6 +242,18 @@ const Workers = () => {
 		dispatch(getAllWorkers());
 	}, [dispatch]);
 
+	useEffect(() => {
+		if (editModalOpen && workerToEdit?.id) {
+			dispatch(getWorkingHours(workerToEdit.id));
+		}
+	}, [editModalOpen, workerToEdit, dispatch]);
+
+	useEffect(() => {
+		if (editModalOpen && Array.isArray(workingHours)) {
+			setEditHourBlocks(workingHours);
+		}
+	}, [workingHours, editModalOpen]);
+
 	if (isLoadingWorkers) {
 		return (
 			<div className="min-h-screen grid place-content-center">
@@ -191,6 +287,7 @@ const Workers = () => {
 									});
 									setEditModalOpen(true);
 									setError("");
+									dispatch(getWorkingHours(worker.id));
 								}}
 							>
 								<Pencil className="w-5 h-5" />
@@ -248,6 +345,73 @@ const Workers = () => {
 						onChange={handleChange}
 						placeholder="Teléfono"
 					/>
+					<p className="font-semibold mt-4">Horarios semanales</p>
+					{hourBlocks.map((block, index) => (
+						<div
+							key={block.id}
+							className="grid grid-cols-4 gap-2 my-2 items-center"
+						>
+							<select
+								value={block.dayOfWeek}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].dayOfWeek = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							>
+								<option value="">Día</option>
+								{daysOfWeek.map((day) => (
+									<option key={day} value={day}>
+										{day}
+									</option>
+								))}
+							</select>
+							<input
+								type="time"
+								value={block.startTime}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].startTime = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							/>
+							<input
+								type="time"
+								value={block.endTime}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].endTime = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							/>
+							<button
+								type="button"
+								onClick={() => {
+									const updated = hourBlocks.filter((_, i) => i !== index);
+									setHourBlocks(updated);
+								}}
+								className="text-red-600"
+							>
+								X
+							</button>
+						</div>
+					))}
+
+					<button
+						type="button"
+						onClick={() =>
+							setHourBlocks([
+								...hourBlocks,
+								{ dayOfWeek: "", startTime: "", endTime: "" },
+							])
+						}
+						className="text-blue-600 mt-2"
+					>
+						+ Agregar bloque horario
+					</button>
 					<ErrorMessage message={error} />
 					<div>
 						<button type="button" onClick={toggleModal}>
@@ -282,39 +446,148 @@ const Workers = () => {
 			</Modal>
 			<Modal
 				isOpen={editModalOpen}
-				onClose={() => setEditModalOpen(false)}
-				title={"Editar trabajador"}
+				onClose={toggleEditModal}
+				title={`Editar trabajador: ${workerToEdit?.name || ""}`}
 			>
 				<button
 					type="button"
-					onClick={() => setEditModalOpen(false)}
+					onClick={toggleEditModal}
 					className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 				>
 					<X />
 				</button>
-				<form onSubmit={handleEditWorker}>
-					<Input
-						label="Gmail del trabajador"
-						name="gmail"
-						type="email"
-						value={formData.gmail}
-						onChange={handleChange}
-						placeholder="Correo electrónico"
-					/>
-					<Input
-						label="Teléfono"
-						name="phoneNumber"
-						type="tel"
-						value={formData.phoneNumber}
-						onChange={handleChange}
-						placeholder="Teléfono"
-					/>
-					<ErrorMessage message={error} />
-					<div>
-						<button type="button" onClick={() => setEditModalOpen(false)}>
-							Cancelar
+				<form className="flex flex-col gap-4" onSubmit={handleEditWorker}>
+					{step === 1 && (
+						<>
+							<Input
+								label="Nombre"
+								name="name"
+								type="text"
+								value={formData.name}
+								onChange={handleChange}
+								placeholder="Nombre completo"
+								disabled
+							/>
+							<Input
+								label="Correo Gmail"
+								name="gmail"
+								type="email"
+								value={formData.gmail}
+								onChange={handleChange}
+								placeholder="correo@gmail.com"
+							/>
+							<Input
+								label="Teléfono"
+								name="phoneNumber"
+								type="tel"
+								value={formData.phoneNumber}
+								onChange={handleChange}
+								placeholder="+54 9 11 1234-5678"
+							/>
+						</>
+					)}
+
+					{step === 2 && (
+						<div className="flex flex-col max-h-[400px]">
+							<p className="font-semibold mb-1">Bloques de horarios:</p>
+
+							<div className="overflow-y-auto pr-1 mb-2 flex-1 border rounded p-2 space-y-2">
+								{editHourBlocks.map((block, i) => (
+									<div
+										key={`edit-block-${block.id}`}
+										className="flex gap-2 items-center"
+									>
+										<select
+											value={block.dayOfWeek}
+											onChange={(e) => {
+												const updatedBlocks = [...editHourBlocks];
+												updatedBlocks[i].dayOfWeek = e.target.value;
+												setEditHourBlocks(updatedBlocks);
+											}}
+											className="border p-1 rounded"
+										>
+											<option value="">Día</option>
+											{daysOfWeek.map((day) => (
+												<option key={day} value={day}>
+													{day}
+												</option>
+											))}
+										</select>
+										<input
+											type="time"
+											value={block.startTime}
+											onChange={(e) => {
+												const updatedBlocks = [...editHourBlocks];
+												updatedBlocks[i].startTime = e.target.value;
+												setEditHourBlocks(updatedBlocks);
+											}}
+											className="border p-1 rounded"
+										/>
+										<input
+											type="time"
+											value={block.endTime}
+											onChange={(e) => {
+												const updatedBlocks = [...editHourBlocks];
+												updatedBlocks[i].endTime = e.target.value;
+												setEditHourBlocks(updatedBlocks);
+											}}
+											className="border p-1 rounded"
+										/>
+										<button
+											type="button"
+											className="btn-danger px-2 py-1"
+											onClick={() => {
+												const updatedBlocks = [...editHourBlocks];
+												updatedBlocks.splice(i, 1);
+												setEditHourBlocks(updatedBlocks);
+											}}
+										>
+											X
+										</button>
+									</div>
+								))}
+							</div>
+
+							<div className="mt-2">
+								<button
+									type="button"
+									className="btn-primary px-2 py-1 w-full"
+									onClick={() =>
+										setEditHourBlocks([
+											...editHourBlocks,
+											{ dayOfWeek: "", startTime: "", endTime: "" },
+										])
+									}
+								>
+									Agregar bloque
+								</button>
+							</div>
+						</div>
+					)}
+
+					{error && <ErrorMessage message={error} />}
+
+					<div className="flex justify-between mt-3">
+						{step > 1 ? (
+							<button
+								type="button"
+								className="btn-secondary"
+								onClick={() => setStep(step - 1)}
+							>
+								Horarios
+							</button>
+						) : (
+							<button
+								type="button"
+								className="btn-primary"
+								onClick={() => setStep(step + 1)}
+							>
+								Datos
+							</button>
+						)}
+						<button type="submit" className="btn-primary">
+							Guardar cambios
 						</button>
-						<button type="submit">Guardar cambios</button>
 					</div>
 				</form>
 			</Modal>

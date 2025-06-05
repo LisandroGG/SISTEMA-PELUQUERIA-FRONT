@@ -29,7 +29,7 @@ const Modal = ({ isOpen, onClose, title, children }) => {
 	return (
 		<div className="fixed inset-0 z-40 flex items-center justify-center bg-black/50 backdrop-blur-sm">
 			<div
-				className="bg-white rounded-lg shadow-lg relative p-6 w-[90%] max-w-xl"
+				className="bg-white rounded-lg shadow-lg relative p-6 w-[90%] max-w-xl mt-18 lg:mt-0"
 				ref={modalRef}
 			>
 				{title && (

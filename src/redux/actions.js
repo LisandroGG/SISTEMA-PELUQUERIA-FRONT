@@ -489,9 +489,9 @@ export const createWorker = (formData) => {
 			);
 			dispatch({
 				type: CREATE_WORKER,
-				payload: data,
+				payload: data.worker,
 			});
-			return { success: true, message: data.message };
+			return { success: true, message: data.message, payload: data.worker };
 		} catch (error) {
 			return { success: false, message: getErrorMessage(error) };
 		}
@@ -668,9 +668,13 @@ export const getWorkingHours = (workerId) => {
 			);
 			dispatch({
 				type: GET_WORKING_HOURS_BY_WORKER,
-				payload: data,
+				payload: data.workingHours,
 			});
-			return { success: true, message: data.message };
+			return {
+				success: true,
+				message: data.message,
+				payload: data.workingHours,
+			};
 		} catch (error) {
 			stopLoading(dispatch, SET_LOADING_WORKING_HOURS);
 			return { success: false, message: getErrorMessage(error) };
