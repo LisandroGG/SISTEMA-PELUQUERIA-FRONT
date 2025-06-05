@@ -1,6 +1,7 @@
 import {
 	Calendar,
 	CalendarClock,
+	Clock,
 	Contact,
 	Home,
 	LogOutIcon,
@@ -24,8 +25,8 @@ const AdminNav = ({ handleLogout }) => {
 	const navItems = [
 		{
 			to: "/admin",
-			label: "Inicio",
-			icon: <Home className="w-5 h-5" />,
+			label: "Turnos",
+			icon: <Calendar className="w-5 h-5" />,
 		},
 		{
 			to: "/admin/services",
@@ -33,14 +34,14 @@ const AdminNav = ({ handleLogout }) => {
 			icon: <Scissors className="w-5 h-5" />,
 		},
 		{
-			to: "/admin/reservations",
-			label: "Turnos",
-			icon: <Calendar className="w-5 h-5" />,
-		},
-		{
 			to: "/admin/workers",
 			label: "Personal",
 			icon: <Contact className="w-5 h-5" />,
+		},
+		{
+			to: "/admin/hours",
+			label: "Horarios",
+			icon: <Clock className="w-5 h-5" />
 		},
 		{
 			to: "/admin/disableDate",
@@ -66,9 +67,6 @@ const AdminNav = ({ handleLogout }) => {
 							alt="logo"
 							className="rounded-full w-10 h-10"
 						/>
-						<span className="text-lg font-bold hidden sm:inline font-chivo">
-							Panel de adminitrador
-						</span>
 					</Link>
 
 					<button

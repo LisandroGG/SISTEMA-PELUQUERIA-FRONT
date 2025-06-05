@@ -15,11 +15,11 @@ import PrivateRoute from "./components/Routes/PrivateRoute.jsx";
 import PublicRoute from "./components/Routes/PublicRoute.jsx";
 import TokenRoute from "./components/Routes/TokenRoute.jsx";
 
-import AdminHome from "./components/Admin/AdminHome.jsx";
 import DisableDate from "./components/Admin/DisableDate.jsx";
 import Reservations from "./components/Admin/Reservations.jsx";
 import Services from "./components/Admin/Services.jsx";
 import Workers from "./components/Admin/Workers.jsx";
+import Hours from "./components/Admin/Hours.jsx";
 
 import Reservation from "./components/Reservation/Reservation.jsx";
 
@@ -88,11 +88,11 @@ function App() {
 						</PrivateRoute>
 					}
 				>
-					<Route index element={<AdminHome />} />
+					<Route index element={<Reservations />} />
 					<Route path="services" element={<Services />} />
-					<Route path="reservations" element={<Reservations />} />
 					<Route path="disableDate" element={<DisableDate />} />
 					<Route path="workers" element={<Workers />} />
+					<Route path="hours" element={<Hours />} />
 				</Route>
 				<Route
 					path="/changePassword"
