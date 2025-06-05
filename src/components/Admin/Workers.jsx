@@ -63,8 +63,6 @@ const Workers = () => {
 		setModalOpen(!modalOpen);
 		cleanData();
 		setError("");
-		setHourBlocks([]);
-		setStep(1);
 	};
 
 	const toggleEditModal = () => {
@@ -313,7 +311,7 @@ const Workers = () => {
 			<Modal
 				isOpen={modalOpen}
 				onClose={toggleModal}
-				title="Crear nuevo trabajador"
+				title={"Crear nuevo trabajador"}
 			>
 				<button
 					type="button"
@@ -322,152 +320,104 @@ const Workers = () => {
 				>
 					<X />
 				</button>
-
-				<form
-					onSubmit={handleCreateWorker}
-					className="flex flex-col gap-4 mt-4"
-				>
-					{step === 1 && (
-						<>
-							<Input
-								label="Nombre del trabajador"
-								name="name"
-								type="text"
-								value={formData.name}
-								onChange={handleChange}
-								placeholder="Nombre"
-							/>
-							<Input
-								label="Gmail del trabajador"
-								name="gmail"
-								type="email"
-								value={formData.gmail}
-								onChange={handleChange}
-								placeholder="Correo electrónico"
-							/>
-							<Input
-								label="Teléfono"
-								name="phoneNumber"
-								type="tel"
-								value={formData.phoneNumber}
-								onChange={handleChange}
-								placeholder="Teléfono"
-							/>
-						</>
-					)}
-
-					{step === 2 && (
-						<div className="flex flex-col max-h-[400px]">
-							<p className="font-semibold">Horarios semanales</p>
-
-							<div className="overflow-y-auto border p-2 rounded mb-2 space-y-2 flex-1">
-								{hourBlocks.map((block, index) => (
-									<div
-										key={block.id}
-										className="grid grid-cols-4 gap-2 items-center"
-									>
-										<select
-											value={block.dayOfWeek}
-											onChange={(e) => {
-												const updated = [...hourBlocks];
-												updated[index].dayOfWeek = e.target.value;
-												setHourBlocks(updated);
-											}}
-											className="border p-1"
-										>
-											<option value="">Día</option>
-											{daysOfWeek.map((day) => (
-												<option key={day} value={day}>
-													{day}
-												</option>
-											))}
-										</select>
-										<input
-											type="time"
-											value={block.startTime}
-											onChange={(e) => {
-												const updated = [...hourBlocks];
-												updated[index].startTime = e.target.value;
-												setHourBlocks(updated);
-											}}
-											className="border p-1"
-										/>
-										<input
-											type="time"
-											value={block.endTime}
-											onChange={(e) => {
-												const updated = [...hourBlocks];
-												updated[index].endTime = e.target.value;
-												setHourBlocks(updated);
-											}}
-											className="border p-1"
-										/>
-										<button
-											type="button"
-											onClick={() => {
-												const updated = hourBlocks.filter(
-													(_, i) => i !== index,
-												);
-												setHourBlocks(updated);
-											}}
-											className="text-red-600"
-										>
-											X
-										</button>
-									</div>
+				<form onSubmit={handleCreateWorker}>
+					<Input
+						label="Nombre del trabajador"
+						name="name"
+						type="text"
+						value={formData.name}
+						onChange={handleChange}
+						placeholder="Nombre"
+					/>
+					<Input
+						label="Gmail del trabajador"
+						name="gmail"
+						type="email"
+						value={formData.gmail}
+						onChange={handleChange}
+						placeholder="Correo electrónico"
+					/>
+					<Input
+						label="Teléfono"
+						name="phoneNumber"
+						type="tel"
+						value={formData.phoneNumber}
+						onChange={handleChange}
+						placeholder="Teléfono"
+					/>
+					<p className="font-semibold mt-4">Horarios semanales</p>
+					{hourBlocks.map((block, index) => (
+						<div
+							key={block.id}
+							className="grid grid-cols-4 gap-2 my-2 items-center"
+						>
+							<select
+								value={block.dayOfWeek}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].dayOfWeek = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							>
+								<option value="">Día</option>
+								{daysOfWeek.map((day) => (
+									<option key={day} value={day}>
+										{day}
+									</option>
 								))}
-							</div>
-
-							<div>
-								<button
-									type="button"
-									onClick={() =>
-										setHourBlocks([
-											...hourBlocks,
-											{ dayOfWeek: "", startTime: "", endTime: "" },
-										])
-									}
-									className="text-blue-600"
-								>
-									+ Agregar bloque horario
-								</button>
-							</div>
+							</select>
+							<input
+								type="time"
+								value={block.startTime}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].startTime = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							/>
+							<input
+								type="time"
+								value={block.endTime}
+								onChange={(e) => {
+									const updated = [...hourBlocks];
+									updated[index].endTime = e.target.value;
+									setHourBlocks(updated);
+								}}
+								className="border p-1"
+							/>
+							<button
+								type="button"
+								onClick={() => {
+									const updated = hourBlocks.filter((_, i) => i !== index);
+									setHourBlocks(updated);
+								}}
+								className="text-red-600"
+							>
+								X
+							</button>
 						</div>
-					)}
+					))}
 
-					{error && <ErrorMessage message={error} />}
-
-					<div className="flex justify-between mt-4">
-						{step > 1 ? (
-							<button
-								type="button"
-								className=""
-								onClick={() => setStep(step - 1)}
-							>
-								Atrás
-							</button>
-						) : (
-							<div />
-						)}
-
-						{step === 1 ? (
-							<button
-								type="button"
-								className=""
-								onClick={() => setStep(step + 1)}
-							>
-								Siguiente
-							</button>
-						) : (
-							<div className="flex gap-2">
-								<button type="button" className="" onClick={toggleModal}>
-									Cancelar
-								</button>
-								<button type="submit" className="">
-									Crear
-								</button>
-							</div>
-						)}
+					<button
+						type="button"
+						onClick={() =>
+							setHourBlocks([
+								...hourBlocks,
+								{ dayOfWeek: "", startTime: "", endTime: "" },
+							])
+						}
+						className="text-blue-600 mt-2"
+					>
+						+ Agregar bloque horario
+					</button>
+					<ErrorMessage message={error} />
+					<div>
+						<button type="button" onClick={toggleModal}>
+							Cancelar
+						</button>
+						<button type="submit">Crear</button>
 					</div>
 				</form>
 			</Modal>
@@ -481,11 +431,15 @@ const Workers = () => {
 					<button
 						type="button"
 						onClick={() => setDeleteModalOpen(false)}
-						className=""
+						className="btn-cancel"
 					>
 						Cancelar
 					</button>
-					<button type="button" onClick={handleDeleteWorker} className="">
+					<button
+						type="button"
+						onClick={handleDeleteWorker}
+						className="btn-delete"
+					>
 						Eliminar
 					</button>
 				</div>
