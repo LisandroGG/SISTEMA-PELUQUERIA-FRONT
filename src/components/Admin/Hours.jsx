@@ -36,7 +36,7 @@ const Hours = () => {
 		"viernes",
 		"sábado",
 	];
-	const [newBlocks, setNewBlocks] = useState([]);
+	const [newBlocks, setNewBlocks] = useState([{ day: "", start: "", end: "" }]);
 
 	const handleAddBlock = () => {
 		setNewBlocks((prev) => [...prev, { day: "", start: "", end: "" }]);
@@ -51,7 +51,10 @@ const Hours = () => {
 	const toggleModal = () => {
 		setModalOpen(!modalOpen);
 		setError("");
-		setNewBlocks([]);
+		if (!modalOpen) {
+			setNewBlocks([{ day: "", start: "", end: "" }]);
+			setError("");
+		}
 	};
 
 	const handleSelectChange = (e) => {
@@ -150,28 +153,41 @@ const Hours = () => {
 			) : (
 				<div className="mt-4">
 					<p className="font-semibold mb-2">Horarios de trabajo:</p>
-					<ul className="list-disc list-inside">
-						{workingHours?.map((hour) => (
-							<li key={hour.id}>
-								<span>
-									{hour.dayOfWeek}: {hour.startTime?.slice(0, 5)} -{" "}
-									{hour.endTime?.slice(0, 5)}
-								</span>
-								<div className="flex gap-2">
-									<button
-										type="button"
-										className="text-red-600 hover:underline"
-										onClick={() => {
-											setHourToDelete(hour);
-											setDeleteModalOpen(true);
-										}}
-									>
-										<X className="w-4 h-4" />
-									</button>
-								</div>
-							</li>
-						))}
-					</ul>
+					{(() => {
+						const groupedHours = workingHours.reduce((acc, hour) => {
+							if (!acc[hour.dayOfWeek]) acc[hour.dayOfWeek] = [];
+							acc[hour.dayOfWeek].push(hour);
+							return acc;
+						}, {});
+
+						return Object.entries(groupedHours).map(([day, hours]) => (
+							<div key={day} className="mb-4">
+								<p className="font-bold capitalize">{day}:</p>
+								<ul className="list-disc list-inside ml-6">
+									{hours.map((hour) => (
+										<div key={hour.id} className="flex">
+											<li>
+												{hour.startTime?.slice(0, 5)} -{" "}
+												{hour.endTime?.slice(0, 5)}
+											</li>
+											<div className="flex gap-2">
+												<button
+													type="button"
+													className="text-red-600 hover:underline"
+													onClick={() => {
+														setHourToDelete(hour);
+														setDeleteModalOpen(true);
+													}}
+												>
+													<X className="w-4 h-4" />
+												</button>
+											</div>
+										</div>
+									))}
+								</ul>
+							</div>
+						));
+					})()}
 					<button type="button" onClick={toggleModal}>
 						Crear horarios
 					</button>
