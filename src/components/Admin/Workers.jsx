@@ -41,6 +41,14 @@ const Workers = () => {
 		setError("");
 	};
 
+	const toggleEditModal = () => {
+		setEditModalOpen(!editModalOpen);
+		setWorkerToEdit(null);
+		setError("");
+		setEditHourBlocks([]);
+		setStep(1);
+	};
+
 	const cleanData = () =>
 		setFormData({
 			name: "",
