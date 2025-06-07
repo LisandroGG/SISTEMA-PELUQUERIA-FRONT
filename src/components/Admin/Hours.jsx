@@ -27,6 +27,10 @@ const Hours = () => {
 	const [error, setError] = useState("");
 	const [selectedWorker, setSelectedWorker] = useState("");
 	const [hourToDelete, setHourToDelete] = useState(null);
+	const [editModalOpen, setEditModalOpen] = useState(false);
+const [hourToEdit, setHourToEdit] = useState(null);
+const [editStart, setEditStart] = useState("");
+const [editEnd, setEditEnd] = useState("");
 
 	const daysOfWeek = [
 		"lunes",
@@ -41,6 +45,11 @@ const Hours = () => {
 	const handleAddBlock = () => {
 		setNewBlocks((prev) => [...prev, { day: "", start: "", end: "" }]);
 	};
+	const handleRemoveBlock = (indexToRemove) => {
+	setNewBlocks((prevBlocks) =>
+		prevBlocks.filter((_, index) => index !== indexToRemove)
+	);
+};
 
 	const handleChangeBlock = (index, field, value) => {
 		const updatedBlocks = [...newBlocks];
@@ -57,6 +66,35 @@ const Hours = () => {
 		}
 	};
 
+	const openEditModal = (hour) => {
+	setHourToEdit(hour);
+	setEditStart(hour.startTime.slice(0, 5));
+	setEditEnd(hour.endTime.slice(0, 5));
+	setEditModalOpen(true);
+};
+
+const handleEditSubmit = async () => {
+	if (!editStart || !editEnd || editStart >= editEnd) {
+		toast.error("La hora de inicio debe ser anterior a la de fin.");
+		return;
+	}
+
+	const formData = {
+		startTime: editStart,
+		endTime: editEnd,
+	};
+
+	const result = await dispatch(editWorkingHours(formData, hourToEdit.id));
+	if (result.success) {
+		toast.success(result.message || "Horario editado correctamente.");
+		setEditModalOpen(false);
+		setHourToEdit(null);
+		dispatch(getWorkingHours(selectedWorker));
+	} else {
+		toast.error(result.message || "Error al editar horario.");
+	}
+};
+
 	const handleSelectChange = (e) => {
 		const selectedName = e.target.value;
 		setSelectedWorker(selectedName);
@@ -65,6 +103,25 @@ const Hours = () => {
 	};
 
 	const handleSubmit = async () => {
+			const first = newBlocks[0];
+	const firstIsValid =
+		first?.day && first?.start && first?.end && first.start < first.end;
+
+	if (!firstIsValid) {
+		setError("El primer bloque debe estar completo y tener horas válidas.");
+		return;
+	}
+		for (let i = 1; i < newBlocks.length; i++) {
+		const block = newBlocks[i];
+		const isFilled = block.day || block.start || block.end;
+		const isValid =
+			block.day && block.start && block.end && block.start < block.end;
+
+		if (isFilled && !isValid) {
+			setError(`El bloque ${i + 1} está incompleto o tiene horas inválidas.`);
+			return;
+		}
+	}
 		const filtered = newBlocks.filter(
 			(block) =>
 				block.day && block.start && block.end && block.start < block.end,
@@ -170,16 +227,23 @@ const Hours = () => {
 												{hour.startTime?.slice(0, 5)} -{" "}
 												{hour.endTime?.slice(0, 5)}
 											</li>
-											<div className="flex gap-2">
+											<div className="flex gap-1">
+												<button	
+													type="button"
+													className="text-blue-600"
+													onClick={() => openEditModal(hour)}
+												>
+													<Pencil className="w-5 h-5" />
+												</button>
 												<button
 													type="button"
-													className="text-red-600 hover:underline"
+													className="text-red-600"
 													onClick={() => {
 														setHourToDelete(hour);
 														setDeleteModalOpen(true);
 													}}
 												>
-													<X className="w-4 h-4" />
+													<X className="w-6 h-6" />
 												</button>
 											</div>
 										</div>
@@ -207,7 +271,7 @@ const Hours = () => {
 				</button>
 				<div className="space-y-4">
 					{newBlocks.map((block, index) => (
-						<div key={block.id} className="flex items-center gap-4">
+						<div key={index + block.id} className="flex items-center gap-4">
 							<select
 								value={block.day}
 								onChange={(e) =>
@@ -239,7 +303,17 @@ const Hours = () => {
 								}
 								className="border p-1 rounded"
 							/>
+							{index !== 0 && (
+		<button
+			type="button"
+			onClick={() => handleRemoveBlock(index)}
+			className="text-red-600 hover:text-red-800"
+		>
+			<X size={18} />
+		</button>
+	)}
 						</div>
+						
 					))}
 
 					<button
@@ -249,6 +323,7 @@ const Hours = () => {
 					>
 						Agregar bloque
 					</button>
+					
 				</div>
 				<ErrorMessage message={error} />
 				<div>
@@ -286,6 +361,46 @@ const Hours = () => {
 					</button>
 				</div>
 			</Modal>
+			<Modal
+	isOpen={editModalOpen}
+	onClose={() => setEditModalOpen(false)}
+	title={`Editar horario de ${hourToEdit?.dayOfWeek || ""}`}
+>
+	<div className="space-y-4">
+		<div className="flex items-center gap-4">
+			<p className="capitalize">{hourToEdit?.dayOfWeek}:</p>
+			<input
+				type="time"
+				value={editStart}
+				onChange={(e) => setEditStart(e.target.value)}
+				className="border p-1 rounded"
+			/>
+			<span>-</span>
+			<input
+				type="time"
+				value={editEnd}
+				onChange={(e) => setEditEnd(e.target.value)}
+				className="border p-1 rounded"
+			/>
+		</div>
+		<div className="flex justify-end gap-2">
+			<button
+				type="button"
+				onClick={() => setEditModalOpen(false)}
+				className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+			>
+				Cancelar
+			</button>
+			<button
+				type="button"
+				onClick={handleEditSubmit}
+				className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+			>
+				Guardar cambios
+			</button>
+		</div>
+	</div>
+</Modal>
 		</section>
 	);
 };
