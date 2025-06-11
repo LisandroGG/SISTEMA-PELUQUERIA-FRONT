@@ -1,0 +1,49 @@
+@import "tailwindcss";
+
+@layer utilities {
+	input:-webkit-autofill {
+		box-shadow: 0 0 0px 1000px white inset;
+		-webkit-text-fill-color: oklch(32.776% 0.00449 247.96);
+	}
+
+	.bg-form-gradient {
+		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
+		/*
+		OPCION SECUNDARIA
+		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
+		background: linear-gradient(to bottom, #f9fafb, #e5e7eb, #9ca3af);
+		*/
+	}
+	.font-montserrat {
+		font-family: var(--font-montserrat);
+	}
+	.font-chivo {
+		font-family: var(--font-chivo);
+	}
+}
+
+@theme {
+	/* COLORS */
+	--color-shark: oklch(32.776% 0.00449 247.96);
+	--color-shark-50: oklch(65.46% 0.00756 247.94);
+	--color-shark-100: oklch(62.051% 0.00845 241.74);
+	--color-shark-200: oklch(55.029% 0.00915 253.9);
+	--color-shark-300: oklch(47.939% 0.00698 239.94);
+	--color-shark-400: oklch(40.46% 0.00566 258.34);
+	--color-shark-500: oklch(32.776% 0.00449 247.96);
+	--color-shark-600: oklch(21.274% 0.0025 247.94);
+	--color-shark-700: oklch(0% 0 none);
+	--color-shark-800: oklch(0% 0 none);
+	--color-shark-900: oklch(0% 0 none);
+	--color-shark-950: oklch(0% 0 none);
+
+	--color-bgbody: #ededed;
+
+	/*TEXT*/
+	--font-montserrat: "Montserrat Alternates", sans-serif;
+	--font-chivo: "Chivo", sans-serif;
+
+	/* SIZES */
+	--container-sm: 21rem;
+	--container-md: 28rem;
+}
