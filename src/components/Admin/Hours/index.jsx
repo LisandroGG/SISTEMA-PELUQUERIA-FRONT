@@ -27,6 +27,8 @@ import CreateCustomModal from "./Modals/CreateCustomModal.jsx";
 import EditCustomModal from "./Modals/EditCustomModal.jsx";
 import DeleteCustomModal from "./Modals/DeleteCustomModal.jsx";
 import DisableDaysList from "./DisableDaysList.jsx";
+import CreateDisableDayModal from "./Modals/CreateDisableDayModal.jsx";
+import DeleteDisableDayModal from "./Modals/DeleteDisableDayModal.jsx";
 
 const Hours = () => {
   const dispatch = useDispatch();
@@ -99,6 +101,8 @@ const Hours = () => {
   };
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleDayChange = (e) => setDisableDayData({ ...disableDayData, [e.target.name]: e.target.value })
 
   const handleSubmit = async () => {
     const valid = newBlocks.filter(b => b.day && b.start && b.end && b.start < b.end);
@@ -252,6 +256,16 @@ const Hours = () => {
         error={error}
       />
 
+      <CreateDisableDayModal
+        isOpen={disableDayModalOpen}
+        onClose={() => setDisableDayModalOpen(false)}
+        workerName={workers.find(w => w.id === Number(selectedWorker))?.name || ""}
+        disableDayData={disableDayData}
+        onChange={handleDayChange}
+        onSubmit={handleDisableDaySubmit}
+        error={error}
+      />
+
       <EditWeeklyModal
         isOpen={editModalOpen}
         onClose={() => setEditModalOpen(false)}
@@ -286,6 +300,13 @@ const Hours = () => {
         onClose={() => setDeleteCustomModalOpen(false)}
         hour={customHourToDelete}
         onDelete={handleDeleteCustomHour}
+      />
+
+      <DeleteDisableDayModal
+        isOpen={deleteDisableDayModalOpen}
+        onClose={() => setDeleteDisableDayModalOpen(false)}
+        day={disableDayToDelete}
+        onDelete={handleDeleteDisableDay}
       />
     </section>
   );

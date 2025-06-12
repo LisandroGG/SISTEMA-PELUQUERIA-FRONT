@@ -10,18 +10,21 @@ const DisableDaysList = ({ disableDays, onDelete }) => {
     return (
         <div className="mb-4">
             <ul className="list-disc list-inside ml-6">
-                {disableDays.map((day) => (
-                    <div key={day.id} className="flex items-center gap-2">
-                        <li>
-                            {isValid(parseISO(day.day))
-                            ? format(parseISO(day.day), "EEEE dd/MM/yyyy", { locale: es }).replace(/^./, str => str.toUpperCase())
-                            : day.day}
-                        </li>
-                        <button className="text-red-600" onClick={() => onDelete(day)}>
-                            <X className="w-6 h-6" />
-                        </button>
-                    </div>
-                ))}
+                {disableDays.map((day) => {
+    const fechaValida = day?.day && isValid(parseISO(day.day));
+    return (
+        <div key={day.id} className="flex items-center gap-2">
+            <li>
+                {fechaValida
+                    ? format(parseISO(day.day), "EEEE dd/MM/yyyy", { locale: es }).replace(/^./, str => str.toUpperCase())
+                    : (day?.day ?? "Fecha no disponible")}
+            </li>
+            <button className="text-red-600" onClick={() => onDelete(day)}>
+                <X className="w-6 h-6" />
+            </button>
+        </div>
+    );
+})}
             </ul>
         </div>
     )
