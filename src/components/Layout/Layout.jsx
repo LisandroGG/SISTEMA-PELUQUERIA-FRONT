@@ -1,12 +1,12 @@
+import Footer from "@/Footer/Footer.jsx";
+import Home from "@/Home/Home.jsx";
+import Nav from "@/Nav/Nav.jsx";
+import { logoutUser } from "@redux/actions.js";
 import React from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { logoutUser } from "@redux/actions.js";
-import Footer from "@/Footer/Footer.jsx";
-import Home from "@/Home/Home.jsx";
-import Nav from "@/Nav/Nav.jsx";
 
 const Layout = () => {
 	const dispatch = useDispatch();

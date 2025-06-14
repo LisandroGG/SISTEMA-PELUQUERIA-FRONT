@@ -1,10 +1,10 @@
+import Loading from "@/Common/Loading.jsx";
+import StepCompont from "@/Common/StepComponent.jsx";
+import { getServices } from "@redux/actions";
 import { ArrowBigLeft } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getServices } from "@redux/actions";
-import Loading from "@/Common/Loading.jsx";
-import StepCompont from "@/Common/StepComponent.jsx";
 
 const Step1 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();

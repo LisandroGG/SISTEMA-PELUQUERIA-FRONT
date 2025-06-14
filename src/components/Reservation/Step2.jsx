@@ -1,9 +1,9 @@
+import Loading from "@/Common/Loading.jsx";
+import StepCompont from "@/Common/StepComponent.jsx";
+import { getWorkersByService } from "@redux/actions";
 import { ArrowBigLeft } from "lucide-react";
 import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWorkersByService } from "@redux/actions";
-import Loading from "@/Common/Loading.jsx";
-import StepCompont from "@/Common/StepComponent.jsx";
 
 const Step2 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();

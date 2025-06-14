@@ -1,14 +1,14 @@
-import { format, parseISO } from "date-fns";
-import { CalendarSearch, X } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import { getReservationsByGmail } from "@redux/actions.js";
 import ErrorMessage from "@/Common/ErrorMessage.jsx";
 import Input from "@/Common/Input.jsx";
 import Loading from "@/Common/Loading.jsx";
 import Modal from "@/Common/Modal.jsx";
 import { validateGmail } from "@/Utils/Validations.js";
+import { getReservationsByGmail } from "@redux/actions.js";
+import { format, parseISO } from "date-fns";
+import { CalendarSearch, X } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const ReservationsModal = ({ isOpen, onClose, user }) => {
 	const dispatch = useDispatch();

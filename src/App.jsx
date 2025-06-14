@@ -15,7 +15,7 @@ import PrivateRoute from "./components/Routes/PrivateRoute.jsx";
 import PublicRoute from "./components/Routes/PublicRoute.jsx";
 import TokenRoute from "./components/Routes/TokenRoute.jsx";
 
-import Hours from "./components/Admin/Hours/index.jsx"
+import Hours from "./components/Admin/Hours/index.jsx";
 import Reservations from "./components/Admin/Reservations/Reservations.jsx";
 import Services from "./components/Admin/Services/Services.jsx";
 import Workers from "./components/Admin/Workers/Workers.jsx";

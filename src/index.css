@@ -8,11 +8,6 @@
 
 	.bg-form-gradient {
 		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
-		/*
-		OPCION SECUNDARIA
-		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
-		background: linear-gradient(to bottom, #f9fafb, #e5e7eb, #9ca3af);
-		*/
 	}
 	.font-montserrat {
 		font-family: var(--font-montserrat);
@@ -39,7 +34,7 @@
 
 	--color-bgbody: #ededed;
 
-	/*TEXT*/
+	/* TXT */
 	--font-montserrat: "Montserrat Alternates", sans-serif;
 	--font-chivo: "Chivo", sans-serif;
 

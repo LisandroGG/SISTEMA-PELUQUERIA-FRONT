@@ -1,13 +1,3 @@
-import { Pencil, X } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	createWorker,
-	deleteWorker,
-	editWorker,
-	getAllWorkers,
-} from "@redux/actions.js";
 import ErrorMessage from "@/Common/ErrorMessage";
 import Input from "@/Common/Input";
 import Loading from "@/Common/Loading";
@@ -17,6 +7,16 @@ import {
 	validateName,
 	validatePhone,
 } from "@/Utils/Validations";
+import {
+	createWorker,
+	deleteWorker,
+	editWorker,
+	getAllWorkers,
+} from "@redux/actions.js";
+import { Pencil, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const Workers = () => {
 	const dispatch = useDispatch();

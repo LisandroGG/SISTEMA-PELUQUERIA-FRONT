@@ -1,8 +1,3 @@
-import React, { useState } from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "@redux/actions.js";
 import ErrorMessage from "@/Common/ErrorMessage.jsx";
 import Form from "@/Common/Form.jsx";
 import FormHeader from "@/Common/FormHeader.jsx";
@@ -13,6 +8,11 @@ import {
 	validatePassword,
 	validatePhone,
 } from "@/Utils/Validations.js";
+import { registerUser } from "@redux/actions.js";
+import React, { useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
 	const dispatch = useDispatch();

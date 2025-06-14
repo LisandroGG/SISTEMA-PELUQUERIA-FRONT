@@ -1,7 +1,3 @@
-import { format, parseISO } from "date-fns";
-import { ArrowBigLeft, CalendarCheck } from "lucide-react";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import ErrorMessage from "@/Common/ErrorMessage.jsx";
 import Input from "@/Common/Input.jsx";
 import StepCompont from "@/Common/StepComponent.jsx";
@@ -10,6 +6,10 @@ import {
 	validateName,
 	validatePhone,
 } from "@/Utils/Validations.js";
+import { format, parseISO } from "date-fns";
+import { ArrowBigLeft, CalendarCheck } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Step4 = ({ setStep, formData, setFormData, onSubmit }) => {
 	const user = useSelector((state) => state.user);

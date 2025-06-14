@@ -1,14 +1,3 @@
-import { Pencil, X } from "lucide-react";
-import React, { useEffect, useRef, useState } from "react";
-import { toast } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	createService,
-	deleteService,
-	editService,
-	getAllWorkers,
-	getServices,
-} from "@redux/actions.js";
 import ErrorMessage from "@/Common/ErrorMessage.jsx";
 import Input from "@/Common/Input.jsx";
 import Loading from "@/Common/Loading.jsx";
@@ -18,6 +7,17 @@ import {
 	validateDuration,
 	validateServiceName,
 } from "@/Utils/Validations.js";
+import {
+	createService,
+	deleteService,
+	editService,
+	getAllWorkers,
+	getServices,
+} from "@redux/actions.js";
+import { Pencil, X } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { useDispatch, useSelector } from "react-redux";
 
 const Services = () => {
 	const dispatch = useDispatch();
