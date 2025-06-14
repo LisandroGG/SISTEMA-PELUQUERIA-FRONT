@@ -2,8 +2,8 @@ import { useKeenSlider } from "keen-slider/react";
 import React from "react";
 import "keen-slider/keen-slider.min.css";
 import { Link } from "react-router-dom";
-import MapIframe from "../Map/Map";
-import { AutoplayPlugin } from "../Utils/Autoloop.js";
+import MapIframe from "@/Map/Map";
+import { AutoplayPlugin } from "@/Utils/Autoloop.js";
 
 const Home = () => {
 	const [sliderRef] = useKeenSlider(

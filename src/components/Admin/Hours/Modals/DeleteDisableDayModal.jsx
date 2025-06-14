@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../../../Common/Modal";
+import Modal from "@/Common/Modal";
 import { format, isValid } from "date-fns";
 import { es } from "date-fns/locale";
 

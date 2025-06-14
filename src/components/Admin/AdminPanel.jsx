@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../redux/actions.js";
-import AdminNav from "./AdminNav";
+import AdminNav from "./Nav/AdminNav.jsx";
 
 const AdminPanel = () => {
 	const dispatch = useDispatch();

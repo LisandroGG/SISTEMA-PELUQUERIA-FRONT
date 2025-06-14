@@ -3,13 +3,13 @@ import React, { useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { es } from "react-day-picker/locale";
 import { useDispatch, useSelector } from "react-redux";
-import { getBloquedDays, getWorkingHoursByWorker } from "../../redux/actions";
+import { getBloquedDays, getWorkingHoursByWorker } from "@redux/actions";
 import "react-day-picker/dist/style.css";
 import { parse } from "date-fns";
 import { addMonths, endOfMonth, startOfMonth } from "date-fns";
 import { ArrowBigLeft } from "lucide-react";
-import Loading from "../Common/Loading.jsx";
-import StepCompont from "../Common/StepComponent.jsx";
+import Loading from "@/Common/Loading.jsx";
+import StepCompont from "@/Common/StepComponent.jsx";
 
 const Step3 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();

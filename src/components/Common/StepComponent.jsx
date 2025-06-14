@@ -1,5 +1,5 @@
 import React from "react";
-import FormHeader from "../Common/FormHeader.jsx";
+import FormHeader from "@/Common/FormHeader.jsx";
 
 const StepCompont = ({ children, step, stepSelected, className = "" }) => {
 	return (

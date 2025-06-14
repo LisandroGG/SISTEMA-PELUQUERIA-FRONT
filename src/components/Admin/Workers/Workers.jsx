@@ -7,16 +7,16 @@ import {
 	deleteWorker,
 	editWorker,
 	getAllWorkers,
-} from "../../redux/actions";
-import ErrorMessage from "../Common/ErrorMessage";
-import Input from "../Common/Input";
-import Loading from "../Common/Loading";
-import Modal from "../Common/Modal";
+} from "@redux/actions.js";
+import ErrorMessage from "@/Common/ErrorMessage";
+import Input from "@/Common/Input";
+import Loading from "@/Common/Loading";
+import Modal from "@/Common/Modal";
 import {
 	validateGmail,
 	validateName,
 	validatePhone,
-} from "../Utils/Validations";
+} from "@/Utils/Validations";
 
 const Workers = () => {
 	const dispatch = useDispatch();

@@ -1,8 +1,8 @@
 import React from "react";
-import Modal from "../../../Common/Modal";
+import Modal from "@/Common/Modal";
 import { X } from "lucide-react";
 import HourBlockForm from "../HourBlockForm";
-import ErrorMessage from "../../../Common/ErrorMessage";
+import ErrorMessage from "@/Common/ErrorMessage";
 
 const CreateWeeklyModal = ({
   isOpen,

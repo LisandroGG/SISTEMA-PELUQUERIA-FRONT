@@ -14,10 +14,10 @@ import {
   getDisableDays,
   createDisableDay,
   deleteDisableDay,
-} from "../../../redux/actions.js";
+} from "@redux/actions.js";
 
-import Loading from "../../Common/Loading.jsx";
-import WorkerSelector from "./WorkerSelector.jsx";
+import Loading from "@/Common/Loading.jsx";
+import WorkerSelector from "@/Common/WorkerSelector.jsx";
 import WeeklyHoursList from "./WeeklyHoursList.jsx";
 import CustomHoursList from "./CustomHoursList.jsx";
 import CreateWeeklyModal from "./Modals/CreateWeeklyModal.jsx";

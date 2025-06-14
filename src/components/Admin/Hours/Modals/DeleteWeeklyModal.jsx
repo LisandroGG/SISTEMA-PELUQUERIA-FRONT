@@ -1,5 +1,5 @@
 import React from "react";
-import Modal from "../../../Common/Modal";
+import Modal from "@/Common/Modal";
 
 const DeleteWeeklyModal = ({ isOpen, onClose, hour, onDelete }) => {
   return (

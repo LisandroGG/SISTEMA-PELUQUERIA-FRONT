@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import ReservationsModal from "../Reservation/ReservationsModal.jsx";
+import ReservationsModal from "@/Reservation/ReservationsModal.jsx";
 
 const Nav = ({ user, handleLogout }) => {
 	const [menuOpen, setMenuOpen] = useState(false);

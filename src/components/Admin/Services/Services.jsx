@@ -8,16 +8,16 @@ import {
 	editService,
 	getAllWorkers,
 	getServices,
-} from "../../redux/actions.js";
-import ErrorMessage from "../Common/ErrorMessage.jsx";
-import Input from "../Common/Input.jsx";
-import Loading from "../Common/Loading.jsx";
-import Modal from "../Common/Modal.jsx";
+} from "@redux/actions.js";
+import ErrorMessage from "@/Common/ErrorMessage.jsx";
+import Input from "@/Common/Input.jsx";
+import Loading from "@/Common/Loading.jsx";
+import Modal from "@/Common/Modal.jsx";
 import {
 	validateCost,
 	validateDuration,
 	validateServiceName,
-} from "../Utils/Validations.js";
+} from "@/Utils/Validations.js";
 
 const Services = () => {
 	const dispatch = useDispatch();

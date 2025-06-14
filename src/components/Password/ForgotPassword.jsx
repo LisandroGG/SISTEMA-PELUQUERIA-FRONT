@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { forgotPassword } from "../../redux/actions";
-import ErrorMessage from "../Common/ErrorMessage.jsx";
-import Form from "../Common/Form.jsx";
-import FormHeader from "../Common/FormHeader.jsx";
-import FormText from "../Common/FormText.jsx";
-import Input from "../Common/Input.jsx";
-import { validateGmail } from "../Utils/Validations.js";
+import { forgotPassword } from "@redux/actions";
+import ErrorMessage from "@/Common/ErrorMessage.jsx";
+import Form from "@/Common/Form.jsx";
+import FormHeader from "@/Common/FormHeader.jsx";
+import FormText from "@/Common/FormText.jsx";
+import Input from "@/Common/Input.jsx";
+import { validateGmail } from "@/Utils/Validations.js";
 
 const ForgotPassword = () => {
 	const dispatch = useDispatch();

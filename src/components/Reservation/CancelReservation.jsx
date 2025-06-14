@@ -2,9 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { cancelReservation } from "../../redux/actions";
-import FormHeader from "../Common/FormHeader";
-import Loading from "../Common/Loading";
+import { cancelReservation } from "@redux/actions";
+import FormHeader from "@/Common/FormHeader";
+import Loading from "@/Common/Loading";
 
 const CancelReservation = () => {
 	const [searchParams] = useSearchParams();
