@@ -33,7 +33,6 @@ import {
 	GET_CUSTOM_WORKING_HOURS_BY_WORKER,
 	GET_DISABLE_DAYS,
 	GET_RESERVATIONS_BY_GMAIL,
-	GET_RESERVATIONS_BY_WORKER,
 	GET_SERVICES,
 	GET_WORKER_BY_SERVICE,
 	GET_WORKING_HOURS_BY_DATE,
@@ -307,13 +306,14 @@ export const editService = (formData, serviceId) => {
 
 //------------------------------------------------RESERVATIONS ACTIONS---------------------------------------------------------------------//
 
-export const getAllReservations = () => {
+export const getAllReservations = (filter = {}) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getAllReservations");
 		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const { data } = await axios.get(`${LOCAL}/reservations`, {
 				withCredentials: true,
+				params: filter,
 			});
 			dispatch({
 				type: GET_ALL_RESERVATIONS,
@@ -340,29 +340,6 @@ export const getReservationsByGmail = (gmail) => {
 			);
 			dispatch({
 				type: GET_RESERVATIONS_BY_GMAIL,
-				payload: data,
-			});
-			return { success: true, message: data.message };
-		} catch (error) {
-			stopLoading(dispatch, SET_LOADING_RESERVATIONS);
-			return { success: false, message: getErrorMessage(error) };
-		}
-	};
-};
-
-export const getReservationsByWorker = (workerId) => {
-	return async (dispatch) => {
-		console.log("ejecutamos getReservationsByWorker");
-		startLoading(dispatch, SET_LOADING_RESERVATIONS);
-		try {
-			const { data } = await axios.get(
-				`${LOCAL}/reservations/by-worker?workerId=${workerId}`,
-				{
-					withCredentials: true,
-				},
-			);
-			dispatch({
-				type: GET_RESERVATIONS_BY_WORKER,
 				payload: data,
 			});
 			return { success: true, message: data.message };

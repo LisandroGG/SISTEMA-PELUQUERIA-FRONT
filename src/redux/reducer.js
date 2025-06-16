@@ -24,7 +24,6 @@ import {
 	GET_CUSTOM_WORKING_HOURS_BY_WORKER,
 	GET_DISABLE_DAYS,
 	GET_RESERVATIONS_BY_GMAIL,
-	GET_RESERVATIONS_BY_WORKER,
 	GET_SERVICES,
 	GET_WORKER_BY_SERVICE,
 	GET_WORKING_HOURS_BY_DATE,
@@ -160,12 +159,6 @@ function rootReducer(state = initialState, action) {
 				isLoadingReservations: false,
 			};
 		case GET_RESERVATIONS_BY_GMAIL:
-			return {
-				...state,
-				reservations: action.payload,
-				isLoadingReservations: false,
-			};
-		case GET_RESERVATIONS_BY_WORKER:
 			return {
 				...state,
 				reservations: action.payload,
