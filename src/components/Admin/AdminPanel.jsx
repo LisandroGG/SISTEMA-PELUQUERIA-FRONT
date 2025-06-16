@@ -30,7 +30,7 @@ const AdminPanel = () => {
 	return (
 		<div className="flex flex-col min-h-screen bg-bgbody">
 			<AdminNav handleLogout={handleLogout} />
-			<main className="h-screen mt-18">
+			<main className="mt-18">
 				<section>
 					<Outlet />
 				</section>
