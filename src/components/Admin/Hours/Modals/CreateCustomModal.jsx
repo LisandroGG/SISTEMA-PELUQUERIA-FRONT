@@ -1,7 +1,9 @@
 import ErrorMessage from "@/Common/ErrorMessage";
 import Modal from "@/Common/Modal";
+import SimpleDatePicker from "@/Common/SimpleDayPicker";
+import { format } from "date-fns";
 import { X } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const CreateCustomModal = ({
 	isOpen,
@@ -12,6 +14,18 @@ const CreateCustomModal = ({
 	workerName,
 	error,
 }) => {
+	const [selectedDate, setSelectedDate] = useState(
+		formData.dayOfWeek ? new Date(formData.dayOfWeek) : undefined,
+	);
+
+	const handleSelectDate = (date) => {
+		if (!date) return;
+
+		setSelectedDate(date);
+		const formatted = format(date, "yyyy-MM-dd");
+
+		onChange({ target: { name: "dayOfWeek", value: formatted } });
+	};
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -27,16 +41,22 @@ const CreateCustomModal = ({
 			</button>
 
 			<div className="space-y-4 mt-2">
-				<div className="flex flex-col gap-2">
-					<label htmlFor="Fecha" className="text-sm">
-						Fecha:
+				<div className="flex flex-col gap-2 items-center">
+					<label htmlFor="Fecha" className="text-lg">
+						Seleccione una día:
 					</label>
-					<input
-						name="dayOfWeek"
-						type="date"
-						value={formData.dayOfWeek}
-						onChange={onChange}
-					/>
+					<div className="grid place-content-center mt-2 flex-col gap-4">
+						<SimpleDatePicker
+							selectedDate={selectedDate}
+							onSelectDate={handleSelectDate}
+						/>
+
+						{selectedDate && (
+							<p className="text-center">
+								Día elegido: {format(selectedDate, "dd/MM/yyyy")}
+							</p>
+						)}
+					</div>
 				</div>
 
 				<div className="flex flex-col gap-2">

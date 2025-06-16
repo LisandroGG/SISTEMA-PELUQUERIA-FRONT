@@ -1,4 +1,5 @@
 import Loading from "@/Common/Loading";
+import StatusSelector from "@/Common/StatusSelector";
 import WorkerSelector from "@/Common/WorkerSelector";
 import {
 	changeReservationStatus,
@@ -11,6 +12,7 @@ import { es } from "date-fns/locale";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import SelectDateModal from "./Modals/SelectDateModal";
 
 const Reservations = () => {
 	const dispatch = useDispatch();
@@ -23,6 +25,7 @@ const Reservations = () => {
 	const isLoadingWorkers = useSelector((state) => state.isLoadingWorkers);
 	const isLoadingServices = useSelector((state) => state.isLoadingServices);
 	const [changeStatusModalOpen, setChangeStatusModalOpen] = useState(false);
+	const [selectDateModalOpen, setSelectDateModalOpen] = useState(false);
 	const [filter, setFilter] = useState({});
 	const [selectedWorker, setSelectedWorker] = useState("");
 
@@ -40,10 +43,19 @@ const Reservations = () => {
 		if (name === "workerId") {
 			setSelectedWorker(value);
 		}
+		if (name === "serviceId") {
+			setSelectedService(value);
+		}
 		setFilter((prev) => ({
 			...prev,
 			[name]: value,
 		}));
+	};
+
+	const parseDateToLocal = (dateString) => {
+		if (!dateString) return undefined;
+		const [year, month, day] = dateString.split("-").map(Number);
+		return new Date(year, month - 1, day); // mes 0-based
 	};
 
 	if (isLoadingReservations && isLoadingServices && isLoadingWorkers) {
@@ -58,22 +70,28 @@ const Reservations = () => {
 		<section className="max-w-7xl mx-auto p-4 md:px-8 lg:px-4 px-5">
 			<p>Turnos:</p>
 			<form onSubmit={(e) => e.preventDefault()} className="flex gap-4 mb-4">
-				<select
-					name="status"
+				<div>
+					<button
+						type="button"
+						onClick={() => setSelectDateModalOpen(true)}
+						className="px-4 py-2 bg-blue-500 text-gray-50 rounded hover:bg-blue-600"
+					>
+						{filter.date
+							? `Fecha seleccionada: ${format(parseDateToLocal(filter.date), "dd/MM/yyyy")}`
+							: "Seleccionar fecha"}
+					</button>
+
+					<SelectDateModal
+						isOpen={selectDateModalOpen}
+						onClose={() => setSelectDateModalOpen(false)}
+						filter={filter}
+						handleFilter={handleFilter}
+						parseDateToLocal={parseDateToLocal}
+					/>
+				</div>
+				<StatusSelector
 					onChange={(e) => handleFilter(e)}
 					value={filter.status ?? ""}
-				>
-					<option value="">Todos</option>
-					<option value="confirm">Confirmados</option>
-					<option value="finish">Terminados</option>
-					<option value="cancel">Cancelados</option>
-				</select>
-
-				<input
-					type="date"
-					name="date"
-					value={filter.date ?? ""}
-					onChange={(e) => handleFilter(e)}
 				/>
 
 				<WorkerSelector
