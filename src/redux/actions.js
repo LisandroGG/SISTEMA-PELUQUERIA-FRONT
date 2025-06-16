@@ -376,9 +376,8 @@ export const changeReservationStatus = (reservationId) => {
 		try {
 			const { data } = await axios.put(
 				`${LOCAL}/reservations/${reservationId}/finish`,
-				{
-					withCredentials: true,
-				},
+				{},
+				jsonHeaders,
 			);
 			dispatch({
 				type: CHANGE_RESERVATION_STATUS,

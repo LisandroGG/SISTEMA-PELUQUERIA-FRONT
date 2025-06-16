@@ -1,6 +1,7 @@
 import Loading from "@/Common/Loading";
 import StatusSelector from "@/Common/StatusSelector";
 import WorkerSelector from "@/Common/WorkerSelector";
+import SelectDateModal from "./Modals/SelectDateModal";
 import {
 	changeReservationStatus,
 	getAllReservations,
@@ -12,7 +13,8 @@ import { es } from "date-fns/locale";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import SelectDateModal from "./Modals/SelectDateModal";
+import { SquareCheckBig } from "lucide-react";
+import ChangeStatusReservationModal from "./Modals/ChangeStatusReservationsModa";
 
 const Reservations = () => {
 	const dispatch = useDispatch();
@@ -28,6 +30,7 @@ const Reservations = () => {
 	const [selectDateModalOpen, setSelectDateModalOpen] = useState(false);
 	const [filter, setFilter] = useState({});
 	const [selectedWorker, setSelectedWorker] = useState("");
+	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] = useState("");
 
 	useEffect(() => {
 		if (executed.current) return;
@@ -55,8 +58,24 @@ const Reservations = () => {
 	const parseDateToLocal = (dateString) => {
 		if (!dateString) return undefined;
 		const [year, month, day] = dateString.split("-").map(Number);
-		return new Date(year, month - 1, day); // mes 0-based
+		return new Date(year, month - 1, day);
 	};
+
+	const handleChangeStatus = async() => {
+
+		const loadingToastId = toast.loading("Guardando cambios...");
+
+		const response = await dispatch(changeReservationStatus(selectedReservationChangeStatus.id));
+				if (response.success) {
+					await dispatch(getAllReservations());
+					toast.dismiss(loadingToastId);
+					toast.success(response.message);
+					setChangeStatusModalOpen(false);
+				} else {
+					toast.dismiss(loadingToastId);
+					toast.error(response.message);
+				}
+	}
 
 	if (isLoadingReservations && isLoadingServices && isLoadingWorkers) {
 		return (
@@ -142,12 +161,26 @@ const Reservations = () => {
 								</p>
 								<p>{res.clientName}</p>
 								<p>{res.clientPhoneNumber}</p>
-								<p>{res.status}</p>
+								<button
+								type="button"
+								onClick={() => {
+									setSelectedReservationChangeStatus(res);
+									setChangeStatusModalOpen(true);
+								}}
+							>
+								<SquareCheckBig className="w-5 h-5" />
+							</button>
 							</article>
 						);
 					})}
 				</section>
 			)}
+			<ChangeStatusReservationModal
+				isOpen={changeStatusModalOpen}
+				onClose={() => setChangeStatusModalOpen(false)}
+				onSubmit={handleChangeStatus}
+				selectedReservationChangeStatus={selectedReservationChangeStatus}
+			/>
 		</section>
 	);
 };
