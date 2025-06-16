@@ -1,7 +1,4 @@
-import ErrorMessage from "@/Common/ErrorMessage";
-import Input from "@/Common/Input";
 import Loading from "@/Common/Loading";
-import Modal from "@/Common/Modal";
 import {
 	validateGmail,
 	validateName,
@@ -17,6 +14,9 @@ import { Pencil, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import CreateWorkerModal from "./Modals/CreateWorkerModal";
+import DeleteWorkerModal from "./Modals/DeleteWorkerModal";
+import EditWorkerModal from "./Modals/EditWorkerModal";
 
 const Workers = () => {
 	const dispatch = useDispatch();
@@ -76,7 +76,6 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Creando trabajador...");
 
-		try {
 			const response = await dispatch(createWorker(formData));
 			if (response.success) {
 				await dispatch(getAllWorkers());
@@ -87,10 +86,6 @@ const Workers = () => {
 				toast.dismiss(loadingToastId);
 				setError(response.message);
 			}
-		} catch (error) {
-			toast.dismiss(loadingToastId);
-			toast.error("Hubo un problema inesperado. Intente nuevamente");
-		}
 	};
 
 	const handleEditWorker = async (e) => {
@@ -112,7 +107,6 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Guardando cambios...");
 
-		try {
 			const response = await dispatch(editWorker(formData, workerToEdit.id));
 			if (response.success) {
 				await dispatch(getAllWorkers());
@@ -123,10 +117,6 @@ const Workers = () => {
 				toast.dismiss(loadingToastId);
 				setError(response.message);
 			}
-		} catch (error) {
-			toast.dismiss(loadingToastId);
-			toast.error("Hubo un problema inesperado. Intente nuevamente");
-		}
 	};
 
 	const handleDeleteWorker = async () => {
@@ -134,7 +124,6 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Eliminando trabajador...");
 
-		try {
 			const response = await dispatch(deleteWorker(workerToDelete.id));
 			if (response.success) {
 				await dispatch(getAllWorkers());
@@ -146,10 +135,6 @@ const Workers = () => {
 				toast.dismiss(loadingToastId);
 				toast.error(response.message);
 			}
-		} catch (error) {
-			toast.dismiss(loadingToastId);
-			toast.error("Hubo un problema inesperado. Intente nuevamente");
-		}
 	};
 
 	useEffect(() => {
@@ -212,108 +197,28 @@ const Workers = () => {
 					))}
 				</section>
 			)}
-			<Modal
+			<CreateWorkerModal 
 				isOpen={modalOpen}
 				onClose={toggleModal}
-				title={"Crear nuevo trabajador"}
-			>
-				<button
-					type="button"
-					onClick={toggleModal}
-					className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
-				>
-					<X />
-				</button>
-				<form onSubmit={handleCreateWorker}>
-					<Input
-						label="Nombre del trabajador"
-						name="name"
-						type="text"
-						value={formData.name}
-						onChange={handleChange}
-						placeholder="Nombre"
-					/>
-					<Input
-						label="Gmail del trabajador"
-						name="gmail"
-						type="email"
-						value={formData.gmail}
-						onChange={handleChange}
-						placeholder="Correo electrónico"
-					/>
-					<Input
-						label="Teléfono"
-						name="phoneNumber"
-						type="tel"
-						value={formData.phoneNumber}
-						onChange={handleChange}
-						placeholder="Teléfono"
-					/>
-					<ErrorMessage message={error} />
-					<div>
-						<button type="button" onClick={toggleModal}>
-							Cancelar
-						</button>
-						<button type="submit">Crear</button>
-					</div>
-				</form>
-			</Modal>
-			<Modal
+				onSubmit={handleCreateWorker}
+				formData={formData}
+				error={error}
+				handleChange={handleChange}
+			/>
+			<DeleteWorkerModal
 				isOpen={deleteModalOpen}
 				onClose={() => setDeleteModalOpen(false)}
-				title={"Eliminar trabajador"}
-			>
-				<p>¿Estás seguro de que quieres eliminar a {workerToDelete?.name}?</p>
-				<div className="mt-4 flex justify-end gap-4">
-					<button
-						type="button"
-						onClick={() => setDeleteModalOpen(false)}
-						className=""
-					>
-						Cancelar
-					</button>
-					<button type="button" onClick={handleDeleteWorker} className="">
-						Eliminar
-					</button>
-				</div>
-			</Modal>
-			<Modal
+				onDelete={handleDeleteWorker}
+				workerToDelete={workerToDelete}
+			/>
+			<EditWorkerModal
 				isOpen={editModalOpen}
 				onClose={() => setEditModalOpen(false)}
-				title={"Editar trabajador"}
-			>
-				<button
-					type="button"
-					onClick={() => setEditModalOpen(false)}
-					className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
-				>
-					<X />
-				</button>
-				<form className="flex flex-col gap-4" onSubmit={handleEditWorker}>
-					<Input
-						label="Correo Gmail"
-						name="gmail"
-						type="email"
-						value={formData.gmail}
-						onChange={handleChange}
-						placeholder="Correo electrónico"
-					/>
-					<Input
-						label="Teléfono"
-						name="phoneNumber"
-						type="tel"
-						value={formData.phoneNumber}
-						onChange={handleChange}
-						placeholder="Teléfono"
-					/>
-
-					{error && <ErrorMessage message={error} />}
-
-					<div className="flex justify-between mt-3">
-						<button type="submit">Guardar cambios</button>
-					</div>
-				</form>
-			</Modal>
+				onSubmit={handleEditWorker}
+				formData={formData}
+				error={error}
+				handleChange={handleChange}
+			/>
 		</section>
 	);
 };

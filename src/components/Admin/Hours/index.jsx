@@ -246,8 +246,13 @@ const Hours = () => {
 		}
 	};
 
-	if (isLoadingWorkers)
-		return <Loading loadingText="Cargando trabajadores..." />;
+	if (isLoadingWorkers) {
+		return (
+			<div className="min-h-screen grid place-content-center">
+				<Loading loadingText={"Cargando trabajadores..."} />
+			</div>
+		);
+	}
 
 	return (
 		<section className="max-w-7xl mx-auto p-4">
