@@ -18,6 +18,9 @@ import { Pencil, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import CreateServiceModal from "./Modals/CreateServiceModal";
+import DeleteServiceModal from "./Modals/DeleteServiceModal";
+import EditServiceModal from "./Modals/EditServiceModal";
 
 const Services = () => {
 	const dispatch = useDispatch();
@@ -101,7 +104,7 @@ const Services = () => {
 		}
 	};
 
-	const handleEdit = async (e) => {
+	const handleEditService = async (e) => {
 		e.preventDefault();
 
 		if (
@@ -228,150 +231,32 @@ const Services = () => {
 					))}
 				</section>
 			)}
-			<Modal
+			<CreateServiceModal
 				isOpen={modalOpen}
 				onClose={toggleModal}
-				title={"Crear nuevo servicio"}
-			>
-				<button
-					type="button"
-					onClick={toggleModal}
-					className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
-				>
-					<X />
-				</button>
-				<form onSubmit={handleCreateService}>
-					<Input
-						label="Nombre del servicio"
-						name="name"
-						type="text"
-						value={formData.name}
-						onChange={handleChange}
-					/>
-					<Input
-						label="Costo del servicio"
-						name="cost"
-						type="number"
-						value={formData.cost}
-						onChange={handleChange}
-					/>
-					<Input
-						label="Duration del servicio"
-						name="duration"
-						type="number"
-						value={formData.duration}
-						onChange={handleChange}
-					/>
-					<div className="mb-4">
-						<p>Asignar trabajadores:</p>
-						{workers?.map((worker) => (
-							<label key={worker.id} className="flex items-center gap-2 my-1">
-								<input
-									type="checkbox"
-									value={worker.id}
-									checked={(formData.workerIds || []).includes(worker.id)}
-									onChange={(e) => {
-										const id = Number.parseInt(e.target.value);
-										setFormData((prevData) => ({
-											...prevData,
-											workerIds: e.target.checked
-												? [...prevData.workerIds, id]
-												: prevData.workerIds.filter((wid) => wid !== id),
-										}));
-									}}
-								/>
-								{worker.name}
-							</label>
-						))}
-					</div>
-					<ErrorMessage message={error} />
-					<div>
-						<button type="button" onClick={toggleModal}>
-							Cancelar
-						</button>
-						<button type="submit">Crear</button>
-					</div>
-				</form>
-			</Modal>
-			<Modal
+				onSubmit={handleCreateService}
+				formData={formData}
+				handleChange={handleChange}
+				error={error}
+				workers={workers}
+				setFormData={setFormData}
+			/>
+			<DeleteServiceModal
 				isOpen={deleteModalOpen}
 				onClose={() => setDeleteModalOpen(false)}
-				title="¿Eliminar servicio?"
-			>
-				<p>
-					¿Estás seguro que querés eliminar el servicio{" "}
-					<strong>{serviceToDelete?.name}</strong>?
-				</p>
-				<div className="flex justify-end mt-4 gap-2">
-					<button type="button" onClick={() => setDeleteModalOpen(false)}>
-						Cancelar
-					</button>
-					<button type="button" onClick={handleDeleteService}>
-						Eliminar
-					</button>
-				</div>
-			</Modal>
-			<Modal
+				onDelete={handleDeleteService}
+				serviceToDelete={serviceToDelete}
+			/>
+			<EditServiceModal
 				isOpen={editModalOpen}
 				onClose={() => setEditModalOpen(false)}
-				title="Editar servicio"
-			>
-				<form onSubmit={handleEdit}>
-					<Input
-						label="Nombre del servicio"
-						name="name"
-						type="text"
-						value={formData.name}
-						onChange={handleChange}
-					/>
-					<Input
-						label="Costo del servicio"
-						name="cost"
-						type="number"
-						value={formData.cost}
-						onChange={handleChange}
-					/>
-					<Input
-						label="Duración del servicio"
-						name="duration"
-						type="number"
-						value={formData.duration}
-						onChange={handleChange}
-					/>
-
-					<div className="mb-4">
-						<p>Asignar trabajadores:</p>
-						{workers?.map((worker) => (
-							<label key={worker.id} className="flex items-center gap-2 my-1">
-								<input
-									type="checkbox"
-									value={worker.id}
-									checked={formData.workerIds.includes(worker.id)}
-									onChange={(e) => {
-										const id = Number.parseInt(e.target.value);
-										setFormData((prev) => ({
-											...prev,
-											workerIds: e.target.checked
-												? [...prev.workerIds, id]
-												: prev.workerIds.filter((wid) => wid !== id),
-										}));
-									}}
-								/>
-								{worker.name}
-							</label>
-						))}
-					</div>
-
-					<ErrorMessage message={error} />
-
-					<div className="flex justify-end gap-2">
-						<button type="button" onClick={() => setEditModalOpen(false)}>
-							Cancelar
-						</button>
-						<button type="submit">Guardar cambios</button>
-					</div>
-				</form>
-			</Modal>
+				onSubmit={handleEditService}
+				formData={formData}
+				handleChange={handleChange}
+				error={error}
+				workers={workers}
+				setFormData={setFormData}
+			/>
 		</section>
 	);
 };
