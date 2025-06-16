@@ -5,6 +5,7 @@ const WorkerSelector = ({ workers, selectedWorker, onChange }) => {
 		<div className="flex items-center gap-2 mb-4">
 			<p>Seleccione trabajador:</p>
 			<select
+				name="workerId"
 				value={selectedWorker}
 				onChange={onChange}
 				className="border rounded px-2 py-1"

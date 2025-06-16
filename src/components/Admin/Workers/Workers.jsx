@@ -76,16 +76,16 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Creando trabajador...");
 
-			const response = await dispatch(createWorker(formData));
-			if (response.success) {
-				await dispatch(getAllWorkers());
-				toast.dismiss(loadingToastId);
-				toast.success(response.message);
-				toggleModal();
-			} else {
-				toast.dismiss(loadingToastId);
-				setError(response.message);
-			}
+		const response = await dispatch(createWorker(formData));
+		if (response.success) {
+			await dispatch(getAllWorkers());
+			toast.dismiss(loadingToastId);
+			toast.success(response.message);
+			toggleModal();
+		} else {
+			toast.dismiss(loadingToastId);
+			setError(response.message);
+		}
 	};
 
 	const handleEditWorker = async (e) => {
@@ -107,16 +107,16 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Guardando cambios...");
 
-			const response = await dispatch(editWorker(formData, workerToEdit.id));
-			if (response.success) {
-				await dispatch(getAllWorkers());
-				toast.dismiss(loadingToastId);
-				toast.success(response.message);
-				toggleEditModal();
-			} else {
-				toast.dismiss(loadingToastId);
-				setError(response.message);
-			}
+		const response = await dispatch(editWorker(formData, workerToEdit.id));
+		if (response.success) {
+			await dispatch(getAllWorkers());
+			toast.dismiss(loadingToastId);
+			toast.success(response.message);
+			toggleEditModal();
+		} else {
+			toast.dismiss(loadingToastId);
+			setError(response.message);
+		}
 	};
 
 	const handleDeleteWorker = async () => {
@@ -124,17 +124,17 @@ const Workers = () => {
 
 		const loadingToastId = toast.loading("Eliminando trabajador...");
 
-			const response = await dispatch(deleteWorker(workerToDelete.id));
-			if (response.success) {
-				await dispatch(getAllWorkers());
-				toast.dismiss(loadingToastId);
-				toast.success(response.message);
-				setDeleteModalOpen(false);
-				setWorkerToDelete(null);
-			} else {
-				toast.dismiss(loadingToastId);
-				toast.error(response.message);
-			}
+		const response = await dispatch(deleteWorker(workerToDelete.id));
+		if (response.success) {
+			await dispatch(getAllWorkers());
+			toast.dismiss(loadingToastId);
+			toast.success(response.message);
+			setDeleteModalOpen(false);
+			setWorkerToDelete(null);
+		} else {
+			toast.dismiss(loadingToastId);
+			toast.error(response.message);
+		}
 	};
 
 	useEffect(() => {
@@ -197,7 +197,7 @@ const Workers = () => {
 					))}
 				</section>
 			)}
-			<CreateWorkerModal 
+			<CreateWorkerModal
 				isOpen={modalOpen}
 				onClose={toggleModal}
 				onSubmit={handleCreateWorker}

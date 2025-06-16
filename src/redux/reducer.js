@@ -155,7 +155,7 @@ function rootReducer(state = initialState, action) {
 		case GET_ALL_RESERVATIONS:
 			return {
 				...state,
-				reservations: action.payload,
+				reservations: action.payload.reservations,
 				isLoadingReservations: false,
 			};
 		case GET_RESERVATIONS_BY_GMAIL:

@@ -306,14 +306,14 @@ export const editService = (formData, serviceId) => {
 
 //------------------------------------------------RESERVATIONS ACTIONS---------------------------------------------------------------------//
 
-export const getAllReservations = (filter = {}) => {
+export const getAllReservations = (filters = {}) => {
 	return async (dispatch) => {
 		console.log("ejecutamos getAllReservations");
 		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
-			const { data } = await axios.get(`${LOCAL}/reservations`, {
+			const queryParams = new URLSearchParams(filters).toString();
+			const { data } = await axios.get(`${LOCAL}/reservations?${queryParams}`, {
 				withCredentials: true,
-				params: filter,
 			});
 			dispatch({
 				type: GET_ALL_RESERVATIONS,

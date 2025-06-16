@@ -1,19 +1,10 @@
 import Modal from "@/Common/Modal";
 import React from "react";
 
-const DeleteServiceModal = ({
-    isOpen,
-    onClose,
-    onDelete,
-    serviceToDelete
-}) => {
-    return(
-        <Modal
-            isOpen={isOpen}
-            onClose={onClose}
-            title="Eliminar servicio"
-        >
-            <p>
+const DeleteServiceModal = ({ isOpen, onClose, onDelete, serviceToDelete }) => {
+	return (
+		<Modal isOpen={isOpen} onClose={onClose} title="Eliminar servicio">
+			<p>
 				¿Estás seguro que querés eliminar el servicio{" "}
 				<strong>{serviceToDelete?.name}</strong>?
 			</p>
@@ -25,8 +16,8 @@ const DeleteServiceModal = ({
 					Eliminar
 				</button>
 			</div>
-        </Modal>
-    )
-}
+		</Modal>
+	);
+};
 
 export default DeleteServiceModal;
