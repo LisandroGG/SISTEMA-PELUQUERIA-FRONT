@@ -76,7 +76,7 @@ const AdminNav = ({ handleLogout }) => {
 								<li key={to}>
 									<Link
 										to={to}
-										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										className="hover:scale-105 flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 									>
 										{icon}
 										{label}
@@ -87,7 +87,7 @@ const AdminNav = ({ handleLogout }) => {
 								<button
 									type="button"
 									onClick={logoutAndClose}
-									className="flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									className="hover:scale-105 flex cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 								>
 									<LogOutIcon className="w-5 h-5" />
 									Cerrar sesión
@@ -113,7 +113,7 @@ const AdminNav = ({ handleLogout }) => {
 									<Link
 										to={to}
 										onClick={closeMenu}
-										className="flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+										className="hover:scale-105 flex gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 									>
 										{icon}
 										{label}
@@ -124,7 +124,7 @@ const AdminNav = ({ handleLogout }) => {
 								<button
 									type="button"
 									onClick={logoutAndClose}
-									className="flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
+									className="hover:scale-105 flex w-full cursor-pointer gap-2 p-2 items-center hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-semibold"
 								>
 									<LogOutIcon className="w-5 h-5" />
 									Cerrar sesión
