@@ -47,16 +47,19 @@ const CreateWorkerModal = ({
 					value={formData.phoneNumber}
 					onChange={handleChange}
 					placeholder="Teléfono"
+					className="tracking-wider"
 				/>
 
 				<ErrorMessage message={error} />
+				<div className="flex justify-center md:justify-end pt-4">
 				<button
 					type="button"
 					onClick={onSubmit}
-					className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+					className="px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 				>
 					Crear trabajador
 				</button>
+				</div>
 			</div>
 		</Modal>
 	);

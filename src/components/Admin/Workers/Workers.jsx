@@ -10,7 +10,7 @@ import {
 	editWorker,
 	getAllWorkers,
 } from "@redux/actions.js";
-import { Pencil, X } from "lucide-react";
+import { Pencil, X, Mail, Phone, User } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -154,18 +154,40 @@ const Workers = () => {
 
 	return (
 		<section className="max-w-7xl mx-auto p-4 md:px-8 lg:px-4 px-5">
-			<div className="">
-				<button type="button" onClick={toggleModal} className="">
+			<div className="flex justify-center md:justify-end pb-5">
+				<button
+					type="button"
+					onClick={toggleModal}
+					className="cursor-pointer font-chivo text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
+				>
 					Crear nuevo trabajador
 				</button>
 			</div>
-			<p>Trabajadores: </p>
+			<p className="text-lg font-semibold pb-4">Trabajadores: </p>
 			{workers?.length === 0 ? (
-				<p>No hay trabajadores disponibles</p>
+				<div className="">
+					<p>No hay trabajadores disponibles</p>
+				</div>
 			) : (
-				<section>
+				<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 					{workers?.map((worker, index) => (
-						<article key={worker?.id ?? `worker-${index}`}>
+						<article
+							key={worker?.id ?? `worker-${index}`}
+							className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white"
+						>
+							<p className="flex items-start gap-2 break-all w-full">
+								<User className="h-5 w-5 shrink-0" />
+								<span className="break-words w-full">{worker.name}</span>
+							</p>
+							<p className="flex items-start gap-2 break-all w-full">
+								<Mail className="h-5 w-5 shrink-0" />
+								<span className="break-words w-full">{worker.gmail}</span>
+							</p>
+							<p className="flex items-start gap-2 break-all w-full">
+								<Phone className="h-5 w-5 shrink-0" />
+								<span className="break-words w-full tracking-wider">{worker.phoneNumber}</span>
+							</p>
+							<div className="flex gap-2 justify-end mt-2">
 							<button
 								type="button"
 								onClick={() => {
@@ -178,8 +200,10 @@ const Workers = () => {
 									setEditModalOpen(true);
 									setError("");
 								}}
+								className="flex items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
 							>
-								<Pencil className="w-5 h-5" />
+								<Pencil className="w-4 h-4" />
+								<span>Editar</span>
 							</button>
 							<button
 								type="button"
@@ -187,12 +211,12 @@ const Workers = () => {
 									setWorkerToDelete(worker);
 									setDeleteModalOpen(true);
 								}}
+								className="flex items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
 							>
-								<X className="w-6 h-6" />
+								<X className="w-5 h-5" />
+								<span>Eliminar</span>
 							</button>
-							<p>{worker.name}</p>
-							<p>{worker.gmail}</p>
-							<p>{worker.phoneNumber}</p>
+							</div>
 						</article>
 					))}
 				</section>

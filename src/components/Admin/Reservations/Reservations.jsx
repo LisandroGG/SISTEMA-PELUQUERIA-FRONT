@@ -30,7 +30,8 @@ const Reservations = () => {
 	const [selectDateModalOpen, setSelectDateModalOpen] = useState(false);
 	const [filter, setFilter] = useState({});
 	const [selectedWorker, setSelectedWorker] = useState("");
-	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] = useState("");
+	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] =
+		useState("");
 
 	useEffect(() => {
 		if (executed.current) return;
@@ -61,21 +62,22 @@ const Reservations = () => {
 		return new Date(year, month - 1, day);
 	};
 
-	const handleChangeStatus = async() => {
-
+	const handleChangeStatus = async () => {
 		const loadingToastId = toast.loading("Guardando cambios...");
 
-		const response = await dispatch(changeReservationStatus(selectedReservationChangeStatus.id));
-				if (response.success) {
-					await dispatch(getAllReservations());
-					toast.dismiss(loadingToastId);
-					toast.success(response.message);
-					setChangeStatusModalOpen(false);
-				} else {
-					toast.dismiss(loadingToastId);
-					toast.error(response.message);
-				}
-	}
+		const response = await dispatch(
+			changeReservationStatus(selectedReservationChangeStatus.id),
+		);
+		if (response.success) {
+			await dispatch(getAllReservations());
+			toast.dismiss(loadingToastId);
+			toast.success(response.message);
+			setChangeStatusModalOpen(false);
+		} else {
+			toast.dismiss(loadingToastId);
+			toast.error(response.message);
+		}
+	};
 
 	if (isLoadingReservations && isLoadingServices && isLoadingWorkers) {
 		return (
@@ -162,14 +164,14 @@ const Reservations = () => {
 								<p>{res.clientName}</p>
 								<p>{res.clientPhoneNumber}</p>
 								<button
-								type="button"
-								onClick={() => {
-									setSelectedReservationChangeStatus(res);
-									setChangeStatusModalOpen(true);
-								}}
-							>
-								<SquareCheckBig className="w-5 h-5" />
-							</button>
+									type="button"
+									onClick={() => {
+										setSelectedReservationChangeStatus(res);
+										setChangeStatusModalOpen(true);
+									}}
+								>
+									<SquareCheckBig className="w-5 h-5" />
+								</button>
 							</article>
 						);
 					})}

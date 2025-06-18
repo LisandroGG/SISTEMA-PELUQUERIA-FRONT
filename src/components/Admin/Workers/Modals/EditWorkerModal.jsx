@@ -37,24 +37,25 @@ const EditWorkerModal = ({
 				value={formData.phoneNumber}
 				onChange={handleChange}
 				placeholder="Teléfono"
+				className="tracking-wider"
 			/>
 
 			<ErrorMessage message={error} />
 
-			<div className="flex justify-end gap-2">
+			<div className="flex justify-center md:justify-end gap-2 pt-4">
 				<button
 					type="button"
 					onClick={onClose}
-					className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+					className="px-4 py-2 cursor-pointer font-chivo text-white bg-shark-200 hover:bg-shark-300 text-md font-semibold rounded-lg transition-all"
 				>
 					Cancelar
 				</button>
 				<button
 					type="button"
 					onClick={onSubmit}
-					className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+					className="px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 				>
-					Guardar cambios
+					Guardar
 				</button>
 			</div>
 		</Modal>
