@@ -10,7 +10,7 @@ import {
 	editWorker,
 	getAllWorkers,
 } from "@redux/actions.js";
-import { Pencil, X, Mail, Phone, User } from "lucide-react";
+import { Pencil, X, Mail, Phone, User, Users } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -154,7 +154,7 @@ const Workers = () => {
 
 	return (
 		<section className="max-w-7xl mx-auto p-4 md:px-8 lg:px-4 px-5">
-			<div className="flex justify-center md:justify-end pb-5">
+			<div className="flex justify-center md:justify-end pb-4 md:pb-2">
 				<button
 					type="button"
 					onClick={toggleModal}
@@ -165,8 +165,9 @@ const Workers = () => {
 			</div>
 			<p className="text-lg font-semibold pb-4">Trabajadores: </p>
 			{workers?.length === 0 ? (
-				<div className="">
-					<p>No hay trabajadores disponibles</p>
+				<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
+					<Users className="w-10 h-10" />
+					<p className="text-lg font-medium text-center">No hay trabajadores registrados</p>
 				</div>
 			) : (
 				<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
