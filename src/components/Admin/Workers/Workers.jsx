@@ -10,7 +10,7 @@ import {
 	editWorker,
 	getAllWorkers,
 } from "@redux/actions.js";
-import { Pencil, X, Mail, Phone, User, Users } from "lucide-react";
+import { Mail, Pencil, Phone, User, Users, X } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -167,7 +167,9 @@ const Workers = () => {
 			{workers?.length === 0 ? (
 				<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
 					<Users className="w-10 h-10" />
-					<p className="text-lg font-medium text-center">No hay trabajadores registrados</p>
+					<p className="text-lg font-medium text-center">
+						No hay trabajadores registrados
+					</p>
 				</div>
 			) : (
 				<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -186,37 +188,39 @@ const Workers = () => {
 							</p>
 							<p className="flex items-start gap-2 break-all w-full">
 								<Phone className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full tracking-wider">{worker.phoneNumber}</span>
+								<span className="break-words w-full tracking-wider">
+									{worker.phoneNumber}
+								</span>
 							</p>
 							<div className="flex gap-2 justify-end mt-2">
-							<button
-								type="button"
-								onClick={() => {
-									setWorkerToEdit(worker);
-									setFormData({
-										name: worker.name,
-										gmail: worker.gmail,
-										phoneNumber: worker.phoneNumber,
-									});
-									setEditModalOpen(true);
-									setError("");
-								}}
-								className="flex items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
-							>
-								<Pencil className="w-4 h-4" />
-								<span>Editar</span>
-							</button>
-							<button
-								type="button"
-								onClick={() => {
-									setWorkerToDelete(worker);
-									setDeleteModalOpen(true);
-								}}
-								className="flex items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
-							>
-								<X className="w-5 h-5" />
-								<span>Eliminar</span>
-							</button>
+								<button
+									type="button"
+									onClick={() => {
+										setWorkerToEdit(worker);
+										setFormData({
+											name: worker.name,
+											gmail: worker.gmail,
+											phoneNumber: worker.phoneNumber,
+										});
+										setEditModalOpen(true);
+										setError("");
+									}}
+									className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
+								>
+									<Pencil className="w-4 h-4" />
+									<span>Editar</span>
+								</button>
+								<button
+									type="button"
+									onClick={() => {
+										setWorkerToDelete(worker);
+										setDeleteModalOpen(true);
+									}}
+									className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
+								>
+									<X className="w-5 h-5" />
+									<span>Eliminar</span>
+								</button>
 							</div>
 						</article>
 					))}
@@ -238,7 +242,10 @@ const Workers = () => {
 			/>
 			<EditWorkerModal
 				isOpen={editModalOpen}
-				onClose={() => setEditModalOpen(false)}
+				onClose={() => {
+					setEditModalOpen(false);
+					setError("");
+				}}
 				onSubmit={handleEditWorker}
 				formData={formData}
 				error={error}

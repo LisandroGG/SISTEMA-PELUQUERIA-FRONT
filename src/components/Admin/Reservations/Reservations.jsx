@@ -1,7 +1,6 @@
 import Loading from "@/Common/Loading";
 import StatusSelector from "@/Common/StatusSelector";
 import WorkerSelector from "@/Common/WorkerSelector";
-import SelectDateModal from "./Modals/SelectDateModal";
 import {
 	changeReservationStatus,
 	getAllReservations,
@@ -10,11 +9,12 @@ import {
 } from "@redux/actions.js";
 import { format, isValid, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
+import { SquareCheckBig } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { SquareCheckBig } from "lucide-react";
 import ChangeStatusReservationModal from "./Modals/ChangeStatusReservationsModa";
+import SelectDateModal from "./Modals/SelectDateModal";
 
 const Reservations = () => {
 	const dispatch = useDispatch();

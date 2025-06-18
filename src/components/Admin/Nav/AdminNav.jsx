@@ -1,10 +1,10 @@
 import {
 	Calendar,
 	Clock,
-	Contact,
 	LogOutIcon,
 	Menu,
 	Scissors,
+	Users,
 	X,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
@@ -34,7 +34,7 @@ const AdminNav = ({ handleLogout }) => {
 		{
 			to: "/admin/workers",
 			label: "Personal",
-			icon: <Contact className="w-5 h-5" />,
+			icon: <Users className="w-5 h-5" />,
 		},
 		{
 			to: "/admin/hours",

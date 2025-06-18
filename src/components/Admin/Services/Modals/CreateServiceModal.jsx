@@ -19,7 +19,7 @@ const CreateServiceModal = ({
 			<button
 				type="button"
 				onClick={onClose}
-				className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
+				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>
 				<X />
 			</button>
@@ -46,37 +46,50 @@ const CreateServiceModal = ({
 					onChange={handleChange}
 				/>
 
-				<div className="mb-4">
-					<p>Asignar trabajadores:</p>
-					{workers?.map((worker) => (
-						<label key={worker.id} className="flex items-center gap-2 my-1">
-							<input
-								type="checkbox"
-								value={worker.id}
-								checked={(formData.workerIds || []).includes(worker.id)}
-								onChange={(e) => {
-									const id = Number.parseInt(e.target.value);
-									setFormData((prevData) => ({
-										...prevData,
-										workerIds: e.target.checked
-											? [...prevData.workerIds, id]
-											: prevData.workerIds.filter((wid) => wid !== id),
-									}));
-								}}
-							/>
-							{worker.name}
-						</label>
-					))}
+				<div className="mb-4 mt-4">
+					<p className="mb-2">Asignar trabajadores:</p>
+					<div className="flex flex-wrap gap-2">
+						{workers?.map((worker) => {
+							const isSelected = (formData.workerIds || []).includes(worker.id);
+							return (
+								<label
+									key={worker.id}
+									htmlFor={`worker-${worker.id}`}
+									className={`cursor-pointer px-3 py-1 rounded-full text-sm font-medium border transition-all select-none
+            ${isSelected ? "bg-shark-500 text-white border-shark-500" : "bg-white text-shark-500 border-shark-500 hover:bg-shark-100"}`}
+								>
+									<input
+										id={`worker-${worker.id}`}
+										type="checkbox"
+										value={worker.id}
+										checked={isSelected}
+										onChange={(e) => {
+											const id = Number.parseInt(e.target.value);
+											setFormData((prevData) => ({
+												...prevData,
+												workerIds: e.target.checked
+													? [...prevData.workerIds, id]
+													: prevData.workerIds.filter((wid) => wid !== id),
+											}));
+										}}
+										className="hidden"
+									/>
+									<span className="font-semibold">{worker.name}</span>
+								</label>
+							);
+						})}
+					</div>
 				</div>
 				<ErrorMessage message={error} />
-
-				<button
-					type="button"
-					onClick={onSubmit}
-					className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
-				>
-					Crear Servicio
-				</button>
+				<div className="flex justify-center md:justify-end pt-4">
+					<button
+						type="button"
+						onClick={onSubmit}
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+					>
+						Crear Servicio
+					</button>
+				</div>
 			</div>
 		</Modal>
 	);
