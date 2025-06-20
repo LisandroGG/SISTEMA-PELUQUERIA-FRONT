@@ -316,9 +316,9 @@ export const getAllReservations = (filters = {}) => {
 				withCredentials: true,
 			});
 			dispatch({
-				type: GET_ALL_RESERVATIONS,
-				payload: data,
-			});
+	type: GET_ALL_RESERVATIONS,
+	payload: data.reservations ?? [],
+});
 			return { success: true, message: data.message };
 		} catch (error) {
 			stopLoading(dispatch, SET_LOADING_RESERVATIONS);
@@ -339,9 +339,9 @@ export const getReservationsByGmail = (gmail) => {
 				},
 			);
 			dispatch({
-				type: GET_RESERVATIONS_BY_GMAIL,
-				payload: data,
-			});
+	type: GET_RESERVATIONS_BY_GMAIL,
+	payload: data.reservations ?? [],
+});
 			return { success: true, message: data.message };
 		} catch (error) {
 			stopLoading(dispatch, SET_LOADING_RESERVATIONS);

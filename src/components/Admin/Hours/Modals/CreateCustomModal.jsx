@@ -29,18 +29,24 @@ const CreateCustomModal = ({
 	return (
 		<Modal
 			isOpen={isOpen}
-			onClose={onClose}
+			onClose={() => {
+				onClose();
+				setSelectedDate(undefined)
+			}}
 			title={`Crear horario personalizado de: ${workerName}`}
 		>
 			<button
 				type="button"
-				onClick={onClose}
-				className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
+				onClick={() => {
+				onClose();
+				setSelectedDate(undefined)
+			}}
+				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>
 				<X />
 			</button>
 
-			<div className="space-y-4 mt-2">
+			<div className="space-y-4">
 				<div className="flex flex-col gap-2 items-center">
 					<label htmlFor="Fecha" className="text-lg">
 						Seleccione una día:
@@ -58,9 +64,8 @@ const CreateCustomModal = ({
 						)}
 					</div>
 				</div>
-
-				<div className="flex flex-col gap-2">
-					<label htmlFor="Hora de inicio" className="text-sm">
+				<div className="flex flex-col items-center text-md">
+					<label htmlFor="Hora de inicio" className="font-semibold">
 						Hora de inicio:
 					</label>
 					<input
@@ -69,10 +74,8 @@ const CreateCustomModal = ({
 						value={formData.startTime}
 						onChange={onChange}
 					/>
-				</div>
 
-				<div className="flex flex-col gap-2">
-					<label htmlFor="Hora de fin" className="text-sm">
+					<label htmlFor="Hora de fin" className="font-semibold">
 						Hora de fin:
 					</label>
 					<input
@@ -84,14 +87,17 @@ const CreateCustomModal = ({
 				</div>
 
 				<ErrorMessage message={error} />
-
+				<div className="flex justify-center md:justify-end pt-4">
 				<button
 					type="button"
-					onClick={onSubmit}
-					className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+					onClick={() => {
+						onSubmit()
+					setSelectedDate(undefined)}}
+					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 				>
 					Crear horario personalizado
 				</button>
+				</div>
 			</div>
 		</Modal>
 	);

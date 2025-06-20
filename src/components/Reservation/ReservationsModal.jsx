@@ -16,7 +16,7 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 	const [error, setError] = useState("");
 	const [submitted, setSubmitted] = useState(false);
 
-	const reservations = useSelector((state) => state.reservations.reservations);
+	const reservations = useSelector((state) => state.reservations);
 	const isLoadingReservations = useSelector(
 		(state) => state.isLoadingReservations,
 	);

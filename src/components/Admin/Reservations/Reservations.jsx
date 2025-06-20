@@ -69,7 +69,7 @@ const Reservations = () => {
 			changeReservationStatus(selectedReservationChangeStatus.id),
 		);
 		if (response.success) {
-			await dispatch(getAllReservations());
+			await dispatch(getAllReservations(filter));
 			toast.dismiss(loadingToastId);
 			toast.success(response.message);
 			setChangeStatusModalOpen(false);

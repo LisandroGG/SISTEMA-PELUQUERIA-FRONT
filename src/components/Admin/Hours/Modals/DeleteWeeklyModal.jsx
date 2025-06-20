@@ -3,7 +3,7 @@ import React from "react";
 
 const DeleteWeeklyModal = ({ isOpen, onClose, hour, onDelete }) => {
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} title="Eliminar horario">
+		<Modal isOpen={isOpen} onClose={onClose} title="Eliminar horario semanal">
 			<p className="text-gray-700">
 				¿Estás seguro de que querés eliminar el horario de{" "}
 				<strong>{hour?.dayOfWeek}</strong> desde{" "}
@@ -11,18 +11,18 @@ const DeleteWeeklyModal = ({ isOpen, onClose, hour, onDelete }) => {
 				<strong>{hour?.endTime.slice(0, 5)}</strong>?
 			</p>
 
-			<div className="mt-6 flex justify-end gap-4">
+			<div className="flex justify-center md:justify-end gap-2 pt-4">
 				<button
 					type="button"
 					onClick={onClose}
-					className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-200 hover:bg-shark-300 text-md font-semibold rounded-lg transition-all"
 				>
 					Cancelar
 				</button>
 				<button
 					type="button"
 					onClick={() => onDelete(hour?.id)}
-					className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 				>
 					Eliminar
 				</button>

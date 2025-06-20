@@ -15,6 +15,7 @@ import {
 import React, { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
+import { Users } from "lucide-react";
 
 import Loading from "@/Common/Loading.jsx";
 import WorkerSelector from "@/Common/WorkerSelector.jsx";
@@ -130,8 +131,8 @@ const Hours = () => {
 		const response = await dispatch(createWorkingHour(payload));
 		if (response.success) {
 			toast.success(response.message);
-			setModalOpen(false);
 			dispatch(getWorkingHours(selectedWorker));
+			handleCloseWeeklyModal();
 		} else {
 			toast.error(response.message);
 		}
@@ -154,7 +155,7 @@ const Hours = () => {
 		);
 		if (response.success) {
 			toast.success(response.message);
-			setCustomModalOpen(false);
+			handleCloseCustomModal();
 			dispatch(getCustomWorkingHours(selectedWorker));
 		} else {
 			toast.error(response.message);
@@ -206,7 +207,7 @@ const Hours = () => {
 		);
 		if (response.success) {
 			toast.success(response.message);
-			setDisableDayModalOpen(false);
+			handleCloseDisableDayModal()
 			dispatch(getDisableDays(selectedWorker));
 		} else {
 			toast.error(response.message);
@@ -246,6 +247,23 @@ const Hours = () => {
 		}
 	};
 
+	const handleCloseCustomModal = () => {
+	setFormData({
+		workerId: "",
+		dayOfWeek: "",
+		startTime: "",
+		endTime: "",
+	});
+	setError("");
+	setCustomModalOpen(false);
+};
+
+const handleCloseWeeklyModal = () => {
+	setNewBlocks([{ day: "", start: "", end: "" }]);
+	setError("");
+	setModalOpen(false);
+};
+
 	if (isLoadingWorkers) {
 		return (
 			<div className="min-h-screen grid place-content-center">
@@ -259,22 +277,30 @@ const Hours = () => {
 			<p className="font-semibold mb-2">Horarios de trabajo:</p>
 
 			{workers.length === 0 ? (
-				<p>No hay trabajadores disponibles</p>
-			) : (
+				<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
+					<Users className="w-10 h-10" />
+					<p className="text-lg font-medium text-center">
+						No hay trabajadores registrados
+					</p>
+				</div>
+			) : 
 				<WorkerSelector
 					workers={workers}
 					selectedWorker={selectedWorker}
 					onChange={handleSelectChange}
 				/>
-			)}
+			}
 
 			{selectedWorker &&
 				!isLoadingWorkingHours &&
 				!isLoadingCustomWorkingHours &&
 				!isLoadingDisableDays && (
-					<div>
-						<div className="mt-4">
-							<p className="font-semibold mb-2">Semanales:</p>
+					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
+							<div className="flex-[1] flex items-center justify-center">
+							<p className="font-semibold text-center text-lg">Semanales:</p>
+							</div>
+							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
 							<WeeklyHoursList
 								workingHours={workingHours}
 								onEdit={(hour) => {
@@ -288,17 +314,24 @@ const Hours = () => {
 									setDeleteModalOpen(true);
 								}}
 							/>
+							</div>
+							<div className="flex-[1] flex items-center justify-center">
 							<button
 								type="button"
 								onClick={() => setModalOpen(true)}
-								className="text-sm text-green-600 underline"
+								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
 							>
-								Crear horarios
+								Crear horarios semanales
 							</button>
+							</div>
 						</div>
 
-						<div className="mt-6">
-							<p className="font-semibold mb-2">Personalizados:</p>
+						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
+							<div className="flex-[1] flex items-center justify-center">
+							<p className="font-semibold mb-2 text-center text-lg">Personalizados:</p>
+
+							</div>
+							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
 							<CustomHoursList
 								customHours={customWorkingHours}
 								onEdit={(hour) => {
@@ -312,17 +345,26 @@ const Hours = () => {
 									setDeleteCustomModalOpen(true);
 								}}
 							/>
+
+							</div>
+							<div className="flex-[1] flex items-center justify-center">
 							<button
 								type="button"
 								onClick={() => setCustomModalOpen(true)}
-								className="text-sm text-green-600 underline"
+								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
 							>
 								Crear horario personalizado
 							</button>
+							</div>
 						</div>
 
-						<div className="mt-6">
-							<p className="font-semibold mb-2">Dias deshabilitados:</p>
+						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
+							<div className="flex-[1] flex items-center justify-center">
+
+							<p className="font-semibold mb-2 text-center text-lg">Dias deshabilitados:</p>
+							</div>
+							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
+
 							<DisableDaysList
 								disableDays={disableDays}
 								onDelete={(day) => {
@@ -330,20 +372,24 @@ const Hours = () => {
 									setDeleteDisableDayModalOpen(true);
 								}}
 							/>
+							</div>
+							<div className="flex-[1] flex items-center justify-center">
+
 							<button
 								type="button"
 								onClick={() => setDisableDayModalOpen(true)}
-								className="text-sm text-green-600 underline"
+								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
 							>
 								Crear horario personalizado
 							</button>
+							</div>
 						</div>
-					</div>
+					</section>
 				)}
 
 			<CreateWeeklyModal
 				isOpen={modalOpen}
-				onClose={() => setModalOpen(false)}
+				onClose={handleCloseWeeklyModal}
 				workerName={
 					workers.find((w) => w.id === Number(selectedWorker))?.name || ""
 				}
@@ -357,7 +403,7 @@ const Hours = () => {
 
 			<CreateCustomModal
 				isOpen={customModalOpen}
-				onClose={() => setCustomModalOpen(false)}
+				onClose={handleCloseCustomModal}
 				workerName={
 					workers.find((w) => w.id === Number(selectedWorker))?.name || ""
 				}

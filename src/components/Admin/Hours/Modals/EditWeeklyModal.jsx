@@ -18,7 +18,7 @@ const EditWeeklyModal = ({
 			title={`Editar horario de ${hour?.dayOfWeek || ""}`}
 		>
 			<div className="space-y-4">
-				<div className="flex items-center gap-4">
+				<div className="flex items-center gap-4 justify-center">
 					<p className="capitalize">{hour?.dayOfWeek}:</p>
 					<input
 						type="time"
@@ -34,20 +34,20 @@ const EditWeeklyModal = ({
 						className="border p-1 rounded"
 					/>
 				</div>
-				<div className="flex justify-end gap-2">
+				<div className="flex justify-center md:justify-end gap-2 pt-2">
 					<button
 						type="button"
 						onClick={onClose}
-						className="px-4 py-2 bg-gray-300 text-gray-800 rounded hover:bg-gray-400 transition"
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-200 hover:bg-shark-300 text-md font-semibold rounded-lg transition-all"
 					>
 						Cancelar
 					</button>
 					<button
 						type="button"
 						onClick={onSubmit}
-						className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 					>
-						Guardar cambios
+						Guardar
 					</button>
 				</div>
 			</div>

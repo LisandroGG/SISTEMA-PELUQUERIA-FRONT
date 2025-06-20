@@ -158,7 +158,7 @@ const Workers = () => {
 				<button
 					type="button"
 					onClick={toggleModal}
-					className="cursor-pointer font-chivo text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
+					className="hover:scale-105 cursor-pointer font-chivo text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
 				>
 					Crear nuevo trabajador
 				</button>
