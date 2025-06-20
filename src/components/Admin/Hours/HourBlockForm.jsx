@@ -46,12 +46,11 @@ const HourBlockForm = ({ blocks, onAdd, onRemove, onChange }) => {
 							onClick={() => onRemove(index)}
 							className="hover:scale-125 cursor-pointer text-shark-500 hover:text-shark-600 transition-all"
 						>
-							<X className="w-6 h-6"/>
+							<X className="w-6 h-6" />
 						</button>
 					)}
 				</div>
 			))}
-
 		</div>
 	);
 };

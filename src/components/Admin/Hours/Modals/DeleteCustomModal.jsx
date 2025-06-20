@@ -13,7 +13,11 @@ const DeleteCustomModal = ({ isOpen, onClose, hour, onDelete }) => {
 	}
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} title="Eliminar horario personalizado">
+		<Modal
+			isOpen={isOpen}
+			onClose={onClose}
+			title="Eliminar horario personalizado"
+		>
 			<p className="text-gray-700">
 				¿Estás seguro de que querés eliminar el horario de{" "}
 				<strong>{formattedDate}</strong> desde{" "}

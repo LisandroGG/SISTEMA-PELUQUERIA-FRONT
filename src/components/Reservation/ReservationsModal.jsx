@@ -92,7 +92,7 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 			{!isLoadingReservations &&
 				Array.isArray(reservations) &&
 				reservations.length > 0 && (
-					<div className="max-h-64 overflow-y-auto mt-4 px-2 font-chivo">
+					<div className="max-h-64 overflow-y-auto mt-4 px-2 font-chivo animate-fadeInToBottom">
 						<ul className="mt-4 space-y-2">
 							{reservations.map((r) => (
 								<li key={r.id} className="p-2 border rounded text-sm">

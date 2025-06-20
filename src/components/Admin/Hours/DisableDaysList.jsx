@@ -1,17 +1,18 @@
 import { format, isValid, parseISO } from "date-fns";
 import { es } from "date-fns/locale";
-import { X, CalendarX   } from "lucide-react";
+import { CalendarX, X } from "lucide-react";
 import React from "react";
 
 const DisableDaysList = ({ disableDays, onDelete }) => {
 	if (disableDays.length === 0)
 		return (
-	<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
-						<CalendarX  className="w-10 h-10" />
-						<p className="text-lg font-medium text-center">
-							No hay dias deshabilitados registrados
-						</p>
-					</div>)
+			<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
+				<CalendarX className="w-10 h-10" />
+				<p className="text-lg font-medium text-center">
+					No hay dias deshabilitados registrados
+				</p>
+			</div>
+		);
 
 	return (
 		<div className="mb-4">
@@ -19,7 +20,10 @@ const DisableDaysList = ({ disableDays, onDelete }) => {
 				{disableDays.map((day) => {
 					const fechaValida = day?.day && isValid(parseISO(day.day));
 					return (
-						<div key={day.id} className="flex items-center justify-between font-bold">
+						<div
+							key={day.id}
+							className="flex items-center justify-between font-bold"
+						>
 							<li>
 								{fechaValida
 									? format(parseISO(day.day), "EEEE dd/MM/yyyy", {

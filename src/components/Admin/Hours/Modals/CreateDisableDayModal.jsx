@@ -29,16 +29,16 @@ const CreateDisableDayModal = ({
 		<Modal
 			isOpen={isOpen}
 			onClose={() => {
-				onClose(),
-				setSelectedDate()
+				onClose();
+				setSelectedDate();
 			}}
 			title={`Deshabilitar día de: ${workerName}`}
 		>
 			<button
 				type="button"
 				onClick={() => {
-					onClose(),
-					setSelectedDate(undefined)
+					onClose();
+					setSelectedDate(undefined);
 				}}
 				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>

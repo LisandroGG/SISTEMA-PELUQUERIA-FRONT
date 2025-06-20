@@ -32,6 +32,12 @@ const Reservations = () => {
 	const [selectedWorker, setSelectedWorker] = useState("");
 	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] =
 		useState("");
+	const [animKey, setAnimKey] = useState(0);
+
+	// biome-ignore lint: ANIMATION
+	useEffect(() => {
+		setAnimKey((k) => k + 1);
+	}, [reservations]);
 
 	useEffect(() => {
 		if (executed.current) return;
@@ -142,7 +148,7 @@ const Reservations = () => {
 			{reservations?.length === 0 ? (
 				<p>No hay turnos disponibles</p>
 			) : (
-				<section className="flex gap-4">
+				<section key={animKey} className="flex gap-4 animate-fadeInToBottom">
 					{reservations?.map((res, index) => {
 						const fechaValida = res?.date && isValid(parseISO(res.date));
 						return (

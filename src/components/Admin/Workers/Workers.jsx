@@ -176,7 +176,7 @@ const Workers = () => {
 					{workers?.map((worker, index) => (
 						<article
 							key={worker?.id ?? `worker-${index}`}
-							className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white"
+							className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white animate-fadeInToBottom"
 						>
 							<p className="flex items-start gap-2 break-all w-full">
 								<User className="h-5 w-5 shrink-0" />

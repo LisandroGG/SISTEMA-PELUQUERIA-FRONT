@@ -211,7 +211,7 @@ const Services = () => {
 					{services?.map((service, index) => (
 						<article
 							key={service?.id ?? `service-${index}`}
-							className="flex flex-col p-4 border border-t-4 border-shark-500 rounded shadow bg-white"
+							className="flex flex-col p-4 border border-t-4 border-shark-500 rounded shadow bg-white animate-fadeInToBottom"
 						>
 							<p className="flex items-start gap-1 break-all w-full">
 								<BadgeCheck className="h-5 w-5 shrink-0" />

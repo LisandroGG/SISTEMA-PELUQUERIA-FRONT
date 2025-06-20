@@ -1,22 +1,5 @@
 @import "tailwindcss";
 
-@layer utilities {
-	input:-webkit-autofill {
-		box-shadow: 0 0 0px 1000px white inset;
-		-webkit-text-fill-color: oklch(32.776% 0.00449 247.96);
-	}
-
-	.bg-form-gradient {
-		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
-	}
-	.font-montserrat {
-		font-family: var(--font-montserrat);
-	}
-	.font-chivo {
-		font-family: var(--font-chivo);
-	}
-}
-
 @theme {
 	/* COLORS */
 	--color-shark: oklch(32.776% 0.00449 247.96);
@@ -41,4 +24,51 @@
 	/* SIZES */
 	--container-sm: 21rem;
 	--container-md: 28rem;
+}
+
+@layer utilities {
+	input:-webkit-autofill {
+		box-shadow: 0 0 0px 1000px white inset;
+		-webkit-text-fill-color: oklch(32.776% 0.00449 247.96);
+	}
+
+	.bg-form-gradient {
+		background: linear-gradient(to bottom, #e5e7eb, #9ca3af);
+	}
+	.font-montserrat {
+		font-family: var(--font-montserrat);
+	}
+	.font-chivo {
+		font-family: var(--font-chivo);
+	}
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+			transform: scale(0.95);
+		}
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+	}
+
+	.animate-fadeIn {
+		animation: fadeIn 0.2s ease-out;
+	}
+
+	@keyframes fadeInToBottom {
+		0% {
+			opacity: 0;
+			transform: translateY(25px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	.animate-fadeInToBottom {
+		animation: fadeInToBottom 0.4s ease-out both;
+		will-change: transform, opacity;
+	}
 }

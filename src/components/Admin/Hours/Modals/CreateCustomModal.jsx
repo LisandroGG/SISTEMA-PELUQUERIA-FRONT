@@ -31,16 +31,16 @@ const CreateCustomModal = ({
 			isOpen={isOpen}
 			onClose={() => {
 				onClose();
-				setSelectedDate(undefined)
+				setSelectedDate(undefined);
 			}}
 			title={`Crear horario personalizado de: ${workerName}`}
 		>
 			<button
 				type="button"
 				onClick={() => {
-				onClose();
-				setSelectedDate(undefined)
-			}}
+					onClose();
+					setSelectedDate(undefined);
+				}}
 				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>
 				<X />
@@ -88,15 +88,16 @@ const CreateCustomModal = ({
 
 				<ErrorMessage message={error} />
 				<div className="flex justify-center md:justify-end pt-4">
-				<button
-					type="button"
-					onClick={() => {
-						onSubmit()
-					setSelectedDate(undefined)}}
-					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
-				>
-					Crear horario personalizado
-				</button>
+					<button
+						type="button"
+						onClick={() => {
+							onSubmit();
+							setSelectedDate(undefined);
+						}}
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+					>
+						Crear horario personalizado
+					</button>
 				</div>
 			</div>
 		</Modal>

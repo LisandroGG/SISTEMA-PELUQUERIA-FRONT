@@ -11,7 +11,6 @@ const WorkerSelector = ({ workers, selectedWorker, onChange }) => {
 				name="workerId"
 				value={selectedWorker}
 				onChange={onChange}
-				
 				className="w-full sm:w-auto border border-gray-300 rounded-xl px-4 py-2 bg-white text-shark-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-shark-500 focus:border-shark-500 transition-all"
 			>
 				<option value="">Trabajadores: </option>

@@ -12,10 +12,10 @@ import {
 	getDisableDays,
 	getWorkingHours,
 } from "@redux/actions.js";
+import { Users } from "lucide-react";
 import React, { useState, useEffect, useRef } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { Users } from "lucide-react";
 
 import Loading from "@/Common/Loading.jsx";
 import WorkerSelector from "@/Common/WorkerSelector.jsx";
@@ -207,7 +207,7 @@ const Hours = () => {
 		);
 		if (response.success) {
 			toast.success(response.message);
-			handleCloseDisableDayModal()
+			handleCloseDisableDayModal();
 			dispatch(getDisableDays(selectedWorker));
 		} else {
 			toast.error(response.message);
@@ -248,21 +248,21 @@ const Hours = () => {
 	};
 
 	const handleCloseCustomModal = () => {
-	setFormData({
-		workerId: "",
-		dayOfWeek: "",
-		startTime: "",
-		endTime: "",
-	});
-	setError("");
-	setCustomModalOpen(false);
-};
+		setFormData({
+			workerId: "",
+			dayOfWeek: "",
+			startTime: "",
+			endTime: "",
+		});
+		setError("");
+		setCustomModalOpen(false);
+	};
 
-const handleCloseWeeklyModal = () => {
-	setNewBlocks([{ day: "", start: "", end: "" }]);
-	setError("");
-	setModalOpen(false);
-};
+	const handleCloseWeeklyModal = () => {
+		setNewBlocks([{ day: "", start: "", end: "" }]);
+		setError("");
+		setModalOpen(false);
+	};
 
 	if (isLoadingWorkers) {
 		return (
@@ -283,105 +283,104 @@ const handleCloseWeeklyModal = () => {
 						No hay trabajadores registrados
 					</p>
 				</div>
-			) : 
+			) : (
 				<WorkerSelector
 					workers={workers}
 					selectedWorker={selectedWorker}
 					onChange={handleSelectChange}
 				/>
-			}
+			)}
 
 			{selectedWorker &&
 				!isLoadingWorkingHours &&
 				!isLoadingCustomWorkingHours &&
 				!isLoadingDisableDays && (
-					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fadeInToBottom">
 						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
 							<div className="flex-[1] flex items-center justify-center">
-							<p className="font-semibold text-center text-lg">Semanales:</p>
+								<p className="font-semibold text-center text-lg">Semanales:</p>
 							</div>
 							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
-							<WeeklyHoursList
-								workingHours={workingHours}
-								onEdit={(hour) => {
-									setHourToEdit(hour);
-									setEditStart(hour.startTime.slice(0, 5));
-									setEditEnd(hour.endTime.slice(0, 5));
-									setEditModalOpen(true);
-								}}
-								onDelete={(hour) => {
-									setHourToDelete(hour);
-									setDeleteModalOpen(true);
-								}}
-							/>
+								<WeeklyHoursList
+									workingHours={workingHours}
+									onEdit={(hour) => {
+										setHourToEdit(hour);
+										setEditStart(hour.startTime.slice(0, 5));
+										setEditEnd(hour.endTime.slice(0, 5));
+										setEditModalOpen(true);
+									}}
+									onDelete={(hour) => {
+										setHourToDelete(hour);
+										setDeleteModalOpen(true);
+									}}
+								/>
 							</div>
 							<div className="flex-[1] flex items-center justify-center">
-							<button
-								type="button"
-								onClick={() => setModalOpen(true)}
-								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
-							>
-								Crear horarios semanales
-							</button>
+								<button
+									type="button"
+									onClick={() => setModalOpen(true)}
+									className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
+								>
+									Crear horarios semanales
+								</button>
 							</div>
 						</div>
 
 						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
 							<div className="flex-[1] flex items-center justify-center">
-							<p className="font-semibold mb-2 text-center text-lg">Personalizados:</p>
-
+								<p className="font-semibold mb-2 text-center text-lg">
+									Personalizados:
+								</p>
 							</div>
 							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
-							<CustomHoursList
-								customHours={customWorkingHours}
-								onEdit={(hour) => {
-									setCustomHourToEdit(hour);
-									setEditCustomStart(hour.startTime.slice(0, 5));
-									setEditCustomEnd(hour.endTime.slice(0, 5));
-									setEditCustomModalOpen(true);
-								}}
-								onDelete={(hour) => {
-									setCustomHourToDelete(hour);
-									setDeleteCustomModalOpen(true);
-								}}
-							/>
-
+								<CustomHoursList
+									customHours={customWorkingHours}
+									onEdit={(hour) => {
+										setCustomHourToEdit(hour);
+										setEditCustomStart(hour.startTime.slice(0, 5));
+										setEditCustomEnd(hour.endTime.slice(0, 5));
+										setEditCustomModalOpen(true);
+									}}
+									onDelete={(hour) => {
+										setCustomHourToDelete(hour);
+										setDeleteCustomModalOpen(true);
+									}}
+								/>
 							</div>
 							<div className="flex-[1] flex items-center justify-center">
-							<button
-								type="button"
-								onClick={() => setCustomModalOpen(true)}
-								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
-							>
-								Crear horario personalizado
-							</button>
+								<button
+									type="button"
+									onClick={() => setCustomModalOpen(true)}
+									className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
+								>
+									Crear horario personalizado
+								</button>
 							</div>
 						</div>
 
 						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
 							<div className="flex-[1] flex items-center justify-center">
-
-							<p className="font-semibold mb-2 text-center text-lg">Dias deshabilitados:</p>
+								<p className="font-semibold mb-2 text-center text-lg">
+									Dias deshabilitados:
+								</p>
 							</div>
 							<div className="flex-[8] overflow-y-auto px-2 flex flex-col">
-
-							<DisableDaysList
-								disableDays={disableDays}
-								onDelete={(day) => {
-									setDisableDayToDelete(day);
-									setDeleteDisableDayModalOpen(true);
-								}}
-							/>
+								<DisableDaysList
+									disableDays={disableDays}
+									onDelete={(day) => {
+										setDisableDayToDelete(day);
+										setDeleteDisableDayModalOpen(true);
+									}}
+								/>
 							</div>
 							<div className="flex-[1] flex items-center justify-center">
-
-							<button
-								type="button"
-								onClick={() => setDisableDayModalOpen(true)}
-								className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
-							>
-								Crear horario personalizado
-							</button>
+								<button
+									type="button"
+									onClick={() => setDisableDayModalOpen(true)}
+									className="hover:scale-105 flex px-2 items-center gap-1 font-chivo cursor-pointer text-white bg-shark-500 text-md font-semibold p-1 rounded-lg hover:bg-shark-600 transition-all"
+								>
+									Crear horario personalizado
+								</button>
 							</div>
 						</div>
 					</section>

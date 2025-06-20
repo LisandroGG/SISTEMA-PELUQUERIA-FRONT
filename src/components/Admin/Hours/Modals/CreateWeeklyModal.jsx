@@ -37,12 +37,12 @@ const CreateWeeklyModal = ({
 			<ErrorMessage message={error} />
 			<div className="flex justify-center md:justify-end gap-2 pt-4">
 				<button
-				type="button"
-				onClick={onAddBlock}
-				className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-200 hover:bg-shark-300 text-md font-semibold rounded-lg transition-all"
-			>
-				Agregar día
-			</button>
+					type="button"
+					onClick={onAddBlock}
+					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-200 hover:bg-shark-300 text-md font-semibold rounded-lg transition-all"
+				>
+					Agregar día
+				</button>
 				<button
 					type="button"
 					onClick={onSubmit}

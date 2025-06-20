@@ -153,12 +153,12 @@ function rootReducer(state = initialState, action) {
 			};
 		//RESERVATIONS
 		case GET_ALL_RESERVATIONS:
-case GET_RESERVATIONS_BY_GMAIL:
-	return {
-		...state,
-		reservations: Array.isArray(action.payload) ? action.payload : [],
-		isLoadingReservations: false,
-	};
+		case GET_RESERVATIONS_BY_GMAIL:
+			return {
+				...state,
+				reservations: Array.isArray(action.payload) ? action.payload : [],
+				isLoadingReservations: false,
+			};
 		case CREATE_RESERVATION:
 			return {
 				...state,
