@@ -295,7 +295,7 @@ const Hours = () => {
 				!isLoadingWorkingHours &&
 				!isLoadingCustomWorkingHours &&
 				!isLoadingDisableDays && (
-					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fadeInToBottom">
+					<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-fadeInToRight">
 						<div className="p-4 border border-t-4 border-shark-500 rounded shadow bg-white h-[500px] flex flex-col">
 							<div className="flex-[1] flex items-center justify-center">
 								<p className="font-semibold text-center text-lg">Semanales:</p>

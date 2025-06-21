@@ -148,7 +148,7 @@ const Reservations = () => {
 			{reservations?.length === 0 ? (
 				<p>No hay turnos disponibles</p>
 			) : (
-				<section key={animKey} className="flex gap-4 animate-fadeInToBottom">
+				<section key={animKey} className="flex gap-4 animate-fadeInToRight">
 					{reservations?.map((res, index) => {
 						const fechaValida = res?.date && isValid(parseISO(res.date));
 						return (
