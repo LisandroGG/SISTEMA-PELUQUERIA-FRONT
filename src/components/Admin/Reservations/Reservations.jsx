@@ -127,7 +127,7 @@ const Reservations = () => {
 			{showFilters && (
 				<form
 					onSubmit={(e) => e.preventDefault()}
-					className="flex flex-col mt-4 md:grid md:grid-cols-3"
+					className="flex flex-col mb-4 md:grid md:grid-cols-3"
 				>
 					<div className="flex flex-col gap-2 md:col-span-3 md:flex-row">
 						<div className="flex-1">
