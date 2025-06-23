@@ -221,13 +221,13 @@ const Services = () => {
 							</p>
 							<p className="flex items-start gap-1 break-all w-full">
 								<BadgeDollarSign className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full font-semibold">
+								<span className="break-words w-full font-semibold tracking-wider">
 									{service.cost}$
 								</span>
 							</p>
 							<p className="flex items-start gap-1 break-all w-full">
 								<Clock className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full font-semibold">
+								<span className="break-words w-full font-semibold tracking-wider">
 									{service.duration}m
 								</span>
 							</p>

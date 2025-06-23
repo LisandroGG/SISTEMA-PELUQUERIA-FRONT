@@ -35,7 +35,7 @@ const SelectDateModal = ({
 			<button
 				type="button"
 				onClick={onClose}
-				className="absolute top-2 right-2 text-gray-600 hover:text-black"
+				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>
 				<X />
 			</button>
@@ -59,14 +59,15 @@ const SelectDateModal = ({
 						)}
 					</div>
 				</div>
-
-				<button
-					type="button"
-					onClick={handleSave}
-					className="px-4 py-2 bg-green-600 text-gray-50 rounded hover:bg-green-700"
-				>
-					Aplicar fecha
-				</button>
+				<div className="flex justify-center md:justify-end gap-2 pt-4">
+					<button
+						type="button"
+						onClick={handleSave}
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+					>
+						Seleccionar fecha
+					</button>
+				</div>
 			</div>
 		</Modal>
 	);

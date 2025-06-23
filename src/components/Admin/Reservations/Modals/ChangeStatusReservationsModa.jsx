@@ -17,21 +17,24 @@ const ChangeStatusReservationModal = ({
 			<button
 				type="button"
 				onClick={onClose}
-				className="absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
+				className="hover:scale-125 transition-all absolute top-2 right-2 text-gray-600 hover:text-black cursor-pointer"
 			>
 				<X />
 			</button>
 			<p>
-				¿Quieres marcar como completado el turno de{" "}
-				{selectedReservationChangeStatus.id}?
+				¿Quieres marcar como terminado el turno{" "}
+				<strong>{selectedReservationChangeStatus?.service?.name}</strong> de{" "}
+				<strong>{selectedReservationChangeStatus?.clientName}</strong>?
 			</p>
-			<button
-				type="button"
-				onClick={() => onSubmit(selectedReservationChangeStatus.id)}
-				className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-			>
-				Marcar como completado
-			</button>
+			<div className="flex justify-center md:justify-end gap-2 pt-4">
+				<button
+					type="button"
+					onClick={() => onSubmit(selectedReservationChangeStatus.id)}
+					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+				>
+					Marcar como completado
+				</button>
+			</div>
 		</Modal>
 	);
 };

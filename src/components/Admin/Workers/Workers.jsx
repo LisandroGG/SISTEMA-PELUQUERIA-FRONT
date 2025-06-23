@@ -180,19 +180,23 @@ const Workers = () => {
 						>
 							<p className="flex items-start gap-2 break-all w-full">
 								<User className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full">{worker.name}</span>
+								<span className="break-words w-full font-semibold">
+									{worker.name}
+								</span>
 							</p>
 							<p className="flex items-start gap-2 break-all w-full">
 								<Mail className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full">{worker.gmail}</span>
+								<span className="break-words w-full font-semibold">
+									{worker.gmail}
+								</span>
 							</p>
 							<p className="flex items-start gap-2 break-all w-full">
 								<Phone className="h-5 w-5 shrink-0" />
-								<span className="break-words w-full tracking-wider">
+								<span className="break-words w-full tracking-wider font-semibold">
 									{worker.phoneNumber}
 								</span>
 							</p>
-							<div className="flex gap-2 justify-end mt-2">
+							<div className="flex gap-2 justify-center md:justify-end mt-2 md:mt-auto">
 								<button
 									type="button"
 									onClick={() => {
