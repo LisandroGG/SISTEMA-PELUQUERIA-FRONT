@@ -44,7 +44,7 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 					{services.map((service) => (
 						<li
 							key={service.id}
-							className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all flex gap-1"
+							className="cursor-pointer text-white bg-shark-500 text-md font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
 							onClick={() => handleSelect(service.id)}
 							onKeyDown={(e) => {
 								if (e.key === "Enter" || e.key === " ") {
@@ -52,8 +52,10 @@ const Step1 = ({ setStep, formData, setFormData }) => {
 								}
 							}}
 						>
-							<h2>{service.name}</h2>
-							<h3>({service.duration}m)</h3>
+							<h2>
+								{service.name} ({service.duration}m)
+							</h2>
+							<h3 className="tracking-wider">{service.cost}$</h3>
 						</li>
 					))}
 				</ul>

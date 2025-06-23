@@ -284,11 +284,13 @@ const Hours = () => {
 					</p>
 				</div>
 			) : (
-				<WorkerSelector
-					workers={workers}
-					selectedWorker={selectedWorker}
-					onChange={handleSelectChange}
-				/>
+				<div className="md:max-w-80">
+					<WorkerSelector
+						workers={workers}
+						selectedWorker={selectedWorker}
+						onChange={handleSelectChange}
+					/>
+				</div>
 			)}
 
 			{selectedWorker &&

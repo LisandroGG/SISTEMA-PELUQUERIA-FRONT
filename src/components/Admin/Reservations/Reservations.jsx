@@ -13,6 +13,8 @@ import {
 	BadgeCheck,
 	Calendar,
 	Clock,
+	Eye,
+	EyeOff,
 	Frown,
 	Funnel,
 	FunnelX,
@@ -44,6 +46,7 @@ const Reservations = () => {
 	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] =
 		useState("");
 	const [animKey, setAnimKey] = useState(0);
+	const [showFilters, setShowFilters] = useState(true);
 
 	// biome-ignore lint: ANIMATION
 	useEffect(() => {
@@ -106,71 +109,87 @@ const Reservations = () => {
 
 	return (
 		<section className="max-w-7xl mx-auto p-4 md:px-8 lg:px-4 px-5">
-			<p className="text-lg font-semibold">Turnos:</p>
-			<form
-				onSubmit={(e) => e.preventDefault()}
-				className="flex flex-col my-4 md:grid md:grid-cols-3 "
-			>
-				<div className="flex flex-col gap-2 md:col-span-3 md:flex-row">
-					<div className="flex-1">
-						<WorkerSelector
-							workers={workers}
-							selectedWorker={selectedWorker}
-							onChange={(e) => handleFilter(e)}
-						/>
+			<div className="flex justify-end mb-2">
+				<button
+					type="button"
+					onClick={() => setShowFilters(!showFilters)}
+					className="flex items-center justify-center hover:scale-105 px-3 py-1 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-sm font-semibold rounded-lg transition-all"
+				>
+					{showFilters ? (
+						<EyeOff className="h-4 w-4 mr-2" />
+					) : (
+						<Eye className="h-4 w-4 mr-2" />
+					)}
+					{showFilters ? "Ocultar filtros" : "Mostrar filtros"}
+				</button>
+			</div>
+			<p className="text-lg font-semibold mb-4">Turnos:</p>
+			{showFilters && (
+				<form
+					onSubmit={(e) => e.preventDefault()}
+					className="flex flex-col mt-4 md:grid md:grid-cols-3"
+				>
+					<div className="flex flex-col gap-2 md:col-span-3 md:flex-row">
+						<div className="flex-1">
+							<WorkerSelector
+								workers={workers}
+								selectedWorker={selectedWorker}
+								onChange={(e) => handleFilter(e)}
+							/>
+						</div>
+						<div className="flex-1">
+							<StatusSelector
+								onChange={(e) => handleFilter(e)}
+								value={filter.status ?? ""}
+							/>
+						</div>
+						<div className="flex-1 flex flex-col lg:flex-row items-center gap-2 mb-6">
+							<span className="font-semibold text-shark-600">Fecha:</span>
+							<button
+								type="button"
+								onClick={() => setSelectDateModalOpen(true)}
+								className="w-full h-[39px] border border-gray-300 rounded-xl px-4 py-2 bg-white text-shark-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-shark-500 focus:border-shark-500 transition-all"
+							>
+								{filter.date
+									? `${format(parseDateToLocal(filter.date), "dd/MM/yyyy")}`
+									: "Seleccionar"}
+							</button>
+
+							<SelectDateModal
+								isOpen={selectDateModalOpen}
+								onClose={() => setSelectDateModalOpen(false)}
+								filter={filter}
+								handleFilter={handleFilter}
+								parseDateToLocal={parseDateToLocal}
+							/>
+						</div>
 					</div>
-					<div className="flex-1">
-						<StatusSelector
-							onChange={(e) => handleFilter(e)}
-							value={filter.status ?? ""}
-						/>
-					</div>
-					<div className="flex-1 flex flex-col lg:flex-row items-center gap-2 mb-6">
-						<span className="font-semibold text-shark-600">Fecha:</span>
+
+					<div className="flex flex-col gap-2 md:col-span-3 md:flex-row md:justify-end">
 						<button
 							type="button"
-							onClick={() => setSelectDateModalOpen(true)}
-							className="w-full h-[39px] border border-gray-300 rounded-xl px-4 py-2 bg-white text-shark-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-shark-500 focus:border-shark-500 transition-all"
+							onClick={() => {
+								setFilter({});
+								setSelectedWorker("");
+								dispatch(getAllReservations({}));
+							}}
+							className="flex items-center justify-center hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 						>
-							{filter.date
-								? `${format(parseDateToLocal(filter.date), "dd/MM/yyyy")}`
-								: "Seleccionar"}
+							<FunnelX className="h-5 w-5 shrink-0 mr-2" />
+							<span>Restablecer filtros</span>
 						</button>
 
-						<SelectDateModal
-							isOpen={selectDateModalOpen}
-							onClose={() => setSelectDateModalOpen(false)}
-							filter={filter}
-							handleFilter={handleFilter}
-							parseDateToLocal={parseDateToLocal}
-						/>
+						<button
+							type="button"
+							onClick={() => dispatch(getAllReservations(filter))}
+							className="flex items-center justify-center hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+						>
+							<Funnel className="h-5 w-5 shrink-0 mr-2" />
+							<span>Filtrar</span>
+						</button>
 					</div>
-				</div>
-
-				<div className="flex flex-col gap-2 md:col-span-3 md:flex-row md:justify-end">
-					<button
-						type="button"
-						onClick={() => {
-							setFilter({});
-							setSelectedWorker("");
-							dispatch(getAllReservations({}));
-						}}
-						className="flex items-center justify-center hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
-					>
-						<FunnelX className="h-5 w-5 shrink-0 mr-2" />
-						<span>Restablecer filtros</span>
-					</button>
-
-					<button
-						type="button"
-						onClick={() => dispatch(getAllReservations(filter))}
-						className="flex items-center justify-center hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
-					>
-						<Funnel className="h-5 w-5 shrink-0 mr-2" />
-						<span>Filtrar</span>
-					</button>
-				</div>
-			</form>
+				</form>
+			)}
 
 			{reservations?.length === 0 ? (
 				<div className="flex flex-col items-center justify-center h-80 text-gray-500 gap-2">
