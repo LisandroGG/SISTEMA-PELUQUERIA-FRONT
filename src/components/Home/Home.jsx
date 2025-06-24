@@ -83,7 +83,7 @@ const Home = () => {
 					<span className="flex justify-center mt-10">
 						<Link
 							to="/reservations"
-							className="hover:scale-105 text-white bg-shark-500 text-lg font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
+							className="animate-zoom text-white bg-shark-500 text-lg font-semibold p-2 rounded-lg hover:bg-shark-600 transition-all"
 						>
 							Reserva tu turno
 						</Link>

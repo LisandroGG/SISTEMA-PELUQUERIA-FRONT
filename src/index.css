@@ -71,4 +71,20 @@
 		animation: fadeInToRight 0.3s ease-out both;
 		will-change: transform, opacity;
 	}
+
+	@keyframes zoom {
+		0% {
+			transform: scale(100%);
+		}
+		50% {
+			transform: scale(105%);
+		}
+		100% {
+			transform: scale(100%);
+		}
+	}
+
+	.animate-zoom {
+		animation: zoom 1s infinite;
+	}
 }
