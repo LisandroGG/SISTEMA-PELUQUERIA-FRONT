@@ -1,6 +1,5 @@
 import { getBloquedDays, getWorkingHoursByWorker } from "@redux/actions";
 import { format } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
 import React, { useEffect, useRef, useState } from "react";
 import { DayPicker } from "react-day-picker";
 import { es } from "react-day-picker/locale";
@@ -19,8 +18,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 	const services = useSelector((state) => state.services);
 	const workers = useSelector((state) => state.workers);
 
-	const timeZone = "America/Argentina/Buenos_Aires";
-	const today = toZonedTime(new Date(), timeZone);
+	const today = new Date();
 	const blockedDays =
 		useSelector((state) => state.bloquedDays?.blockedDays) || [];
 	const isLoadingBloquedDays = useSelector(
@@ -59,10 +57,9 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 		setStep(2);
 	};
 
-	const blockedDates = blockedDays.map((day) => {
-		const parsed = parse(day, "yyyy-MM-dd", new Date());
-		return toZonedTime(parsed, timeZone);
-	});
+	const blockedDates = blockedDays.map((day) =>
+		parse(day, "yyyy-MM-dd", new Date()),
+	);
 
 	const disabledDays = [...blockedDates, { before: today }, { dayOfWeek: [0] }];
 
