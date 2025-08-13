@@ -60,7 +60,7 @@ export const registerUser = (formData) => {
 		console.log("ejecutamos register");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/users/register`,
+				`${LOCAL}/users/register`,
 				formData,
 				jsonHeaders,
 			);
@@ -82,7 +82,7 @@ export const loginUser = (formData) => {
 		console.log("ejecutamos login");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/users/login`,
+				`${LOCAL}/users/login`,
 				formData,
 				jsonHeaders,
 			);
@@ -102,7 +102,7 @@ export const logoutUser = () => {
 		console.log("ejecutamos logout");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/users/logout`,
+				`${LOCAL}/users/logout`,
 				{},
 				{
 					withCredentials: true,
@@ -122,7 +122,7 @@ export const logoutUser = () => {
 export const refreshToken = async () => {
 	try {
 		const res = await axios.post(
-			`${DEPLOY}/users/refresh`,
+			`${LOCAL}/users/refresh`,
 			{},
 			{
 				withCredentials: true,
@@ -140,7 +140,7 @@ export const getUserSession = () => {
 		console.log("Se ejecuto getUserSession");
 		startLoading(dispatch, SET_LOADING_SESSION);
 		try {
-			const { data } = await axios.get(`${DEPLOY}/users/me`, {
+			const { data } = await axios.get(`${LOCAL}/users/me`, {
 				withCredentials: true,
 			});
 
@@ -153,7 +153,7 @@ export const getUserSession = () => {
 				const newAccessToken = await refreshToken();
 				if (newAccessToken) {
 					try {
-						const { data: userData } = await axios.get(`${DEPLOY}/users/me`, {
+						const { data: userData } = await axios.get(`${LOCAL}/users/me`, {
 							headers: {
 								Authorization: `Bearer ${newAccessToken}`,
 							},
@@ -181,7 +181,7 @@ export const forgotPassword = (formData) => {
 		console.log("ejecutamos forgotpassword");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/users/forgotPassword`,
+				`${LOCAL}/users/forgotPassword`,
 				formData,
 				jsonHeaders,
 			);
@@ -202,7 +202,7 @@ export const changePassword = (token, formData) => {
 		console.log("ejecutamos changepassword");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/users/changePassword?token=${token}`,
+				`${LOCAL}/users/changePassword?token=${token}`,
 				formData,
 				jsonHeaders,
 			);
@@ -226,7 +226,7 @@ export const getServices = () => {
 		console.log("se ejecuto getServices");
 		startLoading(dispatch, SET_LOADING_SERVICES);
 		try {
-			const { data } = await axios.get(`${DEPLOY}/services`, {
+			const { data } = await axios.get(`${LOCAL}/services`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -246,7 +246,7 @@ export const createService = (formData) => {
 		console.log("ejecutamos createService");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/services/create`,
+				`${LOCAL}/services/create`,
 				formData,
 				jsonHeaders,
 			);
@@ -266,7 +266,7 @@ export const deleteService = (serviceId) => {
 		console.log("ejecutamos deleteService");
 		try {
 			const { data } = await axios.delete(
-				`${DEPLOY}/services/delete/${serviceId}`,
+				`${LOCAL}/services/delete/${serviceId}`,
 				{
 					withCredentials: true,
 				},
@@ -287,7 +287,7 @@ export const editService = (formData, serviceId) => {
 		console.log("ejecutamos editService");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/services/edit/${serviceId}`,
+				`${LOCAL}/services/edit/${serviceId}`,
 				formData,
 				jsonHeaders,
 			);
@@ -312,7 +312,7 @@ export const getAllReservations = (filters = {}) => {
 		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const queryParams = new URLSearchParams(filters).toString();
-			const { data } = await axios.get(`${DEPLOY}/reservations?${queryParams}`, {
+			const { data } = await axios.get(`${LOCAL}/reservations?${queryParams}`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -333,7 +333,7 @@ export const getReservationsByGmail = (gmail) => {
 		startLoading(dispatch, SET_LOADING_RESERVATIONS);
 		try {
 			const { data } = await axios.get(
-				`${DEPLOY}/reservations/by-gmail?gmail=${gmail}`,
+				`${LOCAL}/reservations/by-gmail?gmail=${gmail}`,
 				{
 					withCredentials: true,
 				},
@@ -355,7 +355,7 @@ export const createReservation = (formData) => {
 		console.log("ejecutamos createReservation");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/reservations/create`,
+				`${LOCAL}/reservations/create`,
 				formData,
 				jsonHeaders,
 			);
@@ -375,7 +375,7 @@ export const changeReservationStatus = (reservationId) => {
 		console.log("ejecutamos changeReservationStatus");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/reservations/${reservationId}/finish`,
+				`${LOCAL}/reservations/${reservationId}/finish`,
 				{},
 				jsonHeaders,
 			);
@@ -395,7 +395,7 @@ export const cancelReservation = (token) => {
 		console.log("ejecutamos cancelReservation");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/reservations/cancel?token=${token}`,
+				`${LOCAL}/reservations/cancel?token=${token}`,
 				{
 					withCredentials: true,
 				},
@@ -420,7 +420,7 @@ export const getAllWorkers = () => {
 		console.log("ejecutamos getAllWorkers");
 		startLoading(dispatch, SET_LOADING_WORKERS);
 		try {
-			const { data } = await axios.get(`${DEPLOY}/workers`, {
+			const { data } = await axios.get(`${LOCAL}/workers`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -440,7 +440,7 @@ export const getWorkersByService = (serviceId) => {
 		console.log("ejecutamos getWorkersByServices");
 		startLoading(dispatch, SET_LOADING_WORKERS);
 		try {
-			const { data } = await axios.get(`${DEPLOY}/workers/${serviceId}`, {
+			const { data } = await axios.get(`${LOCAL}/workers/${serviceId}`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -459,7 +459,7 @@ export const createWorker = (formData) => {
 	return async (dispatch) => {
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/workers/create`,
+				`${LOCAL}/workers/create`,
 				formData,
 				jsonHeaders,
 			);
@@ -479,7 +479,7 @@ export const editWorker = (formData, workerId) => {
 		console.log("ejecutamos editWorker");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/workers/edit/${workerId}`,
+				`${LOCAL}/workers/edit/${workerId}`,
 				formData,
 				jsonHeaders,
 			);
@@ -499,7 +499,7 @@ export const deleteWorker = (workerId) => {
 		console.log("ejecutamos deleteWorker");
 		try {
 			const { data } = await axios.delete(
-				`${DEPLOY}/workers/delete/${workerId}`,
+				`${LOCAL}/workers/delete/${workerId}`,
 				{
 					withCredentials: true,
 				},
@@ -524,7 +524,7 @@ export const getDisableDays = (id) => {
 		console.log("ejecutamos getDisableDays");
 		startLoading(dispatch, SET_LOADING_DISABLE_DAYS);
 		try {
-			const { data } = await axios.get(`${DEPLOY}/disableDay?workerId=${id}`, {
+			const { data } = await axios.get(`${LOCAL}/disableDay?workerId=${id}`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -544,7 +544,7 @@ export const createDisableDay = (disableDayData) => {
 		console.log("ejecutamos createDisableDay");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/disableDay/create`,
+				`${LOCAL}/disableDay/create`,
 				disableDayData,
 				jsonHeaders,
 			);
@@ -563,7 +563,7 @@ export const deleteDisableDay = (id) => {
 	return async (dispatch) => {
 		console.log("ejecutamos cancelDisableDay");
 		try {
-			const { data } = await axios.delete(`${DEPLOY}/disableDay/delete/${id}`, {
+			const { data } = await axios.delete(`${LOCAL}/disableDay/delete/${id}`, {
 				withCredentials: true,
 			});
 			dispatch({
@@ -587,7 +587,7 @@ export const getWorkingHoursByWorker = (workerId, date, serviceId) => {
 		startLoading(dispatch, SET_LOADING_WORKING_HOURS_BY_DATE);
 		try {
 			const { data } = await axios.get(
-				`${DEPLOY}/hours/by-date?workerId=${workerId}&date=${date}&serviceId=${serviceId}`,
+				`${LOCAL}/hours/by-date?workerId=${workerId}&date=${date}&serviceId=${serviceId}`,
 				{
 					withCredentials: true,
 				},
@@ -610,7 +610,7 @@ export const getBloquedDays = (workerId, serviceId) => {
 		startLoading(dispatch, SET_LOADING_BLOQUED_DAYS);
 		try {
 			const { data } = await axios.get(
-				`${DEPLOY}/hours/bloquedDays?workerId=${workerId}&serviceId=${serviceId}`,
+				`${LOCAL}/hours/bloquedDays?workerId=${workerId}&serviceId=${serviceId}`,
 				{
 					withCredentials: true,
 				},
@@ -637,7 +637,7 @@ export const getWorkingHours = (workerId) => {
 		startLoading(dispatch, SET_LOADING_WORKING_HOURS);
 		try {
 			const { data } = await axios.get(
-				`${DEPLOY}/hours/working?workerId=${workerId}`,
+				`${LOCAL}/hours/working?workerId=${workerId}`,
 				{
 					withCredentials: true,
 				},
@@ -663,7 +663,7 @@ export const createWorkingHour = (formData) => {
 		console.log("ejecutamos createWorkingHour");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/hours/working/create`,
+				`${LOCAL}/hours/working/create`,
 				formData,
 				jsonHeaders,
 			);
@@ -683,7 +683,7 @@ export const editWorkingHours = (formData, id) => {
 		console.log("ejecutamos editWorkingHours");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/hours/working/edit/${id}`,
+				`${LOCAL}/hours/working/edit/${id}`,
 				formData,
 				jsonHeaders,
 			);
@@ -703,7 +703,7 @@ export const deleteWorkingHour = (id) => {
 		console.log("ejecutamos deleteWorkingHour");
 		try {
 			const { data } = await axios.delete(
-				`${DEPLOY}/hours/working/delete/${id}`,
+				`${LOCAL}/hours/working/delete/${id}`,
 				{
 					withCredentials: true,
 				},
@@ -729,7 +729,7 @@ export const getCustomWorkingHours = (workerId) => {
 		startLoading(dispatch, SET_LOADING_CUSTOM_WORKING_HOURS);
 		try {
 			const { data } = await axios.get(
-				`${DEPLOY}/hours/custom?workerId=${workerId}`,
+				`${LOCAL}/hours/custom?workerId=${workerId}`,
 				{
 					withCredentials: true,
 				},
@@ -751,7 +751,7 @@ export const createCustomWorkingHour = (formData) => {
 		console.log("ejecutamos createCustomWorkingHour");
 		try {
 			const { data } = await axios.post(
-				`${DEPLOY}/hours/custom/create`,
+				`${LOCAL}/hours/custom/create`,
 				formData,
 				jsonHeaders,
 			);
@@ -771,7 +771,7 @@ export const editCustomWorkingHour = (formData, id) => {
 		console.log("ejecutamos editCustomWorkingHour");
 		try {
 			const { data } = await axios.put(
-				`${DEPLOY}/hours/custom/edit/${id}`,
+				`${LOCAL}/hours/custom/edit/${id}`,
 				formData,
 				jsonHeaders,
 			);
@@ -791,7 +791,7 @@ export const deleteCustomWorkingHour = (id) => {
 		console.log("ejecutamos deleteCustomWorkingHour");
 		try {
 			const { data } = await axios.delete(
-				`${DEPLOY}/hours/custom/delete/${id}`,
+				`${LOCAL}/hours/custom/delete/${id}`,
 				{
 					withCredentials: true,
 				},
