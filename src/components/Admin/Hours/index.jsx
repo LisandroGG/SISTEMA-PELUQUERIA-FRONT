@@ -207,7 +207,7 @@ const Hours = () => {
 		);
 		if (response.success) {
 			toast.success(response.message);
-			handleCloseDisableDayModal();
+			setDisableDayModalOpen(false);
 			dispatch(getDisableDays(selectedWorker));
 		} else {
 			toast.error(response.message);
