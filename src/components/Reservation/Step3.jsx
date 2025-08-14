@@ -18,7 +18,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 	const services = useSelector((state) => state.services);
 	const workers = useSelector((state) => state.workers);
 
-	const today = new Date().toISOString().split("T")[0];
+	const today = new Date();
 	const blockedDays =
 		useSelector((state) => state.bloquedDays?.blockedDays) || [];
 	const isLoadingBloquedDays = useSelector(
