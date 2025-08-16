@@ -7,9 +7,11 @@ import "react-day-picker/dist/style.css";
 import Loading from "@/Common/Loading.jsx";
 import StepCompont from "@/Common/StepComponent.jsx";
 import { parse } from "date-fns";
-import { addMonths, endOfMonth, startOfMonth, startOfDay, format } from "date-fns";
+import { addMonths, endOfMonth, startOfMonth, format } from "date-fns";
 import { ArrowBigLeft } from "lucide-react";
+
 import { toZonedTime } from "date-fns-tz";
+const ARG_TIMEZONE = "America/Argentina/Buenos_Aires";
 
 const Step3 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();
@@ -18,8 +20,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 	const services = useSelector((state) => state.services);
 	const workers = useSelector((state) => state.workers);
 
-	const timeZone = "America/Argentina/Buenos_Aires";
-	const today = toZonedTime(new Date(), timeZone);
+	const today = toZonedTime(new Date(), ARG_TIMEZONE);
 	const blockedDays =
 		useSelector((state) => state.bloquedDays?.blockedDays) || [];
 	const isLoadingBloquedDays = useSelector(
@@ -62,7 +63,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 		parse(day, "yyyy-MM-dd", new Date()),
 	);
 
-	const disabledDays = [...blockedDates, { before: startOfDay(today) }, { dayOfWeek: [0] }];
+	const disabledDays = [...blockedDates, { before: today }, { dayOfWeek: [0] }];
 
 	return (
 		<StepCompont
