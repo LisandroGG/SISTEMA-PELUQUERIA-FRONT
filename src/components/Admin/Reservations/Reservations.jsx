@@ -213,7 +213,7 @@ const Reservations = () => {
 								<p className="flex items-start gap-2 break-all w-full">
 									<Users className="h-5 w-5 shrink-0" />
 									<span className="break-words w-full font-semibold">
-										{res.worker.name}
+										{res.worker?.name}
 									</span>
 								</p>
 								<p className="flex items-start gap-2 break-all w-full">
@@ -229,7 +229,7 @@ const Reservations = () => {
 								<p className="flex items-start gap-2 break-all w-full">
 									<BadgeCheck className="h-5 w-5 shrink-0" />
 									<span className="break-words w-full font-semibold">
-										{res.service.name}({res.service.duration} m)
+										{res.service?.name}({res.service?.duration} m)
 									</span>
 								</p>
 								<p className="flex items-start gap-2 break-all w-full">
