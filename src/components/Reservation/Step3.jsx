@@ -10,9 +10,6 @@ import { parse } from "date-fns";
 import { addMonths, endOfMonth, startOfMonth, format } from "date-fns";
 import { ArrowBigLeft } from "lucide-react";
 
-import { toZonedTime } from "date-fns-tz";
-const ARG_TIMEZONE = "America/Argentina/Buenos_Aires";
-
 const Step3 = ({ setStep, formData, setFormData }) => {
 	const dispatch = useDispatch();
 	const hasFetched = useRef(false);
@@ -20,7 +17,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 	const services = useSelector((state) => state.services);
 	const workers = useSelector((state) => state.workers);
 
-	const today = toZonedTime(new Date(), ARG_TIMEZONE);
+	const today = new Date();
 	const blockedDays =
 		useSelector((state) => state.bloquedDays?.blockedDays) || [];
 	const isLoadingBloquedDays = useSelector(
