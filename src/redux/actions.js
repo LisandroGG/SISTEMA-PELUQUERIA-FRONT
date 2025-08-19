@@ -119,57 +119,58 @@ export const logoutUser = () => {
 	};
 };
 
-export const refreshToken = async () => {
-	try {
-		const res = await axios.post(
-			`${DEPLOY}/users/refresh`,
-			{},
-			{
-				withCredentials: true,
-			},
-		);
-		return res.data.token;
-	} catch (error) {
-		console.error("Error al refrescar token", error);
-		return null;
-	}
-};
-
 export const getUserSession = () => {
-	return async (dispatch) => {
-		console.log("Se ejecuto getUserSession");
-		startLoading(dispatch, SET_LOADING_SESSION);
+  return async (dispatch) => {
+    console.log("Se ejecutó getUserSession");
+    startLoading(dispatch, SET_LOADING_SESSION);
 
-		try {
-			const { data } = await axios.get(`${DEPLOY}/users/me`, {
-				withCredentials: true,
-			});
+    try {
+      const { data } = await axios.get(`${DEPLOY}/users/me`, {
+        withCredentials: true,
+      });
 
-			dispatch({ type: LOGIN, payload: data.user });
-		} catch (error) {
-			if (error.response?.status === 401) {
-				const newAccessToken = await refreshToken();
-				if (!newAccessToken) {
-					stopLoading(dispatch, SET_LOADING_SESSION);
-					return;
-				}
+      dispatch({ type: LOGIN, payload: data.user });
+      stopLoading(dispatch, SET_LOADING_SESSION);
+    } catch (error) {
+      if (error.response?.status === 401) {
+        console.log("Token expirado, intentando refrescar...");
 
-				try {
-					const { data: userData } = await axios.get(`${DEPLOY}/users/me`, {
-						headers: { Authorization: `Bearer ${newAccessToken}` },
-					});
+        const newToken = await refreshToken();
+        if (!newToken) {
+          stopLoading(dispatch, SET_LOADING_SESSION);
+          return;
+        }
 
-					dispatch({ type: LOGIN, payload: userData.user });
-				} catch (error) {
-					console.error("Error al obtener sesión con token refrescado:", error);
-					stopLoading(dispatch, SET_LOADING_SESSION);
-				}
-			} else {
-				stopLoading(dispatch, SET_LOADING_SESSION);
-			}
-		}
-	};
+        try {
+          const { data: userData } = await axios.get(`${DEPLOY}/users/me`, {
+            withCredentials: true,
+          });
+          dispatch({ type: LOGIN, payload: userData.user });
+        } catch (err) {
+          console.error("Error al obtener sesión después de refrescar token:", err);
+        }
+      } else {
+        console.error("Error al obtener sesión:", error);
+      }
+      stopLoading(dispatch, SET_LOADING_SESSION);
+    }
+  };
 };
+
+export const refreshToken = async () => {
+  try {
+    const { data } = await axios.post(
+      `${DEPLOY}/users/refresh`,
+      {},
+      { withCredentials: true }
+    );
+    console.log("Token refrescado correctamente");
+    return data.token;
+  } catch (error) {
+    console.error("No se pudo refrescar token:", error.response?.data || error);
+    return null;
+  }
+}
 
 export const forgotPassword = (formData) => {
 	return async (dispatch) => {
