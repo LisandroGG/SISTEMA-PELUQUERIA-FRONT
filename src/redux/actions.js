@@ -139,34 +139,29 @@ export const getUserSession = () => {
 	return async (dispatch) => {
 		console.log("Se ejecuto getUserSession");
 		startLoading(dispatch, SET_LOADING_SESSION);
+
 		try {
 			const { data } = await axios.get(`${DEPLOY}/users/me`, {
 				withCredentials: true,
 			});
 
-			dispatch({
-				type: LOGIN,
-				payload: data.user,
-			});
+			dispatch({ type: LOGIN, payload: data.user });
 		} catch (error) {
 			if (error.response?.status === 401) {
 				const newAccessToken = await refreshToken();
-				if (newAccessToken) {
-					try {
-						const { data: userData } = await axios.get(`${DEPLOY}/users/me`, {
-							headers: {
-								Authorization: `Bearer ${newAccessToken}`,
-							},
-							withCredentials: true,
-						});
-						dispatch({
-							type: "LOGIN",
-							payload: userData.user,
-						});
-					} catch (error) {
-						stopLoading(dispatch, SET_LOADING_SESSION);
-					}
-				} else {
+				if (!newAccessToken) {
+					stopLoading(dispatch, SET_LOADING_SESSION);
+					return;
+				}
+
+				try {
+					const { data: userData } = await axios.get(`${DEPLOY}/users/me`, {
+						headers: { Authorization: `Bearer ${newAccessToken}` },
+					});
+
+					dispatch({ type: LOGIN, payload: userData.user });
+				} catch (error) {
+					console.error("Error al obtener sesión con token refrescado:", error);
 					stopLoading(dispatch, SET_LOADING_SESSION);
 				}
 			} else {
