@@ -64,13 +64,13 @@ const CreateDisableDayModal = ({
 
 				<ErrorMessage message={error} />
 				<div className="flex justify-center md:justify-end gap-2 pt-4">
-				<button
-					type="button"
-					onClick={onSubmit}
-					className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
-				>
-					Deshabilitar día
-				</button>
+					<button
+						type="button"
+						onClick={onSubmit}
+						className="hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
+					>
+						Deshabilitar día
+					</button>
 				</div>
 			</div>
 		</Modal>

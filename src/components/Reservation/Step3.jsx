@@ -7,7 +7,7 @@ import "react-day-picker/dist/style.css";
 import Loading from "@/Common/Loading.jsx";
 import StepCompont from "@/Common/StepComponent.jsx";
 import { parse } from "date-fns";
-import { addMonths, endOfMonth, startOfMonth, format } from "date-fns";
+import { addMonths, endOfMonth, format, startOfMonth } from "date-fns";
 import { ArrowBigLeft } from "lucide-react";
 
 const Step3 = ({ setStep, formData, setFormData }) => {
