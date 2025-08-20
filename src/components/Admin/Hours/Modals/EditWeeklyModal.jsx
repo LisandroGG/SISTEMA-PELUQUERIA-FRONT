@@ -1,3 +1,4 @@
+import InputTime from "@/Common/InputTime";
 import Modal from "@/Common/Modal";
 import React from "react";
 
@@ -20,18 +21,16 @@ const EditWeeklyModal = ({
 			<div className="space-y-4">
 				<div className="flex items-center gap-4 justify-center">
 					<p className="capitalize">{hour?.dayOfWeek}:</p>
-					<input
-						type="time"
+					<InputTime
 						value={startTime}
 						onChange={(e) => setStartTime(e.target.value)}
-						className="border p-1 rounded"
+						className=""
 					/>
 					<span>-</span>
-					<input
-						type="time"
+					<InputTime
 						value={endTime}
 						onChange={(e) => setEndTime(e.target.value)}
-						className="border p-1 rounded"
+						className=""
 					/>
 				</div>
 				<div className="flex justify-center md:justify-end gap-2 pt-2">

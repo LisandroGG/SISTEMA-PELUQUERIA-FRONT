@@ -1,3 +1,4 @@
+import InputTime from "@/Common/InputTime";
 import { X } from "lucide-react";
 import React from "react";
 
@@ -18,27 +19,27 @@ const HourBlockForm = ({ blocks, onAdd, onRemove, onChange }) => {
 					<select
 						value={block.day}
 						onChange={(e) => onChange(index, "day", e.target.value)}
-						className="border p-1 rounded"
+						className="w-26 h-8 hover:cursor-pointer border text-center border-gray-300 rounded-lg px-2 py-1 bg-white text-shark-800 shadow-sm focus:outline-none focus:ring-2 focus:ring-shark-500 focus:border-shark-500 transition-all"
 					>
-						<option value="">Día</option>
+						<option value="" className="text-shark-600">
+							Día
+						</option>
 						{daysOfWeek.map((day) => (
-							<option key={day} value={day}>
+							<option key={day} value={day} className="text-shark-600 ">
 								{day}
 							</option>
 						))}
 					</select>
-					<input
-						type="time"
+					<InputTime
 						value={block.start}
 						onChange={(e) => onChange(index, "start", e.target.value)}
-						className="border p-1 rounded"
+						className=""
 					/>
 					<span>-</span>
-					<input
-						type="time"
+					<InputTime
 						value={block.end}
 						onChange={(e) => onChange(index, "end", e.target.value)}
-						className="border p-1 rounded"
+						className=""
 					/>
 					{index !== 0 && (
 						<button

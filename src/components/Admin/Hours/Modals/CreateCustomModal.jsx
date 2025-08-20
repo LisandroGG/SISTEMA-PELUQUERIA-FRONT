@@ -1,4 +1,5 @@
 import ErrorMessage from "@/Common/ErrorMessage";
+import InputTime from "@/Common/InputTime";
 import Modal from "@/Common/Modal";
 import SimpleDatePicker from "@/Common/SimpleDayPicker";
 import { format } from "date-fns";
@@ -68,21 +69,21 @@ const CreateCustomModal = ({
 					<label htmlFor="Hora de inicio" className="font-semibold">
 						Hora de inicio:
 					</label>
-					<input
+					<InputTime
 						name="startTime"
-						type="time"
 						value={formData.startTime}
 						onChange={onChange}
+						className=""
 					/>
 
 					<label htmlFor="Hora de fin" className="font-semibold">
 						Hora de fin:
 					</label>
-					<input
+					<InputTime
 						name="endTime"
-						type="time"
 						value={formData.endTime}
 						onChange={onChange}
+						className=""
 					/>
 				</div>
 
