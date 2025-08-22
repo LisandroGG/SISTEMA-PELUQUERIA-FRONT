@@ -28,6 +28,7 @@ const InputTime = ({ value, onChange, name, className = "", ...props }) => {
 	return (
 		<input
 			type="text"
+			inputMode="numeric"
 			pattern="[0-9]{2}:[0-9]{2}"
 			placeholder="00:00"
 			name={name}
