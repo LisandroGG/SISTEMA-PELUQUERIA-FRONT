@@ -1,7 +1,6 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
 import { Toaster } from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 
 import AdminPanel from "./components/Admin/AdminPanel";
@@ -22,26 +21,7 @@ import Workers from "./components/Admin/Workers/Workers.jsx";
 
 import Reservation from "./components/Reservation/Reservation.jsx";
 
-import { getUserSession } from "./redux/actions.js";
-
 function App() {
-	const user = useSelector((state) => state.user);
-	const isLoadingSession = useSelector((state) => state.isLoadingSession);
-	const executed = useRef(false);
-	const dispatch = useDispatch();
-
-	useEffect(() => {
-		if (executed.current) return;
-		executed.current = true;
-		if (!user) {
-			dispatch(getUserSession());
-		}
-	}, [dispatch, user]);
-
-	if (isLoadingSession) {
-		return null;
-	}
-
 	return (
 		<div className="min-h-screen font-montserrat">
 			<Toaster position="top-center" />
