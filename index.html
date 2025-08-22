@@ -1,58 +1,70 @@
 <!doctype html>
 <html lang="es">
   <head>
-    <link
-  rel="preload"
-  as="style"
-  href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
-/>
-<link
-  rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
-  media="all"
-  onload="this.media='all'"
-/>
-<noscript>
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
-  />
-</noscript>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Peluquería profesional con cortes modernos y clásicos. Reservá tu turno online, reprogramá o cancelá fácilmente. Atención personalizada y servicios de calidad en cada visita.">
+    <title>Peluquería</title>
     <link rel="icon" href="assets/logo.ico" type="image/x-icon" />
 
+    <!-- Preconnect & Preload fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="preload"
-      as="image"
-      href="https://res.cloudinary.com/dcznyhsek/image/upload/v1753291539/foto1-480w_f6kdvz.webp"
-      type="image/webp"
-      media="(max-width: 480px)"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
     />
     <link
-      rel="preload"
-      as="image"
-      href="https://res.cloudinary.com/dcznyhsek/image/upload/v1753291540/foto1-768w_jvii63.webp"
-      type="image/webp"
-      media="(min-width: 481px) and (max-width: 768px)"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
+      media="all"
+      onload="this.media='all'"
     />
-    <link
-      rel="preload"
-      as="image"
-      href="https://res.cloudinary.com/dcznyhsek/image/upload/v1753291540/foto1_p6j5md.webp"
-      type="image/webp"
-      media="(min-width: 769px)"
-    />
-    <meta name="description" content="Peluquería profesional con cortes modernos y clásicos. Reservá tu turno online, reprogramá o cancelá fácilmente. Atención personalizada y servicios de calidad en cada visita.">
-    <title>Peluqueria</title>
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@500;600;700&family=Chivo:wght@500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Estilo crítico para loader y altura inicial -->
+    <style>
+      html, body, #root {
+        height: 100%;
+        margin: 0;
+        font-family: 'Montserrat Alternates', sans-serif;
+      }
+
+      #loading {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: white;
+        z-index: 9999;
+        transition: opacity 0.3s ease;
+      }
+    </style>
   </head>
+
   <body>
+    <!-- Loader visible hasta que React se monte -->
     <div id="loading">
       <span>Cargando...</span>
     </div>
-    <div id="root"></div>
+
+    <!-- Contenedor React -->
+    <div id="root" style="opacity:0;">
+  <div class="skeleton">
+    <h1>Peluquería Profesional</h1>
+    <p>Cargando contenido...</p>
+  </div>
+</div>
     <div id="modal-root"></div>
+
+    <!-- React app -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
