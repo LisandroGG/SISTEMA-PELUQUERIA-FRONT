@@ -7,7 +7,6 @@
     <title>Peluquería</title>
     <link rel="icon" href="assets/logo.ico" type="image/x-icon" />
 
-    <!-- Preconnect & Preload fuentes -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -28,7 +27,6 @@
       />
     </noscript>
 
-    <!-- Estilo crítico para loader y altura inicial -->
     <style>
       html, body, #root {
         height: 100%;
@@ -50,12 +48,10 @@
   </head>
 
   <body>
-    <!-- Loader visible hasta que React se monte -->
     <div id="loading">
       <span>Cargando...</span>
     </div>
 
-    <!-- Contenedor React -->
     <div id="root" style="opacity:0;">
   <div class="skeleton">
     <h1>Peluquería Profesional</h1>
@@ -64,7 +60,6 @@
 </div>
     <div id="modal-root"></div>
 
-    <!-- React app -->
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

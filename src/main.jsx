@@ -7,41 +7,29 @@ import App from "./App.jsx";
 import store from "./redux/store.js";
 
 function Root() {
-useEffect(() => {
-console.log("⏱ React montado", performance.now());
-  const loader = document.getElementById("loading");
-  const root = document.getElementById("root");
+	useEffect(() => {
+		const loader = document.getElementById("loading");
+		const root = document.getElementById("root");
 
-  if (loader) {
-    loader.style.opacity = "0";
-    setTimeout(() => loader.remove(), 300);
-  }
+		if (loader) {
+			loader.style.opacity = "0";
+			setTimeout(() => loader.remove(), 300);
+		}
 
-  if (root) {
-    root.style.opacity = "1"; // ahora se muestra React
-  }
-}, []);
+		if (root) {
+			root.style.opacity = "1";
+		}
+	}, []);
 
-  return <App />;
+	return <App />;
 }
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <Root />
-      </BrowserRouter>
-    </Provider>
-  </StrictMode>
+	<StrictMode>
+		<Provider store={store}>
+			<BrowserRouter>
+				<Root />
+			</BrowserRouter>
+		</Provider>
+	</StrictMode>,
 );
-
-console.log("⏱ Inicio de script", performance.now());
-
-window.addEventListener("DOMContentLoaded", () => {
-  console.log("⏱ DOM listo", performance.now());
-});
-
-window.addEventListener("load", () => {
-  console.log("⏱ Recursos cargados", performance.now());
-});
-
