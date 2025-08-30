@@ -39,6 +39,11 @@ function Root() {
 	if (isLoadingSession || initialLoading) {
 		return (
 			<div className="min-h-screen flex items-center justify-center font-montserrat">
+				<img
+					src="/assets/scissors-loading.svg"
+					className="w-28"
+					alt="Loading"
+				/>
 				<p>Cargando aplicación...</p>
 			</div>
 		);
