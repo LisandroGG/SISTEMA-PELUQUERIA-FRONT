@@ -101,6 +101,7 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 										{r.date ? format(parseISO(r.date), "dd/MM/yyyy") : "No disponible"}
 									</p>
 									<p>
+										<strong>Hora:</strong>{" "}
 										{r.startTime ? r.startTime.slice(0, 5) : "No disponible"}
 									</p>
 									<p>
