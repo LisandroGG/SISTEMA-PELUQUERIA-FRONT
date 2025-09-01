@@ -98,17 +98,17 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 								<li key={r.id} className="p-2 border rounded text-sm">
 									<p>
 										<strong>Fecha:</strong>{" "}
-										{format(parseISO(r.date), "dd/MM/yyyy")}
+										{r.date ? format(parseISO(r.date), "dd/MM/yyyy") : "No disponible"}
 									</p>
 									<p>
-										<strong>Hora:</strong> {r.startTime.slice(0, 5)}
+										{r.startTime ? r.startTime.slice(0, 5) : "No disponible"}
 									</p>
 									<p>
-										<strong>Peluquero:</strong> {r.worker.name}
+										<strong>Peluquero:</strong> {r.worker?.name || "No disponible"}
 									</p>
 									<p>
 										<strong>Servicio:</strong> {r.service.name} (
-										{r.service.duration} min)
+										{r.service?.duration ? r.service.duration + " min" : "-"})
 									</p>
 								</li>
 							))}
