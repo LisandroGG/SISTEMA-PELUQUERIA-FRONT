@@ -108,8 +108,8 @@ const ReservationsModal = ({ isOpen, onClose, user }) => {
 										<strong>Peluquero:</strong> {r.worker?.name || "No disponible"}
 									</p>
 									<p>
-										<strong>Servicio:</strong> {r.service.name} (
-										{r.service?.duration ? r.service.duration + " min" : "-"})
+										<strong>Servicio:</strong> {r.service?.name} (
+										{r.service?.duration ? r.service?.duration + " min" : "-"})
 									</p>
 								</li>
 							))}
