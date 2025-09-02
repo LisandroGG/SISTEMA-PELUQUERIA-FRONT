@@ -49,6 +49,7 @@ import {
 	SET_LOADING_WORKERS,
 	SET_LOADING_WORKING_HOURS,
 	SET_LOADING_WORKING_HOURS_BY_DATE,
+	CLEAR_RESERVATIONS,
 } from "./actions-types";
 
 const LOCAL = import.meta.env.VITE_LOCAL;
@@ -409,6 +410,10 @@ export const cancelReservation = (token) => {
 		}
 	};
 };
+
+export const clearReservations = () => ({
+	type: CLEAR_RESERVATIONS,
+});
 
 //------------------------------------------------RESERVATIONS ACTIONS---------------------------------------------------------------------//
 

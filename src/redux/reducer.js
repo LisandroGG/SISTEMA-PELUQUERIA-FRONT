@@ -40,6 +40,7 @@ import {
 	SET_LOADING_WORKERS,
 	SET_LOADING_WORKING_HOURS,
 	SET_LOADING_WORKING_HOURS_BY_DATE,
+	CLEAR_RESERVATIONS,
 } from "./actions-types";
 
 export const initialState = {
@@ -178,6 +179,11 @@ function rootReducer(state = initialState, action) {
 					res.id === action.payload.id ? action.payload : res,
 				),
 			};
+		case CLEAR_RESERVATIONS: 
+		return {
+			...state,
+			reservations: [],
+		}
 		case SET_LOADING_RESERVATIONS:
 			return {
 				...state,

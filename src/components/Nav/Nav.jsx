@@ -10,18 +10,23 @@ import {
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearReservations } from "../../redux/actions";
 
 const Nav = ({ user, handleLogout }) => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [modalOpen, setModalOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	const openModal = () => {
 		setModalOpen(true);
 		closeMenu();
+		dispatch(clearReservations());
 	};
 
 	const closeModal = () => {
 		setModalOpen(false);
+		dispatch(clearReservations());
 	};
 
 	const toggleMenu = () => {
