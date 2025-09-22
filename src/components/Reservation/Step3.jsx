@@ -40,6 +40,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 
 		const formatted = format(date, "yyyy-MM-dd");
 		setSelectedDate(date);
+		console.log("dia seleccionado", formatted)
 		setFormData({ ...formData, date: formatted, startTime: "" });
 		dispatch(
 			getWorkingHoursByWorker(formData.workerId, formatted, formData.serviceId),
@@ -60,7 +61,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 		parse(day, "yyyy-MM-dd", new Date()),
 	);
 
-	const disabledDays = [...blockedDates, { before: today }, { dayOfWeek: [0] }];
+	const disabledDays = [...blockedDates, { before: today }];
 
 	return (
 		<StepCompont

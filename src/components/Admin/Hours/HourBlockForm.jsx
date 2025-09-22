@@ -10,6 +10,7 @@ const HourBlockForm = ({ blocks, onAdd, onRemove, onChange }) => {
 		"jueves",
 		"viernes",
 		"sábado",
+		"domingo"
 	];
 
 	return (

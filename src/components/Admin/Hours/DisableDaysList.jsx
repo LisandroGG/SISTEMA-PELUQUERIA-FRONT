@@ -21,7 +21,7 @@ const DisableDaysList = ({ disableDays, onDelete }) => {
 					const fechaValida = day?.day && isValid(parseISO(day.day));
 					return (
 						<div
-							key={day.id}
+							key={day}
 							className="flex items-center justify-between font-bold"
 						>
 							<li>
