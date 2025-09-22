@@ -1,6 +1,6 @@
 export const passwordRegex =
 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/;
-export const phoneRegex = /^\+?\d{10,15}$/;
+export const phoneRegex = /^\d{10}$/;
 export const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 export const costRegex = /^(?!0(\.0+)?$)(\d+(\.\d{1,2})?)$/;
 export const serviceNameRegex = /^[a-zA-Z0-9\s\-\(\)]+$/;
@@ -16,7 +16,7 @@ export const validatePassword = (password) => {
 
 export const validatePhone = (phoneNumber) => {
 	if (!phoneRegex.test(phoneNumber)) {
-		return "Número de teléfono inválido. Debe contener entre 10 y 15 dígitos.";
+		return "Número de teléfono inválido. Debe tener 10 dígitos. Ej: 3472620188";
 	}
 	return "";
 };
