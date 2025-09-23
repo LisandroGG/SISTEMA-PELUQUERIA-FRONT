@@ -37,7 +37,16 @@ function Root() {
 	}, [dispatch, user]);
 
 	if (isLoadingSession || initialLoading) {
-		return null
+		return (
+			<div className="fixed inset-0 flex flex-col items-center justify-center bg-[#ededed] z-[9999] transition-opacity duration-300">
+				<img
+					src="/assets/scissors-loading.svg"
+					className="w-52"
+					alt="Loading"
+				/>
+				<p className="text-lg">Cargando...</p>
+			</div>
+		);
 	}
 
 	return <App />;
