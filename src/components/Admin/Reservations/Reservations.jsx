@@ -41,12 +41,20 @@ const Reservations = () => {
 	const isLoadingServices = useSelector((state) => state.isLoadingServices);
 	const [changeStatusModalOpen, setChangeStatusModalOpen] = useState(false);
 	const [selectDateModalOpen, setSelectDateModalOpen] = useState(false);
-	const [filter, setFilter] = useState({});
 	const [selectedWorker, setSelectedWorker] = useState("");
 	const [selectedReservationChangeStatus, setSelectedReservationChangeStatus] =
 		useState("");
 	const [animKey, setAnimKey] = useState(0);
 	const [showFilters, setShowFilters] = useState(true);
+
+	const now = new Date()
+	const nowArg= format(now, "yyyy-MM-dd")
+	console.log("hoy es:", now)
+	console.log("hoy es formateado:", nowArg)
+
+	const [filter, setFilter] = useState({
+		date: nowArg,
+	});
 
 	// biome-ignore lint: ANIMATION
 	useEffect(() => {
@@ -169,9 +177,9 @@ const Reservations = () => {
 						<button
 							type="button"
 							onClick={() => {
-								setFilter({});
+								setFilter({ date: nowArg });
 								setSelectedWorker("");
-								dispatch(getAllReservations({}));
+								dispatch(getAllReservations({ date: nowArg }));
 							}}
 							className="flex items-center justify-center hover:scale-105 px-4 py-2 cursor-pointer font-chivo text-white bg-shark-500 hover:bg-shark-600 text-md font-semibold rounded-lg transition-all"
 						>
