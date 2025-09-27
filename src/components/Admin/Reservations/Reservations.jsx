@@ -49,8 +49,6 @@ const Reservations = () => {
 
 	const now = new Date()
 	const nowArg= format(now, "yyyy-MM-dd")
-	console.log("hoy es:", now)
-	console.log("hoy es formateado:", nowArg)
 
 	const [filter, setFilter] = useState({
 		date: nowArg,
