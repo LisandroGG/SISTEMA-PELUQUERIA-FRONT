@@ -40,7 +40,7 @@ const Step3 = ({ setStep, formData, setFormData }) => {
 
 		const formatted = format(date, "yyyy-MM-dd");
 		setSelectedDate(date);
-		console.log("dia seleccionado", formatted)
+		console.log("dia seleccionado", formatted);
 		setFormData({ ...formData, date: formatted, startTime: "" });
 		dispatch(
 			getWorkingHoursByWorker(formData.workerId, formatted, formData.serviceId),

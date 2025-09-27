@@ -47,8 +47,8 @@ const Reservations = () => {
 	const [animKey, setAnimKey] = useState(0);
 	const [showFilters, setShowFilters] = useState(true);
 
-	const now = new Date()
-	const nowArg= format(now, "yyyy-MM-dd")
+	const now = new Date();
+	const nowArg = format(now, "yyyy-MM-dd");
 
 	const [filter, setFilter] = useState({
 		date: nowArg,

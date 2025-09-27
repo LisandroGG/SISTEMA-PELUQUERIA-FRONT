@@ -2,6 +2,7 @@ import {
 	CANCEL_RESERVATION,
 	CHANGE_PASSWORD,
 	CHANGE_RESERVATION_STATUS,
+	CLEAR_RESERVATIONS,
 	CREATE_CUSTOM_WORKING_HOURS,
 	CREATE_DISABLE_DAY,
 	CREATE_RESERVATION,
@@ -40,7 +41,6 @@ import {
 	SET_LOADING_WORKERS,
 	SET_LOADING_WORKING_HOURS,
 	SET_LOADING_WORKING_HOURS_BY_DATE,
-	CLEAR_RESERVATIONS,
 } from "./actions-types";
 
 export const initialState = {
@@ -179,11 +179,11 @@ function rootReducer(state = initialState, action) {
 					res.id === action.payload.id ? action.payload : res,
 				),
 			};
-		case CLEAR_RESERVATIONS: 
-		return {
-			...state,
-			reservations: [],
-		}
+		case CLEAR_RESERVATIONS:
+			return {
+				...state,
+				reservations: [],
+			};
 		case SET_LOADING_RESERVATIONS:
 			return {
 				...state,

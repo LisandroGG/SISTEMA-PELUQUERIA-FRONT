@@ -9,8 +9,8 @@ import {
 	X,
 } from "lucide-react";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { clearReservations } from "../../redux/actions";
 
 const Nav = ({ user, handleLogout }) => {
