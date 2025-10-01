@@ -1,6 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const PrivacyPolicy = () => {
+	
+	const navigate = useNavigate();
+
 	return (
 		<div className="bg-bgbody">
 		<div className="max-w-3xl mx-auto px-6 py-16 text-shark-500">
@@ -95,6 +99,14 @@ const PrivacyPolicy = () => {
 					.
 				</p>
 			</section>
+			<div className="flex justify-center">
+			<button
+					onClick={() => navigate("/")}
+					className="mt-8 px-4 py-3 bg-shark-500 font-chivo text-white text-md font-semibold rounded-lg hover:bg-shark-600 hover:cursor-pointer hover:scale-105 transition-all"
+				>
+					Volver al inicio
+			</button>
+			</div>
 		</div>
 		</div>
 	);

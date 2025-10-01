@@ -6,6 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
 import { getUserSession } from "./redux/actions.js";
 import store from "./redux/store.js";
+import ScrollToTop from "./components/Utils/ScrollTop.jsx"
 
 function Root() {
 	const user = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ createRoot(document.getElementById("root")).render(
 	<StrictMode>
 		<Provider store={store}>
 			<BrowserRouter>
+				<ScrollToTop />
 				<Root />
 			</BrowserRouter>
 		</Provider>
