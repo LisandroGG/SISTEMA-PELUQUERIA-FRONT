@@ -2,7 +2,8 @@ import React from "react";
 
 const PrivacyPolicy = () => {
 	return (
-		<div className="max-w-3xl mx-auto px-6 py-16 text-gray-800">
+		<div className="bg-bgbody">
+		<div className="max-w-3xl mx-auto px-6 py-16 text-shark-500">
 			<h1 className="text-3xl font-bold mb-8">Política de Privacidad</h1>
 
 			<section className="mb-6">
@@ -55,7 +56,7 @@ const PrivacyPolicy = () => {
 					notificaciones en cualquier momento contactándonos en{" "}
 					<a
 						href="mailto:peluqueriaaf4@gmail.com"
-						className="text-blue-600 underline"
+						className="text-shark-700 font-semibold underline"
 					>
 						peluqueriaaf4@gmail.com
 					</a>
@@ -80,20 +81,21 @@ const PrivacyPolicy = () => {
 					Si tienes dudas sobre nuestra política de privacidad, contáctanos en{" "}
 					<a
 						href="mailto:peluqueriaaf4@gmail.com"
-						className="text-blue-600 underline"
+						className="text-shark-700 font-semibold underline"
 					>
 						peluqueriaaf4@gmail.com
 					</a>{" "}
 					o al WhatsApp{" "}
 					<a
 						href="https://wa.me/5493472438424"
-						className="text-blue-600 underline"
+						className="text-shark-700 font-semibold underline"
 					>
 						+54 9 3472 438424
 					</a>
 					.
 				</p>
 			</section>
+		</div>
 		</div>
 	);
 };

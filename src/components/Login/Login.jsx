@@ -54,7 +54,7 @@ const Login = () => {
 	};
 
 	return (
-		<div className="min-h-screen grid place-content-center bg-form-gradient">
+		<div className="min-h-screen grid place-content-center bg-bgbody ">
 			<Form onSubmit={handleSubmit} submitText={"Iniciar Sesión"} title={""}>
 				<FormHeader
 					title="Bienvenido a AF Peluquería"

@@ -70,7 +70,7 @@ const Register = () => {
 		}
 	};
 	return (
-		<div className="min-h-screen grid place-content-center bg-form-gradient">
+		<div className="min-h-screen grid place-content-center bg-bgbody">
 			<Form onSubmit={handleSubmit} submitText={"Registrarse"} title={""}>
 				<FormHeader title="Bienvenido a AF Peluquería" subtitle="Registrarse" />
 				<Input

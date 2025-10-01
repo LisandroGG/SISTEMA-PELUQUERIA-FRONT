@@ -50,7 +50,7 @@ const ChangePassword = () => {
 		}
 	};
 	return (
-		<div className="min-h-screen grid place-content-center bg-form-gradient">
+		<div className="min-h-screen grid place-content-center bg-bgbody">
 			<Form
 				onSubmit={handleSubmit}
 				submitText={"Actualizar contraseña"}
