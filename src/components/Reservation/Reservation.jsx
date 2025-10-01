@@ -25,10 +25,6 @@ const Reservation = () => {
 	const dispatch = useDispatch();
 
 	const handleReservationSubmit = async () => {
-		if (!formData.workerId || !formData.serviceId) {
-			console.log("error");
-		}
-
 		const loadingToastId = toast.loading("Reservando Turno...");
 		try {
 			const response = await dispatch(createReservation(formData));

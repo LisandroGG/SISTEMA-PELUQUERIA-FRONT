@@ -4,9 +4,9 @@ import "./index.css";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App.jsx";
+import ScrollToTop from "./components/Utils/ScrollTop.jsx";
 import { getUserSession } from "./redux/actions.js";
 import store from "./redux/store.js";
-import ScrollToTop from "./components/Utils/ScrollTop.jsx"
 
 function Root() {
 	const user = useSelector((state) => state.user);
