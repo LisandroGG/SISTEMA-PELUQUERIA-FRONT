@@ -30,13 +30,19 @@ const Footer = () => {
 					</div>
 				</section>
 				<section className="grid grid-cols-1 gap-6 md:grid-cols-3">
-					<section>
+					<section className="flex flex-col">
 						<p className="font-bold text-lg mb-4">Enlaces</p>
 						<Link
 							to="/reservations"
 							className="font-semibold text-sm hover:text-white/80 transition-all"
 						>
-							Nuevo turno
+							Reservar turno
+						</Link>
+						<Link
+							to="/privacy-policy"
+							className="font-semibold text-sm hover:text-white/80 transition-all"
+						>
+							Política de privacidad
 						</Link>
 					</section>
 					<section className="text-center">

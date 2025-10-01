@@ -19,6 +19,7 @@ import Reservations from "./components/Admin/Reservations/Reservations.jsx";
 import Services from "./components/Admin/Services/Services.jsx";
 import Workers from "./components/Admin/Workers/Workers.jsx";
 
+import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy.jsx";
 import Reservation from "./components/Reservation/Reservation.jsx";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
 			<Toaster position="top-center" />
 			<Routes>
 				<Route path="/" element={<Layout />} />
+				<Route path="/privacy-policy" element={<PrivacyPolicy />} />
 				<Route
 					path="/login"
 					element={
